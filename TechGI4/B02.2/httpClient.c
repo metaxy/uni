@@ -17,9 +17,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <time.h>
 
 #define MAX_BUFFER_LENGTH 100
-
 int main(int argc, char *argv[])
 {
     int sockfd;
@@ -27,53 +27,51 @@ int main(int argc, char *argv[])
     struct hostent *he;
     int numbytes;
     int serverPort;
-    int a = 0;
-    int b = 0;
-
-    printf("UDP client example\n\n");
+    unsigned int a = 0;
+    unsigned int b = 0;
     
+    printf("TCP client example\n\n");
+    /*
     if (argc != 5) {
-        fprintf(stderr,"Usage: udpClient serverName serverPort int1 int2\n");
+        fprintf(stderr,"Usage: tcpClient serverName serverPort int1 int2\n");
         exit(1);
     }
-    
+    */
     serverPort = atoi(argv[2]);
-    a = atoi(argv[3]);
-    b = atoi(argv[4]);    
 
     //Resolv hostname to IP Address
     if ((he=gethostbyname(argv[1])) == NULL) {  // get the host info
         herror("gethostbyname");
         exit(1);
     }
-    
-    //socket erstellen
-    sockfd = socket(PF_INET, SOCK_DGRAM, 0);
-    
+    //create tcp socket
+    sockfd = socket(PF_INET, SOCK_STREAM, 0);
+
+
     //setup transport address
     their_addr.sin_family = AF_INET;     
     their_addr.sin_port = htons(serverPort);
     their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
 
-    unsigned char buffer[4];
+    //coneckt to server, using sockfd
+    if(connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in)) == -1) {
+        printf("could not connect\n");
+        exit(-1);
+    }	
+	//send the data in buffer over sockfd
+	int size = 0;
+	char req[1024];
+	size = snprintf(req,1024, "GET / HTTP/1.1\nHOST: %s\n\n", argv[1]);
+    send(sockfd, req, size, 0);
 
-    packData(&buffer, a, b);
+	char buffer[1024];
 
-    //send 
-    sendto(sockfd, buffer, sizeof(unsigned char)*4, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
+	if(recv(sockfd, buffer, 1024,0) > 0)
+	{
+		printf("%s",buffer);
+	}
 
-    //close socket
-    close(sockfd);
-
+	close(sockfd);
     return 0;
 }
-int packData(unsigned char *buffer, unsigned int a, unsigned int b) 
-{
-    buffer[0] = htons(a) & 0xFF;
-    buffer[1] = htons(a) >> 8;
-    
-    buffer[2] = htons(b) & 0xFF;
-    buffer[3] = htons(b) >> 8;
-}
-
