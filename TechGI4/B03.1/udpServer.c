@@ -17,7 +17,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-
 #define MAX_BUFFER_LENGTH 100
 
 void unpackData(unsigned char *buffer, unsigned int *a, unsigned int *b)
@@ -73,7 +72,6 @@ int main(int argc, char *argv[])
 
     listen(sockfd, 10);
 
-    
     while(1) {
 		clilen = sizeof cli_addr;
         unsigned char buffer[4];
@@ -83,13 +81,12 @@ int main(int argc, char *argv[])
             unsigned int a,b;
             
 			printf("received: %x %x %x %x\n", buffer[0],buffer[1],buffer[2],buffer[3]);
-            //unpackData(buffer, &a, &b);
-            printf("ggt of %i %i is %i\n", a ,b, ggt(a,b));
-			//packData(buffer, ggt(a,b), 0);
-			printf("client port %i\n", cli_addr.sin_port);
-			printf("client addr %i\n", cli_addr.sin_addr.s_addr);
-			int ret = sendto(sockfd, buffer, 4, 0, (struct sockaddr *) &cli_addr, sizeof(clilen));
-			printf("sento = %i\n", ret);
+            unpackData(buffer, &a, &b);
+            
+			printf("ggt of %i %i is %i\n", a ,b, ggt(a,b));
+			packData(buffer, ggt(a,b), 0);
+
+			sendto(sockfd, buffer, sizeof(char)*4,0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);
