@@ -17,7 +17,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-
 #define MAX_BUFFER_LENGTH 100
 
 void unpackData(unsigned char *buffer, unsigned int *a, unsigned int *b)
@@ -25,6 +24,16 @@ void unpackData(unsigned char *buffer, unsigned int *a, unsigned int *b)
     *a = (buffer[0]<<8) | buffer[1];
     *b = (buffer[2]<<8) | buffer[3];
 }
+
+int packData(unsigned char *buffer, unsigned int a, unsigned int b) 
+{
+    buffer[0] = htons(a) & 0xFF;
+    buffer[1] = htons(a) >> 8;
+    
+    buffer[2] = htons(b) & 0xFF;
+    buffer[3] = htons(b) >> 8;
+}
+
 int ggt (int a, int b)
 {
     if (b==0)
@@ -55,7 +64,7 @@ int main(int argc, char *argv[])
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(serverPort);
 
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     if(bind(sockfd, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) < 0)
     {
         printf("could not bind\n");
@@ -63,19 +72,21 @@ int main(int argc, char *argv[])
 
     listen(sockfd, 10);
 
-    clilen = sizeof cli_addr;
-    
     while(1) {
-        new_fd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen);
-
+		clilen = sizeof cli_addr;
         unsigned char buffer[4];
 
-        int size = read(new_fd, buffer, 4);
-        if(size > 0) {
+        int size = recvfrom(sockfd, buffer, sizeof(char)*4,0,(struct sockaddr *) &cli_addr, &clilen);
+		if(size > 0) {
             unsigned int a,b;
-            printf("received: %x %x %x %x\n", buffer[0],buffer[1],buffer[2],buffer[3]);
+            
+			printf("received: %x %x %x %x\n", buffer[0],buffer[1],buffer[2],buffer[3]);
             unpackData(buffer, &a, &b);
-            printf("ggt of %i %i is %i\n", a ,b, ggt(a,b));
+            
+			printf("ggt of %i %i is %i\n", a ,b, ggt(a,b));
+			packData(buffer, ggt(a,b), 0);
+
+			sendto(sockfd, buffer, sizeof(char)*4,0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);
