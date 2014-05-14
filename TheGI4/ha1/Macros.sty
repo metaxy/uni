@@ -1,0 +1,192 @@
+%----------------------- THEGI 4 --------------------------------
+
+\newcommand{\nil}{\ensuremath{\mathbf{0}}}
+\newcommand{\Out}[2]{\ifx\\#2\\
+			\overline{\mathit{#1}}
+		      \else
+			\overline{\mathit{#1}}(#2)
+		      \fi}
+\newcommand{\In}[2]{\ifx\\#2\\
+			\ensuremath{\mathit{#1}}
+		      \else
+			\ensuremath{\mathit{#1}(#2)}
+		      \fi}
+
+\newcommand{\0}{\ensuremath{\emptyset}}
+		      
+\newcommand{\CCSDef}{\ensuremath{\stackrel{\text{def}}{=}}}
+\newcommand{\Proc}{\mbox{\sf Proc}}
+\newcommand{\Act}{\mbox{\sf Act}}
+\newcommand{\Traces}[1]{\ensuremath{\mathit{Traces(#1)}}}
+\newcommand{\Id}{\ensuremath{\operatorname{Id}}}
+
+\newcommand{\MC}[1]{\ensuremath{\mathbin{\mathcal{#1}}}}
+\newcommand{\A}{\MC{A}}
+\newcommand{\Abar}{\ensuremath{\mkern 7mu\overline{\mkern-7mu\A}}}
+\newcommand{\Lang}{\MC{L}}
+\newcommand{\Const}{\MC{K}}                             
+
+\newcommand{\bisim}{\ensuremath{\sim}}
+\newcommand{\wbisim}{\ensuremath{\approx}}
+
+\newcommand{\Pro}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\ProK}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\ProV}[1]{\ensuremath{\mathit{#1}}}
+
+\newcommand{\LTSTrip}{\ensuremath{\left(\Proc, \Act, \Set{\CCSTrans{\alpha} \mid \alpha \in \Act}\right)}}
+
+\newcommand{\Relabel}{\@ifstar\RelabelStar\RelabelNoStar}
+\newcommand{\RelabelStar}[2]{\ensuremath{\RelabelNoStar{\left(#1\right)}{#2}}}
+\newcommand{\RelabelNoStar}[2]{\ensuremath{\ifthenelse{\isempty{#1}}{}{#1}\ifthenelse{\isempty{#2}}{\cdot}{\left[\!\List{#2}{}{}{}\!\right]}}}
+
+\newcommand{\CCSTrans}[1]{\ensuremath{\stackrel{\ifthenelse{\isempty{#1}}{}{#1}}{\to}}}
+\newcommand{\NCCSTrans}[1]{\ensuremath{\not\stackrel{\ifthenelse{\isempty{#1}}{}{#1}}{\to}}}
+
+\newcommand{\WCCSTrans}[1]{\ensuremath{\stackrel{\ifthenelse{\isempty{#1}}{}{#1}}{\Rightarrow}}}
+\newcommand{\NWCCSTrans}[1]{\ensuremath{\not\stackrel{\ifthenelse{\isempty{#1}}{}{#1}}{\Rightarrow}}}
+
+\newcommand{\Choice}{\@ifstar\ChoiceStar\ChoiceNoStar}
+\newcommand{\ChoiceStar}[2]{\ensuremath{\left(\ChoiceNoStar{#1}{#2}\right)}}
+\newcommand{\ChoiceNoStar}[2]{\ensuremath{\ifthenelse{\isempty{#1}}{\cdot}{#1} + \ifthenelse{\isempty{#2}}{\cdot}{#2}}}
+ 
+\newcommand{\Res}{\@ifstar\ResStar\ResNoStar}
+\newcommand{\ResStar}[2]{\ensuremath{\ResNoStar{\left(#1\right)}{#2}}}
+\newcommand{\ResNoStar}[2]{\ensuremath{\ifthenelse{\isempty{#1}}{\cdot}{#1} \setminus \ifthenelse{\isempty{#2}}{\Set{\cdot}}{\ASet{#2}}}}
+
+\newcommand{\Par}{\@ifstar\ParStar\ParNoStar}
+\newcommand{\ParStar}[2]{\ensuremath{\left(\ParNoStar{#1}{#2}\right)}}
+\newcommand{\ParNoStar}[2]{\ensuremath{\ifthenelse{\isempty{#1}}{\cdot}{#1}\mid\ifthenelse{\isempty{#2}}{\cdot}{#2}}}
+
+\newcounter{MakeSanCount}\newcounter{curitem}% Counters
+\newcommand{\menuitem}[1]{\ifstrequal{#1}{\tau}{\ensuremath{\tau}}{\ensuremath{\mathit{#1}}}}% Menu item formatting
+\newcommand{\menusep}{.}% Menu separator
+\newcommand{\menuend}{\relax}% Menu end
+\newcommand{\MakeSan}[1]{% \menulist{<menu list>}
+  \setcounter{MakeSanCount}{0}\setcounter{curitem}{0}% Reset MakeSanCount & curitem
+  \renewcommand*{\do}[1]{\stepcounter{MakeSanCount}}%
+  \menulistparser{#1}% Count menu items
+  \renewcommand*{\do}[1]{\menuitem{##1}\stepcounter{curitem}\ifnumless{\value{curitem}}{\value{MakeSanCount}}{\menusep}{\menuend}}%
+  \menulistparser{#1}% Process list
+}
+%\DeclareListParser{\menulistparser}{.}
+
+\newif\ifAFIRST
+\newcommand{\ALISTOP}[1]{\expandafter\ifstrequal\expandafter{#1}{\tau}{\ensuremath{\tau}}{\ensuremath{\mathit{#1}}}}
+\newcommand{\AList}[4][\;]{#3#1%
+	\AFIRSTtrue
+	\@for\i:=#2\do{%
+	\ifAFIRST\ALISTOP{\i}\AFIRSTfalse\else,\;\ALISTOP{\i}\fi%
+	}%
+	#1#4%
+}
+
+\newcommand{\ASet}[2][\;]{\AList[#1]{#2}{\left\{}{\right\}}}
+
+\newcommand{\Sup}{\ensuremath{\bigsqcup}}
+\newcommand{\Inf}{\rotatebox[origin=c]{180}{$\bigsqcup$}}
+
+% \newcommand{\MakeSan}[1]{\StrSubstitute{#1}{.}{.}[\i]\ifstrequal{\i}{\tau}{\ensuremath{\tau}}{\mathit{\i}}}
+%----------------------- !THEGI 4 -------------------------------
+
+% =============================================================================
+% =============================================================================
+% Grundlagen
+% =============================================================================
+% =============================================================================
+
+\def\clap#1{\hbox to 0pt{\hss#1\hss}}
+\def\mathllap{\mathpalette\mathllapinternal}
+\def\mathrlap{\mathpalette\mathrlapinternal}
+\def\mathclap{\mathpalette\mathclapinternal}
+\def\mathllapinternal#1#2{%
+           \llap{$\mathsurround=0pt#1{#2}$}}
+\def\mathrlapinternal#1#2{%
+           \rlap{$\mathsurround=0pt#1{#2}$}}
+\def\mathclapinternal#1#2{%
+           \clap{$\mathsurround=0pt#1{#2}$}}
+
+% -----------------------------------------------------------------------------
+% Special Sets
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+
+\newcommand{\Potm}[1]{\ensuremath{2^{#1}}}
+
+% -----------------------------------------------------------------------------
+% Relations
+
+\newcommand{\Refl}[1]{\ensuremath{\operatorname{r}(#1)}}
+\newcommand{\Trans}[1]{\ensuremath{\operatorname{t}(#1)}}
+\newcommand{\Sym}[1]{\ensuremath{\operatorname{s}(#1)}}
+
+% -----------------------------------------------------------------------------
+% Print using Stackrel
+% \begin{align*}
+% A & \Stackrel{\text{Def. 1a}}{\Rightarrow} B\\
+% 	& \Stackrel{\text{Def. 2a}}{\Rightarrow} C
+% \end{align*}
+
+\newlength{\stackrel@A}
+\newlength{\stackrel@B}
+
+\let\org@start@align\start@align
+\def\start@align{%
+  \global\stackrel@A=\z@
+  \org@start@align
+}
+\newcommand\Stackrel[2]{%
+  \settowidth\stackrel@B{$\stackrel{#1}{}$}%
+  \ifmeasuring@
+    \ifdim\stackrel@B>\stackrel@A
+      \global\stackrel@A=\stackrel@B
+    \fi
+  \else
+    \advance\stackrel@B-\stackrel@A
+    \stackrel@B-.5\stackrel@B
+    \ifthenelse{\isempty{#2}}{#1}{\stackrel{%
+      \kern\stackrel@B
+      #1%
+      \kern\stackrel@B
+    }{#2}}%
+  \fi
+}
+
+% -----------------------------------------------------------------------------
+% Special keywords for exercises
+\newcommand{\Hinweis}[1]{\textsl{Hinweis:} \emph{#1}\xspace}
+\newcommand{\Anmerkung}[1]{\textsl{Anmerkung:} \emph{#1}\xspace}
+\newcommand{\Achtung}[1]{\emph{Achtung: #1}}
+
+% -----------------------------------------------------------------------------
+% Meta and Misc
+
+\newif\ifFIRST
+\newif\ifSECOND
+\let\LISTOP\relax
+\newcommand{\List}[4][\;]{#3#1%
+	\FIRSTtrue
+	\@for\i:=#2\do{%
+	\ifFIRST\LISTOP{\i}\FIRSTfalse\else,\;\LISTOP{\i}\fi%
+	}%
+	#1#4%
+	\let\LISTOP\relax
+}
+% (f_s:A_s\fun B_s)_{s\in S}
+% \FAMF{f,A,B}{s}{S}
+\newcommand{\FAMF}[3]{%
+	(\STYPE{#1}{#2})_{#2\in #3}%
+}
+\newcommand{\STYPE}[2]{%
+	\FIRSTtrue
+	\@for\i:=#1\do{%
+	\ifFIRST\i_{#2}:\FIRSTfalse\SECONDtrue\else
+		\ifSECOND\i_{#2}\fun\SECONDfalse\else\i_{#2}\fi\fi%
+	}%
+}
+
+\newcommand{\Set}[2][\;]{\List[#1]{#2}{\left\{}{\right\}}}
+\newcommand{\SetL}[2][\;]{\List[#1]{#2}{\{}{}}
+\newcommand{\SetR}[2][\;]{\List[#1]{#2}{}{\}}}
+\newcommand{\SetComp}[3][\;]{\left\{#1#2#1\mid#1#3#1\right\}}

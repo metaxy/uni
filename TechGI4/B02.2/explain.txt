@@ -1,0 +1,7 @@
+Die Ausgabe liefert für einen lokalen Server:
+it took for tcp 20596 ns
+it took for udp 13257 ns
+
+Wir sehen dass ein udp für send deutlich weniger zeit benötigt. Dies ist leicht zu erklären, indemw ir bedenken dass tcp ein handshake für eine connection braucht.
+
+

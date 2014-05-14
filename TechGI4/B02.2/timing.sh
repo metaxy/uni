@@ -1,0 +1,1 @@
+gcc -lnsl -lresolv tcpClient.c -lrt -o tcpClient && ./tcpClient 127.0.0.1 3000 3001

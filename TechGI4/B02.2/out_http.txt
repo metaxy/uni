@@ -1,0 +1,251 @@
+HTTP Client
+
+HTTP/1.1 200 OK
+Date: Mon, 12 May 2014 11:52:10 GMT
+Server: Apache
+X-Powered-By: PHP/5.3.27
+Cache-Control: private
+Set-Cookie: fe_typo_user=183b79ff7ea0ea667f7673cf6026fb28; path=/; domain=.tu-berlin.de
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+
+4819
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 
+	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<!--
+
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2013 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at http://typo3.org/
+-->
+
+<base href="http://www.tu-berlin.de/" />
+
+<title>TU Berlin: Technische Universität Berlin</title>
+<meta name="generator" content="TYPO3 4.5 CMS" />
+<meta name="abstract" content="Homepage der Technischen Universität Berlin" />
+<meta name="keywords" content="Technische Universität Berlin, TU Berlin, TUB, TU, Technische Universität, Hochschule" />
+<meta name="description" content="Homepage der Technischen Universität Berlin. Die TU Berlin versteht sich als international renommierte Universität in der deutschen Hauptstadt, im Zentrum Europas." />
+<meta name="author" content="Pressestelle" />
+<meta name="robots" content="index,follow" />
+<meta name="language" content="de" />
+
+<link rel="stylesheet" type="text/css" href="typo3temp/stylesheet_5d370599a3.css?1360686586" media="all" />
+<link rel="stylesheet" type="text/css" href="fileadmin/Aperto_design/css/style-mittig.css?1392994365" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="fileadmin/Aperto_design/css/print.css?1352887419" media="print" />
+<link rel="stylesheet" type="text/css" href="fileadmin/Aperto_design/css/rss.css?1348584787" media="screen, projection, print" />
+
+
+
+<script src="typo3temp/javascript_93077bb238.js?1353335529" type="text/javascript"></script>
+
+
+<link rel="shortcut icon" href="http://www.tu-berlin.de/fileadmin/Aperto_design/img/favicon.ico" type="image/x-icon" />        <!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+        <!--[if lte IE 7]>
+        <link rel="stylesheet" href="fileadmin/Aperto_design/css/style-ie.css" type="text/css" media="projection, screen" />
+        <![endif]--><link rel="stylesheet" href="fileadmin/Aperto_design/css/font-m.css" type="text/css" media="screen, projection" /><script type="text/javascript" src="fileadmin/Aperto_design/js/behavior.js"></script>        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+
+
+</head>
+<body id="welcome">
+
+
+
+<div id="jump"><p class="skip"><a href="http://www.tu-berlin.de/menue/home/#main">direkt zum Inhalt springen</a></p><p class="skip"><a href="http://www.tu-berlin.de/menue/home/#nav">direkt zum Hauptnavigationsmen&uuml;</a></p></div>
+ 
+<!-- Klickpfad ersteckt-->
+<p id="klickpfad" class="aural"><!--###klickpfad### begin --><a href="">Sie sind hier</a><!--###klickpfad### end --></p>
+
+<div id="branding"><!--###branding### begin --> 
+
+<div id="home"><a href="http://www.tu-berlin.de/"><img src="fileadmin/Aperto_design/img/logo_01.gif" width="219" height="75" alt="TU Berlin" title="TU Berlin" /></a></div>
+
+
+<div id="head"><!--###head### begin -->
+
+<div id="nav-meta"><div id="search-box"><h2>Suchfunktion</h2><form action="http://www.google.com/cse" method="get"><p><label for="suchen">Suchen</label><input id="suchen" accesskey="4" name="q" value="suchen nach ..."  type="text" title="Hier bitte Suchwort eingeben" onfocus="if (this.value == 'suchen nach ...') this.value=''" onblur="if (this.value == '') this.value='suchen nach ...'" /><input type="hidden" value="014699785756456278397:8t4pu4gzfyw" name="cx" /><input type="hidden" name="sitesearch" value=".tu-berlin.de" /><input class="button" name="sa" src="fileadmin/Aperto_design/img/lupe.gif"  value="suchen" type="image" alt="Standardsuche" title="Standardsuche" /></p></form></div><h2>Kontakt, Inhaltsverzeichnis und weitere <span lang="en" xml:lang="en" title="">Service</span>-Links</h2><ul><li> <a href="http://www.tu-berlin.de/servicemenue/kontakt/"  >Kontakt</a> </li><li> <a href="http://www.tu-berlin.de/servicemenue/impressum/"  >Impressum</a> </li><li> <a href="http://www.tu-berlin.de/servicemenue/sitemap/"  >Sitemap</a> </li><li class="en"><a href="http://www.tu-berlin.de/menue/home/parameter/en/"  >English</a></li><li><a href="http://www.tu-berlin.de/servicemenue/index_a-z/">Index A-Z</a></li><li><a href="http://www.tu-berlin.de/menue/home/parameter/mobil/">Mobil</a></li><li><a href="http://www.tu-berlin.de/allgemeine_seiten/datenschutz/">Datenschutz</a></li></ul></div> <!-- ende nav-meta -->
+
+
+<div class="section-box"><!--###section-box### begin -->
+    <div id="login"><h4><abbr title="Technische Universität Berlin">TUB</abbr>-<span lang="en" xml:lang="en"><a href="http://www.tu-berlin.de/allgemeine_seiten/loginhilfe/" title="Login-Hilfe">Login</a></span></h4><ul><li><a href="https://www.tu-berlin.de/login_pw" title="Login mit Passwort">mit Passwort</a></li><li><a href="https://www.tu-berlin.de/login_karte" title="Login mit Campuskarte">mit Campuskarte / Zertifikat</a></li></ul></div><!-- ende login -->
+
+    <div class="section"><p>Technische Universität Berlin</p></div>
+<!--###section-box### end --></div>
+
+
+
+<!--###head### end --></div><!-- ende head -->
+
+
+<div id="nav-groups"><h2>Zielgruppennavigation</h2><ul><li> <a href="http://www.tu-berlin.de/zielgruppen/studieninteressierte/" title="Studieninteressierte"  >Studieninteressierte</a> </li><li> <a href="http://www.tu-berlin.de/zielgruppen/studierende/" title="Studierende"  >Studierende</a> </li><li> <a href="http://www.tu-berlin.de/zielgruppen/beschaeftigte/" title="Beschäftigte"  >Beschäftigte</a> </li><li> <a href="http://www.tu-berlin.de/zielgruppen/wirtschaft/" title="Wirtschaft"  >Wirtschaft</a> </li><li> <a href="http://www.pressestelle.tu-berlin.de/menue/service_fuer_journalisten/" title="Presse"  >Presse</a> </li><li> <a href="http://www.tu-berlin.de/zielgruppen/alumni/" title="Alumni"  >Alumni</a> </li></ul></div>
+
+
+<!--###branding### end --></div> <!-- ende branding -->
+
+
+
+
+
+
+
+<div id="wrapper"><!--###wrapper### begin -->
+
+<div id="content"><!--###content### begin -->
+
+<!-- ############### navigation ###############  -->
+
+<div id="nav"><h2>Haupt-Navigation</h2><ul><li><a href="http://www.tu-berlin.de/menue/ueber_die_tu_berlin/"  >Über die TU Berlin</a></li><li><a href="http://www.tu-berlin.de/menue/einrichtungen/"  >Einrichtungen</a></li><li><a href="http://www.tu-berlin.de/menue/fakultaeten/"  >Fakultäten</a></li><li><a href="http://www.tu-berlin.de/menue/forschung/forschungsprofil/"  >Forschung</a></li><li><a href="http://www.tu-berlin.de/menue/studium_lehre/"  >Studium &amp; Lehre</a></li><li><a href="http://www.tu-berlin.de/menue/internationales/"  >Internationales</a></li><li><a href="http://www.tu-berlin.de/menue/service/"   title="">Service</a></li></ul></div> <!-- ende nav -->
+
+
+
+
+
+
+
+<!-- ############### content ###############  -->
+
+<div id="main"><h3 class="aural">Inhalt des Dokuments</h3><a name="594049"></a><div id="c594049" class="csc-default" >
+
+<div class="opener">
+<h1><a href="http://www.pressestelle.tu-berlin.de/medieninformationen/2014/mai_2014/medieninformation_nr_952014/">Einstimmig: Gutheil erneut zur Kanzlerin gewählt</a></h1>
+
+<p class="date">Sonntag, der 11. Mai 2014</p>
+
+
+<dl class="bild"><dt><img src="typo3temp/pics/1/111d6b8829.jpg" width="241" height="185"  class="tx-jppageteaser-pi1-image" alt="Bild" title="Bild" /></dt><dd style="background: rgb(234, 234, 234) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">Wissenschaftssenatorin Sandra Scheeres gratuliert der TU-Kanzlerin Ulrike Gutheil zur einstimmigen Wahl.</dd> <dd class="copyright">&copy;&nbsp;TU Berlin/PR/Jacek Ruta</dd> </dl>
+
+
+<p>Prof. Dr. Ulrike Gutheil wurde am 9. Mai 2014 vom Kuratorium der TU Berlin erneut und einstimmig zur Kanzlerin der Universität gewählt. Damit tritt sie nach zehn Jahren ihre zweite Amtsperiode an einer der größten Technischen Universitäten Deutschlands an. Sie ist als Kanzlerin Leiterin der Zentralen Universitätsverwaltung mit den Abteilungen „Studierendenservice“, „Personal und Recht", „Finanzen“, „Gebäude- und Dienstemanagement“ und „Forschung“, außerdem Beauftragte für den Haushalt und als Chief Information Officer (CIO) zuständig für den Bereich Informations- und Kommunikationstechnologie.
+
+<span class="mehr"><a href="http://www.pressestelle.tu-berlin.de/medieninformationen/2014/mai_2014/medieninformation_nr_952014/">mehr <span class="aural"> zu: Einstimmig: Gutheil erneut zur Kanzlerin gewählt</span></a></span> </p>
+
+</div>
+</div><a name="20528"></a><div id="c20528" class="csc-default" >
+			<div class="banner">
+                        <p class="aural">Werbung</p>
+                        <!-- BEGIN ADITIONTAG Website-Tag, Werbeplatz: Startseite, Website: TU Berlin, Unternehmen: TU Berlin, Typ: dynamic, Größe: (Bereich, 1x1 - 800x800) -->
+<script type="text/javascript" src="http://imagesrv.adition.com/js/adition.js"></script>
+<script type="text/javascript" src="http://ad1.adfarm1.adition.com/js?wp_id=10619"></script>
+<!-- END ADITIONTAG -->
+                        <p class="aural">Werbung ende</p>
+                        </div>
+		</div><a name="440455"></a><div id="c440455" class="csc-default" ><h2>TU-Ticker</h2>
+<div class="listing">
+<ul>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/menue/service_fuer_journalisten/fotoarchiv/fotogalerie_lange_nacht_10_mai_2014/">Fotorückblick auf die Lange Nacht der Wissenschaften an der TU Berlin</a></li>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/newsportal/tipps_termine/2014/145_projekttag_des_studienprogramms_gender_pro_mint/">14.5.: Projekttag des Studienprogramms GENDER PRO MINT</a></li>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/medieninformationen/2014/mai_2014/medieninformation_nr_832014/">Deutschlandstipendium und Mentoringprogramm: TU Berlin gewinnt erneut Alumni-Preis</a></li>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/medieninformationen/2014/mai_2014/medieninformation_nr_842014/">Neue Frauenbeauftragte: Dr. Petra Brzank nahm am 22. April ihre Arbeit als Zentrale Frauenbeauftragte der TU Berlin auf</a></li>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/medieninformationen/2014/april_2014/medieninformation_nr_822014/">Richard-Theile-Medaille für Videokompression: erneut Auszeichnung für TU-Professor Thomas Wiegand</a></li>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/newsportal/vermischtes/2014/fair_fuer_familie/">Preis "Fair für Familie" ausgeschrieben - Frist für Bewerbungen und Vorschläge bis 19.5. verlängert</a></li>
+
+
+</ul> 
+</div>
+</div><a name="24817"></a><div id="c24817" class="csc-default" ><h2>... weitere TU-News</h2>
+<div class="listing">
+<ul>
+
+    <li><a href="http://www.pressestelle.tu-berlin.de/newsportal/?no_cache=1">Mehr Aktuelles aus der TU Berlin auf dem <abbr title="Technische Universität Berlin">TUB</abbr>-newsportal</a></li>
+
+
+</ul> 
+</div>
+</div><div id="footer"><h2>Kontakt, Index und weiterer <span lang="en" xml:lang="en" title="">Service</span></h2><p>Zuletzt aktualisiert:&nbsp;11.05.14 <a href="http://www.tu-berlin.de/allgemeine_seiten/e-mail-anfrage/parameter/de/id/85/?no_cache=1&amp;ask_name=Pressestelle&amp;ask_mail=U3C15AAGTTjnYdSXNHxPXL9LfLx2%2BVdhk0tpDj3iheJaKB4HexQr4A%3D%3D" title="Zum Kontaktformular" class="feedback">Pressestelle</a></p><ul><li class="print"><a href="http://www.tu-berlin.de/menue/home/?type=1" title="Seite drucken">Seite drucken</a></li><li class="send"><a href="http://www.tu-berlin.de/allgemeine_seiten/seite_empfehlen/id/85/" title="Diese Seite weiterempfehlen">Seite empfehlen</a></li></ul><h2>Kontakt, Inhaltsverzeichnis und weitere <span lang="en" xml:lang="en" title="">Service</span>-Links</h2><ul id="features"><li> <a href="http://www.tu-berlin.de/servicemenue/kontakt/"  >Kontakt</a> </li><li> <a href="http://www.tu-berlin.de/servicemenue/impressum/"  >Impressum</a> </li><li> <a href="http://www.tu-berlin.de/servicemenue/sitemap/"  >Sitemap</a> </li><li class="en"><a href="http://www.tu-berlin.de/menue/home/parameter/en/"  >English</a></li><li><a href="http://www.tu-berlin.de/servicemenue/index_a-z/">Index A-Z</a></li><li><a href="http://www.tu-berlin.de/menue/home/parameter/mobil/">Mobil</a></li><li><a href="http://www.tu-berlin.de/allgemeine_seiten/datenschutz/">Datenschutz</a></li></ul></div></div> <!-- ende main -->
+
+
+
+<!-- ############### randspalte ###############  -->
+
+
+<div id="extras"><h3 class="aural">Zusatzinformationen / Extras</h3><div class="box quickaccess"><h2>Direktzugang</h2><div class="standortnr"><div class="aural">Schnellnavigation zur Seite &uuml;ber Nummerneingabe</div><form action="http://www.tu-berlin.de/jump/" method="get"><p><label for="nummer"><a href="http://www.tu-berlin.de/allgemeine_seiten/gehe-zu-hilfe/" title="Hilfe zur Gehe Zu-Funktion">Gehe zu:</a></label><input id="nummer" type="text" name="tx_upbidjump_pi1[jump_id]" size="15" value="85" title="Hier bitte Seiten-Nummer eingeben" onfocus="if (this.value == 'Nummer') this.value=''" onblur="if (this.value == '') this.value='Nummer'" /><input type="image" class="button" title="Springe zur Seite" src="fileadmin/Aperto_design/img/icon-link-intern.gif" alt="Springe zur Seite" /><input type="hidden" name="L" size="1" value="" /><input GET / HTTP/1.1
+HOST: www.tu-berlin.de
+
+type="hidden" name="F" size="1" value="" /><input type="hidden" name="H" size="1" value="" /></p></form></div></div><div class="box help"><h2>Hilfsfunktionen</h2><dl id="fontsize"><dt>Schriftgr&ouml;&szlig;e:</dt><dd><a href="http://www.tu-berlin.de/menue/home/parameter/font2/"><img src="fileadmin/Aperto_design/img/icon-minus.gif" width="21" height="17" alt="kleiner" title="Schrift verkleinern" /></a></dd><dd><a href="http://www.tu-berlin.de/menue/home/parameter/font3/"><img src="fileadmin/Aperto_design/img/icon-gleich.gif" width="21" height="17" alt="Standardgröße" title="Standardgröße" /></a></dd><dd><a href="http://www.tu-berlin.de/menue/home/parameter/font4/"><img src="fileadmin/Aperto_design/img/icon-plus.gif" width="21" height="17" alt="größer" title="Schrift vergrößern" /></a></dd></dl><ul><li><a href="http://www.tu-berlin.de/allgemeine_seiten/informationen_zur_barrierefreiheit/" title="Infos zur Barrierefreiheit">Infos zur Barrierefreiheit</a></li><li><a href="http://www.tu-berlin.de/allgemeine_seiten/hilfe_zur_bedienung/" title="Hilfe zur Bedienung">Hilfe zur Bedienung</a></li><li><a href="http://www.tu-berlin.de/allgemeine_seiten/tastaturkuerzel/" title="Tastaturk&uuml;rzel">Tastaturk&uuml;rzel</a></li></ul><div style="background: url(fileadmin/Aperto_design/img/dotted-bg.gif) top no-repeat;padding-top:10px;"><ul><li><a href="http://www.tu-berlin.de/menue/home/parameter/minhilfe/" style="background: url(fileadmin/Aperto_design/img/icon_link_up.gif) no-repeat 0 0;">Hilfsfunktionen minimieren</a></li></ul></div></div><a name="135175"></a><div id="c135175" class="csc-default" >
+
+<div class="box">
+<h2></h2>
+       <a href="http://www.tu-berlin.de/?id=45115"><img src="fileadmin/a70100710/Dokumentationen/PR-Material/logos_exist_equality_audit.jpg" width="180" height="61" alt="" /></a>
+</div>
+
+</div><a name="10204"></a><div id="c10204" class="csc-default" >
+
+<div class="box">
+        <h2>Aktuelles</h2>
+        <ul>
+                <li><a href="http://www.tu-berlin.de/?id=115296">Veranstaltungskalender</a></li>
+<li><a href="http://www.tu-berlin.de/?id=217">Medieninformationen</a></li>
+<li><a href="http://www.tu-berlin.de/?id=213">Aktuelle Publikationen</a></li>
+<li><a href="http://www.tu-berlin.de/?id=65718">TU Berlin in den Medien</a></li>
+        </ul>
+</div> 
+
+
+</div><a name="567692"></a><div id="c567692" class="csc-default" >
+<div class="box">
+	<a href="http://www.facebook.com/TU.Berlin" class="social-link"><img src="typo3temp/pics/4/4e40121984.jpg" width="18" height="18" alt="facebook" title="facebook" /></a><a href="http://twitter.com/TUBerlin_PR" class="social-link"><img src="typo3temp/pics/8/85aa62a9c8.jpg" width="18" height="18" alt="twitter" title="twitter" /></a>
+</div>
+</div><a name="16931"></a><div id="c16931" class="csc-default" >
+
+<div class="box">
+        <h2><abbr title="Technische Universität Berlin">TUB</abbr> mobil</h2>
+        <ul>
+                <li><a href="http://tub2go.tu-berlin.de">Campus-App &quot;tub2go&quot;</a></li>
+<li><a href="https://webmail.tu-berlin.de">mailbox.tu-berlin.de</a></li>
+<li><a href="https://exchange.tu-berlin.de/owa/">Exchange Web Access</a></li>
+<li><a href="http://www.mydesk.tu-berlin.de">Studierendenportal &quot;myDESK&quot;</a></li>
+        </ul>
+</div> 
+
+
+</div><a name="10212"></a><div id="c10212" class="csc-default" >
+
+<div class="box">
+        <h2>Quicklinks</h2>
+        <ul>
+                <li><a href="http://www.tu-berlin.de/lsf/">Vorlesungsverzeichnis</a></li>
+<li><a href="http://www.tu-berlin.de/?id=7001">Studiengänge</a></li>
+<li><a href="http://www.tu-berlin.de/?id=20843">Bewerbung</a></li>
+<li><a href="http://www.tu-berlin.de/?id=83780">Schulportal</a></li>
+<li><a href="http://www.tu-berlin.de/personensuche/">Personensuche</a></li>
+<li><a href="http://www.personalabteilung.tu-berlin.de/?id=34901">Stellenausschreibungen</a></li>
+<li><a href="http://www.tu-berlin.de/?id=1584">Ausbildung/Weiterbildung</a></li>
+<li><a href="http://www.freunde.tu-berlin.de/v-menue/gesellschaft_von_freunden_der_tu_berlin_ev/engagement/">Gesellschaft von Freunden der TU Berlin e. V.</a></li>
+<li><a href="http://www.tu-sport.de" class="extern">Angebote des TU-Sports</a></li>
+<li><a href="http://www.tu-berlin-shop.de" class="extern">Uni-Shop der TU Berlin</a></li>
+<li><a href="http://www.alumni.tu-berlin.de">Die <abbr title="Technische Universität Berlin">TUB</abbr> sucht ihre Alumni</a></li>
+        </ul>
+</div> 
+
+
+</div></div> <!-- ende extras -->
+
+<div class="clr"><!--###clr### begin --><!-- --><!--###clr### end --></div>
+
+<!--###content### end --></div> <!-- ende content -->
+<!--###wrapper### end --></div> <!-- ende wrapper -->
+
+
+
+
+</body>
+</html>
+0
+
