@@ -7,8 +7,9 @@
 \RequirePackage{etoolbox}
 \usepackage{xifthen}
 \usepackage[arrow, matrix, curve]{xy}
+\usepackage{semantic}
 %opening
-\title{}
+\title{TheGI4 HA}
 \author{}
 
 \begin{document}
@@ -19,6 +20,85 @@
 
 \end{abstract}
 
-\section{}
+\section{Aufgabe 3}
 
+\subsection{Aufgabe 3.1}
+
+Zu zeigen ist $ \Par {P}{Q} \bisim \Par {Q}{P}$ \\
+Sei $B = Id_{\Proc} \cup \Set { (\Par {P}{Q},\Par {Q}{P})}$ \\
+
+Betrachte $Id_{\Proc} \subseteq B$. Dann ist $Id_{\Proc}$ nach Definition eine Bisimulation\\
+
+Betrachte $(\Par {P}{Q},\Par {Q}{P}) \in B$ \\
+Transitionen in $\Par {P}{Q}$\\
+
+1.Fall $COM_1$ \\
+\begin{displaymath}
+    \inference[COM1]
+    {
+        \inference[ACT]
+        {
+        }
+        {
+            P \CCSTrans{a} P'
+        }
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P'}{Q}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang
+
+\begin{displaymath}
+    \inference[COM2]
+    {
+         \inference[ACT]
+        {
+        }
+        {
+            P \CCSTrans{a} P'
+        }
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+Und $(\Par{P'}{Q},\Par{Q}{P'}) \in B $
+
+2.Fall $COM_2$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+        \inference[ACT]
+        {
+        }
+        {
+            Q \CCSTrans{a} Q'
+        }
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P}{Q'}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang
+
+\begin{displaymath}
+    \inference[COM1]
+    {
+         \inference[ACT]
+        {
+        }
+        {
+            Q \CCSTrans{a} Q'
+        }
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{P}{Q'}
+    }
+\end{displaymath}
+
+%Und $(\Par{P'}{Q},\Par{P'}{Q}) \in Id_{\Proc}$
 \end{document}
