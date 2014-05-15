@@ -72,12 +72,10 @@ int main(int argc, char *argv[])
     sendto(sockfd, buffer, sizeof(unsigned char)*4, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
 	printf("sent\n");
 	int len = sizeof(struct sockaddr_in);
-	//if(recvfrom(sockfd, buffer, sizeof(char)*4, 0, NULL, NULL) > 0) {
-		recvfrom(sockfd, buffer, 4, 0, NULL, NULL);
-		unsigned int kk,kkt;
-		unpackData(buffer, &kk, &kkt);
-		printf("received %i", kk);
-	//}
+    recvfrom(sockfd, buffer, 4, 0, NULL, NULL);
+	unsigned int kk,kkt;
+	unpackData(buffer, &kk, &kkt);
+	printf("received %i", kk);
     //close socket
     close(sockfd);
 

@@ -45,7 +45,6 @@ int main(int argc, char *argv[])
 {
     int sockfd;
     int serverPort;
-    int new_fd;
     struct sockaddr_in serv_addr, cli_addr;
     int clilen;
     printf("UDP Server\n\n");

@@ -19,33 +19,28 @@
 #include <netdb.h>
 #define MAX_BUFFER_LENGTH 100
 
-void unpackData(unsigned char *buffer, unsigned int *a, unsigned int *b)
+void unpackData(unsigned char *buffer, char command[], unsigned int *a, unsigned int *b)
 {
-    *a = (buffer[0]<<8) | buffer[1];
-    *b = (buffer[2]<<8) | buffer[3];
+    printf("%s", buffer);
+    *command = *buffer;
+    *a = (buffer[4]<<8) | buffer[5];
+    *b = (buffer[6]<<8) | buffer[7];
 }
 
-int packData(unsigned char *buffer, unsigned int a, unsigned int b) 
+int packData(unsigned char *buffer, char *command, unsigned int a, unsigned int b) 
 {
-    buffer[0] = htons(a) & 0xFF;
-    buffer[1] = htons(a) >> 8;
+    *buffer = *command;
+    buffer[4] = htons(a) & 0xFF;
+    buffer[5] = htons(a) >> 8;
     
-    buffer[2] = htons(b) & 0xFF;
-    buffer[3] = htons(b) >> 8;
+    buffer[6] = htons(b) & 0xFF;
+    buffer[7] = htons(b) >> 8;
 }
 
-int ggt (int a, int b)
-{
-    if (b==0)
-        return a;
-    else
-        return ggt(b, a%b);
-}
 int main(int argc, char *argv[])
 {
     int sockfd;
     int serverPort;
-    int new_fd;
     struct sockaddr_in serv_addr, cli_addr;
     int clilen;
     printf("UDP Server\n\n");
@@ -71,22 +66,21 @@ int main(int argc, char *argv[])
     }
 
     listen(sockfd, 10);
-
+    
     while(1) {
 		clilen = sizeof cli_addr;
-        unsigned char buffer[4];
+        unsigned char buffer[8];
 
-        int size = recvfrom(sockfd, buffer, sizeof(char)*4,0,(struct sockaddr *) &cli_addr, &clilen);
+        int size = recvfrom(sockfd, buffer, sizeof(char)*8, 0,(struct sockaddr *) &cli_addr, &clilen);
+        perror ("The following error occurred");
 		if(size > 0) {
-            unsigned int a,b;
+            printf("received len  %i", size);
+            unsigned int key,value;
+            char command[4];
+            unpackData(buffer, command, &key, &value);
             
-			printf("received: %x %x %x %x\n", buffer[0],buffer[1],buffer[2],buffer[3]);
-            unpackData(buffer, &a, &b);
-            
-			printf("ggt of %i %i is %i\n", a ,b, ggt(a,b));
-			packData(buffer, ggt(a,b), 0);
-
-			sendto(sockfd, buffer, sizeof(char)*4,0, (struct sockaddr *) &cli_addr, clilen);
+            /*
+			sendto(sockfd, buffer, packSize,0, (struct sockaddr *) &cli_addr, clilen);*/
         }
     }
     close(sockfd);
