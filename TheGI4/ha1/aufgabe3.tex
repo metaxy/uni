@@ -22,9 +22,59 @@ M"ogliche Aktionen := \lbrace \overline{a} \rbrace
     }
    \end{displaymath}
    \bigskip\bigskip\bigskip
- \subsection*{Aufgabe 3 b)}
+\subsection*{Aufgabe 3 b)}
+Es sind keine Aktionen möglich.
+
+\subsection*{Aufgabe 3 c)}
+
+Mögliche Aktionen sind $\{\tau\}$\\
+Beweis:\\
 \begin{math}
-M"ogliche Aktionen := \lbrace \tau \rbrace
- \end{math}
-\\ Beweis:
-  
+\inference[RES]
+{
+	\inference[COM3]
+	{
+		\inference[CON]
+		{
+			\inference[ACT]
+			{}
+			{
+				a.A \CCSTrans{a} A
+			}
+		}
+		{				
+			B \CCSTrans{a} A
+		}
+		{
+			B \CCSDef a.A
+		}
+		\inference[RES]
+		{
+			\inference[ACT]
+			{}
+			{
+				(\Co{b}.A) \CCSTrans{\Co{b}} A
+			}
+		}
+		{
+			(\Co{b}.A) [a/b]
+		 		\CCSTrans{\Co{a}}
+			A[a/b]
+		}
+	}
+	{
+		(B | (\Co{b}.A) [a/b])
+			\CCSTrans{\tau}
+		(A | A[a/b])
+	}
+}
+{
+	(B | (\Co{b}.A) [a/b]) \setminus \{a\}
+		\CCSTrans{\tau}
+	(A | A[a/b]) \setminus \{a\}
+}
+{
+	where\,\tau \notin \{a\}
+}
+\end{math}
+
