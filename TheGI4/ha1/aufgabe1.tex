@@ -1,0 +1,43 @@
+\section*{Aufgabe 1}
+
+\subsection*{Aufgabe 1 a)}
+ 
+ 	$SG \CCSDef \Out {betreten}{}. \In {aktiv}{}.SG1 $ \\ \\
+ 	$SG1 \CCSDef \Out {erstellen}{}.SG2 $ \\ \\
+ 	$SG2 \CCSDef \Out {verlassen}{}.SG  $ \\ \\
+ 	 	$TG \CCSDef \Relabel {SG}{betritt/betreten, zuh"ort/aktiv, gute\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}  $ \\ \\
+ 	 	$HG \CCSDef \Relabel {SG}{betritt/betreten, redet/aktiv, schlechte\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}  $ \\ \\
+ 	 	$T \CCSDef \Out {betreten}{}.T1$ \\ \\
+ 	 	$T1 \CCSDef \Out {verlassen}{}.T$ \\ \\
+ 	 	$R \CCSDef \Choice{TR}{HR}$ \\ \\
+ 	 	$TR \CCSDef \In {betreten}{}. \In {betritt}{}.\Out {zuh"ort}{}.TR1$ \\ \\
+ 	 	$TR1 \CCSDef \In {verl"asst}{}. \In {verlassen}{}.R$ \\ \\
+ 	 	$HR \CCSDef \In {betritt}{}.\Out {redet}{}.HR1$ \\ \\
+ 	 	$HR1 \CCSDef \In {verl"asst}{}.R$ \\ \\
+ 	 	$U \CCSDef \Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}  $ \\ \\
+ 	 	Anmerkung: \\ SG steht f"ur Studentengruppe, TG f"ur Tutoriumsgruppe, HG f"ur Hausaufgabengruppe, T f"ur Tutor, R f"ur Raum, TR f"ur Tutoriumsraum, HR f"ur Hausaufgabenraum und U f"ur Universit"at. \\
+\\ \\ \\
+\subsection*{Aufgabe 1 b)}
+ \begin{math}
+	LTS_U = (Proc, Act, \lbrace $ \CCSTrans {a} $ | a \in Act \rbrace) \\ \\
+	Proc = \\ ($ \Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen} $, \\ $ \Res *{\Par {TR1} \Par {T1} \Par {TG1}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen} $, \\ $ \Res *{\Par {TR1} \Par {T1} \Par {TG2}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen} $, \\ $ \Res *{\Par {HR1} \Par {T} \Par {TG}{HG1}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen} $, \\ $ \Res *{\Par {HR1} \Par {T} \Par {TG}{HG2}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen} $)
+	\\ \\
+	Act = \lbrace \tau , schlechte\,Hausaufgaben\,erstellt, gute\,Hausaufgaben\,erstellt \rbrace
+	\\ \\
+	$\CCSTrans {\tau}$ = \lbrace \\($\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {TR1} \Par {T1} \Par {TG1}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\ ($\Res *{\Par {TR1} \Par {T1} \Par {TG2}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\($\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {HR1} \Par {T} \Par {TG}{HG1}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\($\Res *{\Par {HR1} \Par {T} \Par {TG}{HG2}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)  \\ \rbrace
+	\\ \\
+	$\CCSTrans {schlechte\,Hausaufgaben\,erstellt}$ = \emptyset
+	\\ \\
+	$\CCSTrans {\overline{schlechte\,Hausaufgaben\,erstellt}}$ = \lbrace \\
+	($\Res *{\Par {HR1} \Par {T} \Par {TG}{HG1}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {HR1} \Par {T} \Par {TG}{HG2}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)
+	\\
+	\rbrace
+	\\ \\
+	$\CCSTrans {gute\,Hausaufgaben\,erstellt}$ = \emptyset
+	\\ \\
+	$\CCSTrans {\overline{gute\,Hausaufgaben\,erstellt}}$ = \lbrace \\
+	($\Res *{\Par {TR1} \Par {T1} \Par {TG1}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {TR1} \Par {T1} \Par {TG2}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)
+	\\
+	\rbrace
+	\\ \\
+ \end{math}	 	

@@ -1,0 +1,33 @@
+
+\section*{Aufgabe 2} 
+\subsection*{Aufgabe 2 a)}
+\begin{math}
+	LTS = (Proc, Act, \lbrace $ \CCSTrans {a} $ | a \in Act \rbrace) \\ \\
+	Proc = \lbrace T, T_i | 1 \leq i \leq 8 \rbrace \\ \\
+	Act = A \cup \overline{A} \cup \lbrace \tau \rbrace \\ \\
+	A = \lbrace a, b \rbrace \\ \\	
+	$\CCSTrans {a}$ = \lbrace(T,T_1), (T,T_5), (T_4,T_6)\rbrace\\ \\
+	$\CCSTrans {\overline{a}}$ = \lbrace(T,T_4), (T_5,T_6), (T_7,T_8)\rbrace\\ \\
+	$\CCSTrans {b}$ = \lbrace(T,T_4), (T_1,T_2), (T_3,T_8), (T_5,T_6), (T_7,T_8)\rbrace\\ \\
+	$\CCSTrans {\overline{b}}$ = \lbrace(T_1,T_3), (T_2,T_8), (T_5,T_7), (T_6, T_8)\rbrace\\ \\
+	$\CCSTrans {\tau}$ = \lbrace(T,T_6), (T_1,T_8), (T_5,T_8)\rbrace\\ \\
+\end{math}
+\subsection*{Aufgabe 2 b)}
+$T \CCSDef 
+\Choice {\In {a}{}.\In {b}{}.\Out {b}{}.T_8} 
+\Choice{\In{a}{}.\In{\tau}{}.T_8}
+\Choice{\In{a}{}.\Out{b}{}.\In{b}{}.T_8}
+\Choice{\Out{a}{}.\In{a}{}.\Out{b}{}.T_8}
+\Choice{\In{b}{}.\In{a}{}.\Out{b}{}.T_8}
+\Choice{\In{\tau}{}.\Out{b}{}.T_8}
+\Choice{\In{a}{}.\Out{a}{}.\Out{b}{}.T_8}
+\Choice{\In{a}{}.\In{b}{}.\Out{b}{}.T_8}
+\Choice{\In{a}{}.\In{\tau}{}.T_8}
+\Choice{\In{a}{}.\Out{b}{}.\Out{a}{}.T_8}
+{\In{a}{}.\Out{b}{}.\In{b}{}.T_8}$
+\subsection*{Aufgabe 2 c)}
+$T_{min} \CCSDef 
+\Par *{\Choice *{\Out{a}{}.T_8}{b.T_8}}{a.\Out{b}{}.T_{8}} + a.(b.T_{8} | \Out{b}{}.T_{8})
+$
+
+

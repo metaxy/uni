@@ -1,0 +1,176 @@
+\section{Aufgabe 3}
+
+\subsection{Aufgabe 3.1}
+
+Zu zeigen ist $\Par{P}{Q} \bisim \Par{Q}{P}$ \\
+Sei $\mathcal{B} = Id_{\Proc} \cup \{ (\Par{A}{B},\Par{B}{A}) | A,B \in \Proc \}$ \\
+
+Betrachte $Id_{\Proc} \subseteq B$. Dann ist $Id_{\Proc}$ nach Definition eine Bisimulation\\
+
+Sei $(\Par {P}{Q},\Par {Q}{P}) \in B$ \\
+
+\textbf{Transitionen in $\Par {P}{Q}$}\\
+
+1.Fall $COM1$ \\
+\begin{displaymath}
+    \inference[COM1]
+    {
+      P \CCSTrans{a} P'
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P'}{Q}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM2]
+    {
+      P \CCSTrans{a} P'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+Nach Defintion von $\mathcal{B}$ gilt, dass $(\Par{P'}{Q},\Par{Q}{P'}) \in \mathcal{B}$.\\
+\\
+2.Fall $COM2$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P}{Q'}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM1]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+Nach Definition von $\mathcal{B}$ gilt, 
+dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.
+
+3.Fall $COM3$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
+    }
+    {
+        \Par{P}{Q} \CCSTrans{\tau} \Par{P'}{Q'}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM1]
+    {
+      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q'}{P'}
+    }
+\end{displaymath}
+
+Nach Definition von $\mathcal{B}$ gilt, 
+dass $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.\\\\
+
+\textbf{Transitionen in $\Par {Q}{P}$}\\
+TODO: umbennen\\
+
+1.Fall $COM1$ \\
+\begin{displaymath}
+    \inference[COM1]
+    {
+      P \CCSTrans{a} P'
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P'}{Q}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM2]
+    {
+      P \CCSTrans{a} P'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+Nach Defintion von $\mathcal{B}$ gilt, dass $(\Par{P'}{Q},\Par{Q}{P'}) \in \mathcal{B}$.\\
+\\
+2.Fall $COM2$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P}{Q'}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM1]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+Nach Definition von $\mathcal{B}$ gilt, 
+dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.
+
+3.Fall $COM3$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
+    }
+    {
+        \Par{P}{Q} \CCSTrans{\tau} \Par{P'}{Q'}
+    }
+\end{displaymath}
+
+In $\Par {Q}{P}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM1]
+    {
+      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q'}{P'}
+    }
+\end{displaymath}
+
+Nach Definition von $\mathcal{B}$ gilt, 
+dass $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.
+\subsection{Aufgabe 3.2}
+$\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$ gilt nicht.\\
+Gegenbeispiel: $P \CCSDef a.\nil$\\
+Unter der der Bedingung, dass weder die Aktion $a$, noch ihre co-Aktion $\Co{a}$ in $P$ enthalten ist, gilt diese Bisimulation.
+%Wiederspruchsbeweis:\\
+%Wir nehmen an $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$ gilt, d.h es $\mathcal{B}$ ist eine Bisimulation mit $(\Res *{\Par{a.\nil}{\Co{a}}.P}{a},\tau.P) \in \mathcal{B}$.
+
