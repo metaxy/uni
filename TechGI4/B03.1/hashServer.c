@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
         table[i].valid = 0;
     }
     if (argc != 2) {
-        fprintf(stderr,"Usage: udpServer serverPort \n");
+        fprintf(stderr,"Usage: hashServer serverPort \n");
         exit(1);
     }
         

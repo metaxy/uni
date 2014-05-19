@@ -3,13 +3,11 @@
 \subsection*{Aufgabe 1 a)}
 Sei $f_1$ die Umbennung \\ $[betritt/betreten, zuh"ort/aktiv, guteHA/erstellen, verl"asst/verlassen]$\\ \\
 und $f_2$ die Umbennung \\ $[betritt/betreten, redet/aktiv, schlechteHA/erstellen, verl"asst/verlassen]$\\
-
-
  	$SG \CCSDef \Out {betreten}{}. \In {aktiv}{}.SG1 $ \\ \\
  	$SG1 \CCSDef \Out {erstellen}{}.SG2 $ \\ \\
  	$SG2 \CCSDef \Out {verlassen}{}.SG  $ \\ \\
  	 	$TG \CCSDef SG[f_1] $ \\ \\
- 	 	$HG \CCSDef \Relabel SG[f_2]  $ \\ \\
+ 	 	$HG \CCSDef SG[f_2]  $ \\ \\
  	 	$T \CCSDef \Out {betreten}{}.T1$ \\ \\
  	 	$T1 \CCSDef \Out {verlassen}{}.T$ \\ \\
  	 	$R \CCSDef \Choice{TR}{HR}$ \\ \\
@@ -23,10 +21,27 @@ und $f_2$ die Umbennung \\ $[betritt/betreten, redet/aktiv, schlechteHA/erstelle
 
 
 \subsection*{Aufgabe 1 b)}
-
-
-\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,thick]
-
-  \node (1) {$(R | T | TG | HG)$};
-
-\end{tikzpicture}
+Sei $\mathcal{X} = \{betritt, zuh"ort, verl"asst, redet, betreten, verlassen\}$\\
+Sei \begin{compactitem}
+ \item $ P_1 =  (R | T | TG | HG) \setminus \mathcal{X}$
+ \item $ P_2 =  (TR1 | T1 | SG1[f_1] | HG) \setminus \mathcal{X}$
+ \item $ P_3 =  (TR1 | T1 | SG2[f_1] | HG) \setminus \mathcal{X}$
+ \item $ P_4 =  (HR1 | T | TG | HG[f_2]) \setminus \mathcal{X}$
+ \item $ P_5 =  (HR1 | T | TG | HG[f_2]) \setminus \mathcal{X}$
+\end{compactitem}
+Nun ist
+\begin{align*}
+LTS_U & = (Proc, Act, \{  \CCSTrans {a}  | a \in Act \})\\
+\Proc &= \{ P_1,P_2,P_3,P_4,P_5 \} \\
+\MC{A} &= \lbrace schlechteHA, guteHA \rbrace \\
+\Act &= \lbrace \tau \rbrace \cup \MC{A} \cup \Co{\MC{A}}\\
+\CCSTrans {\tau} &= \{(P_1,P_2),(P_1,P_4),(P_3,P_1),(P_5,P_1) \}
+\\
+\CCSTrans {schlechteHA} &= \emptyset
+\\ 
+\CCSTrans {\overline{schlechteHA}}  &= \{ (P_4,P_5)\}
+\\ 
+\CCSTrans {guteHA} &= \emptyset 
+\\
+\CCSTrans {\overline{guteHA}} &= \{ (P_2,P_3)\}
+\end{align*}

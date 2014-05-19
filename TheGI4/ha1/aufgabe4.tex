@@ -33,8 +33,7 @@ In $\Par {Q}{P}$ gibt es den Übergang.
         \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
     }
 \end{displaymath}
-
-Nach Defintion von $\mathcal{B}$ gilt, dass $(\Par{P'}{Q},\Par{Q}{P'}) \in \mathcal{B}$.\\
+und $(\Par{P'}{Q},\Par{Q}{P'}) \in \mathcal{B}$.\\
 \\
 2.Fall $COM2$ \\
 \begin{displaymath}
@@ -58,9 +57,7 @@ In $\Par {Q}{P}$ gibt es den Übergang.
         \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
     }
 \end{displaymath}
-
-Nach Definition von $\mathcal{B}$ gilt, 
-dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.\\ \\
+und $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.\\ \\
 3.Fall $COM3$ \\
 \begin{displaymath}
     \inference[COM2]
@@ -83,14 +80,46 @@ In $\Par {Q}{P}$ gibt es den Übergang.
         \Par{Q}{P} \CCSTrans{a} \Par{Q'}{P'}
     }
 \end{displaymath}
-
-Nach Definition von $\mathcal{B}$ gilt, 
-dass $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.\\\\
+und $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.\\\\
 
 \textbf{Transitionen in $\Par {Q}{P}$}\\
-TODO: umbennen\\
-
 1.Fall $COM1$ \\
+\begin{displaymath}
+    \inference[COM1]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q'}{P}
+    }
+\end{displaymath}
+
+In $\Par {P}{Q}$ gibt es den Übergang.
+
+\begin{displaymath}
+    \inference[COM2]
+    {
+      Q \CCSTrans{a} Q'
+    }
+    {
+        \Par{P}{Q} \CCSTrans{a} \Par{P}{Q'}
+    }
+\end{displaymath}
+und $(\Par{Q'}{P},\Par{P}{Q'}) \in \mathcal{B}$.\\
+\\
+2.Fall $COM2$ \\
+\begin{displaymath}
+    \inference[COM2]
+    {
+      P \CCSTrans{a} P'
+    }
+    {
+        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
+    }
+\end{displaymath}
+
+In $\Par {P}{Q}$ gibt es den Übergang.
+
 \begin{displaymath}
     \inference[COM1]
     {
@@ -101,61 +130,11 @@ TODO: umbennen\\
     }
 \end{displaymath}
 
-In $\Par {Q}{P}$ gibt es den Übergang.
-
-\begin{displaymath}
-    \inference[COM2]
-    {
-      P \CCSTrans{a} P'
-    }
-    {
-        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
-    }
-\end{displaymath}
-
-Nach Defintion von $\mathcal{B}$ gilt, dass $(\Par{P'}{Q},\Par{Q}{P'}) \in \mathcal{B}$.\\
-\\
-2.Fall $COM2$ \\
-\begin{displaymath}
-    \inference[COM2]
-    {
-      Q \CCSTrans{a} Q'
-    }
-    {
-        \Par{P}{Q} \CCSTrans{a} \Par{P}{Q'}
-    }
-\end{displaymath}
-
-In $\Par {Q}{P}$ gibt es den Übergang.
-
-\begin{displaymath}
-    \inference[COM1]
-    {
-      Q \CCSTrans{a} Q'
-    }
-    {
-        \Par{Q}{P} \CCSTrans{a} \Par{Q}{P'}
-    }
-\end{displaymath}
-
 Nach Definition von $\mathcal{B}$ gilt, 
-dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.
-
+dass $(\Par{Q}{P'},\Par{P'}{Q}) \in \mathcal{B}$.\\
 3.Fall $COM3$ \\
 \begin{displaymath}
-    \inference[COM2]
-    {
-      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
-    }
-    {
-        \Par{P}{Q} \CCSTrans{\tau} \Par{P'}{Q'}
-    }
-\end{displaymath}
-
-In $\Par {Q}{P}$ gibt es den Übergang.
-
-\begin{displaymath}
-    \inference[COM1]
+    \inference[COM3]
     {
       Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
     }
@@ -164,8 +143,19 @@ In $\Par {Q}{P}$ gibt es den Übergang.
     }
 \end{displaymath}
 
-Nach Definition von $\mathcal{B}$ gilt, 
-dass $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.
+In $\Par {P}{Q}$ gibt es den Übergang.
+\begin{displaymath}
+    \inference[COM3]
+    {
+      Q \CCSTrans{a} Q' \, \, P \CCSTrans{a} P' 
+    }
+    {
+        \Par{P}{Q} \CCSTrans{\tau} \Par{P'}{Q'}
+    }
+\end{displaymath}
+
+und $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.\\
+Daraus folgt dass $\mathcal{B}$ eine Bisimulation ist und somit $P|Q \bisim Q|P$.
 \subsection*{Aufgabe 4 b)}
 $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$ gilt nicht.\\
 Angenommen $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$\\ Dann gibt es eine starke Bisimulation $ \mathcal{R}$
