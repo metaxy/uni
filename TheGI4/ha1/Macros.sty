@@ -2,9 +2,9 @@
 
 \newcommand{\nil}{\ensuremath{\mathbf{0}}}
 \newcommand{\Out}[2]{\ifx\\#2\\
-			\overline{\mathit{#1}}
+			\ensuremath{\overline{\mathit{#1}}}
 		      \else
-			\overline{\mathit{#1}}(#2)
+			\ensuremath{\overline{\mathit{#1}}(#2)}
 		      \fi}
 \newcommand{\In}[2]{\ifx\\#2\\
 			\ensuremath{\mathit{#1}}
@@ -17,6 +17,7 @@
 \newcommand{\CCSDef}{\ensuremath{\stackrel{\text{def}}{=}}}
 \newcommand{\Proc}{\mbox{\sf Proc}}
 \newcommand{\Act}{\mbox{\sf Act}}
+\newcommand{\Lab}{\MC{L}}
 \newcommand{\Traces}[1]{\ensuremath{\mathit{Traces(#1)}}}
 \newcommand{\Id}{\ensuremath{\operatorname{Id}}}
 
@@ -83,7 +84,71 @@
 \newcommand{\ASet}[2][\;]{\AList[#1]{#2}{\left\{}{\right\}}}
 
 \newcommand{\Sup}{\ensuremath{\bigsqcup}}
-\newcommand{\Inf}{\rotatebox[origin=c]{180}{$\bigsqcup$}}
+\newcommand{\Inf}{\rotatebox[origin=c]{180}{$\bigsqcup$}\kern0.35ex}
+
+% =============================================================================
+% =============================================================================
+% Sim and Bisimhelper
+% =============================================================================
+% =============================================================================
+
+\newcounter{saveargc}
+\newcommand{\savearg}[2]%
+{
+  \setcounter{saveargc}{0}
+  \forcsvlist{\stepcounter{saveargc}\expandafter\def\csname #1\thesaveargc\endcsname}{#2}
+}
+
+\newcommand{\MakeTrans}[7]%
+{
+\ifx\\#4\\
+Keine Transitionen in \ensuremath{#2} m\"oglich.
+\else
+  Transitionen in \ensuremath{#2}:
+
+  \begin{compactitem}
+    \renewcommand*{\do}[1]%
+    {
+      \savearg{trans}{##1}
+    \item F\"ur \ensuremath{#2 \CCSTrans{\csname  trans1\endcsname} \csname  trans2\endcsname} w\"ahle \ensuremath{#3 #5{\csname  trans1\endcsname} \csname  trans3\endcsname} und \ensuremath{(\csname  trans#6\endcsname, \csname  trans#7\endcsname) \in #1}.
+    }
+    \docsvlist{#4}
+  \end{compactitem}
+\fi
+}
+
+\newcommand{\MakeSim}[4]
+{
+  \savearg{arg}{#2}
+  Betrachte \ensuremath{(#2) \in #1}.
+
+  \MakeTrans{#1}{\csname  arg1\endcsname}{\csname  arg2\endcsname}{#3}{#4}{2}{3}
+}
+
+\newcommand{\MakeBiSim}[5]
+{
+  \savearg{arg}{#2}
+  Betrachte \ensuremath{(#2) \in #1}.
+
+  \ifx\\#3\\
+  \ifx\\#4\\
+  Keine Transitionen in \ensuremath{\csname arg1\endcsname} oder \ensuremath{\csname arg2\endcsname} m\"oglich.
+  \else
+  \MakeTrans{#1}{\csname  arg1\endcsname}{\csname  arg2\endcsname}{#3}{#5}{2}{3}
+
+  \MakeTrans{#1}{\csname  arg2\endcsname}{\csname  arg1\endcsname}{#4}{#5}{3}{2}
+  \fi
+  \else
+  \MakeTrans{#1}{\csname  arg1\endcsname}{\csname  arg2\endcsname}{#3}{#5}{2}{3}
+
+  \MakeTrans{#1}{\csname  arg2\endcsname}{\csname  arg1\endcsname}{#4}{#5}{3}{2}
+  \fi
+}
+
+\newcommand{\ShowSim}[3]{\MakeSim{#1}{#2}{#3}{\CCSTrans}}
+\newcommand{\ShowWSim}[3]{\MakeSim{#1}{#2}{#3}{\WCCSTrans}}
+\newcommand{\ShowBisim}[4]{\MakeBiSim{#1}{#2}{#3}{#4}{\CCSTrans}}
+\newcommand{\ShowWBisim}[4]{\MakeBiSim{#1}{#2}{#3}{#4}{\WCCSTrans}}
 
 % \newcommand{\MakeSan}[1]{\StrSubstitute{#1}{.}{.}[\i]\ifstrequal{\i}{\tau}{\ensuremath{\tau}}{\mathit{\i}}}
 %----------------------- !THEGI 4 -------------------------------
