@@ -1,5 +1,4 @@
 %----------------------- THEGI 4 --------------------------------
-
 \newcommand{\nil}{\ensuremath{\mathbf{0}}}
 \newcommand{\Out}[2]{\ifx\\#2\\
 			\ensuremath{\overline{\mathit{#1}}}
@@ -69,7 +68,7 @@
   \renewcommand*{\do}[1]{\menuitem{##1}\stepcounter{curitem}\ifnumless{\value{curitem}}{\value{MakeSanCount}}{\menusep}{\menuend}}%
   \menulistparser{#1}% Process list
 }
-%\DeclareListParser{\menulistparser}{.}
+\DeclareListParser{\menulistparser}{.}
 
 \newif\ifAFIRST
 \newcommand{\ALISTOP}[1]{\expandafter\ifstrequal\expandafter{#1}{\tau}{\ensuremath{\tau}}{\ensuremath{\mathit{#1}}}}

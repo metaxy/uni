@@ -1,5 +1,74 @@
+
 \section*{Aufgabe 7}
+\subsection*{Aufgabe 7 a)}
+Ja.\\\\
+$B = \Set{(p,q),(p_1,q_1),(p_2,q_2),(p_4,q_4),(p_5,q_5),(p_2,q_3),(p_3,q_5),(p_1,q_5)}$\\\\
 
-\subsection{a)}
+Betrachte $(p, q) \in B$\\
+Transitionen in $p$:\\
+-Wenn $p \CCSTrans {b} p_1$, dann $q \CCSTrans {b} q_1$ und $(p_1, q_1) \in B$.\\
+-Wenn $p \CCSTrans {c} p_2$, dann $q \CCSTrans {c} q_2$ und $(p_2, q_2) \in B$.\\
+Transitionen in $q$:\\
+-Wenn $q \CCSTrans {b} q_1$, dann $p \CCSTrans {b} p_1$ und $(p_1, q_1) \in B$.\\
+-Wenn $q \CCSTrans {c} q_2$, dann $p \CCSTrans {c} p_2$ und $(p_2, q_2) \in B$.\\
 
-Zu zeigen ist $ p \wbisim q$
+Betrachte $(p_1, q_1) \in B$\\
+Transitionen in $p_1$:\\
+-Wenn $p_1 \CCSTrans {a} p_4$, dann $q_1 \CCSTrans {a} q_4$ und $(p_4, q_4) \in B$.\\
+Transitionen in $q_1$:\\
+-Wenn $q_1 \CCSTrans {a} q_2$, dann $p_1 \WCCSTrans {a} p_2$ und $(p_2, q_2) \in B$.\\
+-Wenn $q_1 \CCSTrans {a} q_4$, dann $p_1 \CCSTrans {a} p_4$ und $(p_4, q_4) \in B$.\\
+
+Betrachte $(p_2, q_2) \in B$\\
+Transitionen in $p_2$:\\
+-Wenn $p_2 \CCSTrans {c} p_1$, dann $q_2 \WCCSTrans {c} q_1$ und $(p_1, q_1) \in B$.\\
+-Wenn $p_2 \CCSTrans {b} p_5$, dann $q_2 \WCCSTrans {b} q_5$ und $(p_5, q_5) \in B$.\\
+Transitionen in $q_2$:\\
+-Wenn $q_1 \CCSTrans {\tau} q_3$, dann $p_2 \WCCSTrans {\tau} p_2$ und $(p_2, q_3) \in B$.\\
+
+Betrachte $(p_4, q_4) \in B$\\
+Transitionen in $p_4$:\\
+-Wenn $p_4 \CCSTrans {\tau} p_2$, dann $q_4 \CCSTrans {\tau} q_3$ und $(p_2, q_3) \in B$.\\
+-Wenn $p_4 \CCSTrans {d} p_3$, dann $q_4 \CCSTrans {d} q_5$ und $(p_3, q_5) \in B$.\\
+Transitionen in $q_4$:\\
+-Wenn $q_4 \CCSTrans {\tau} q_3$, dann $p_4 \CCSTrans {\tau} p_2$ und $(p_2, q_3) \in B$.\\
+-Wenn $q_4 \CCSTrans {d} q_5$, dann $p_4 \CCSTrans {d} p_3$ und $(p_3, q_5) \in B$.\\
+
+Betrachte $(p_5, q_5) \in B$\\
+Transitionen in $p_5$:\\
+-Wenn $p_5 \CCSTrans {a} p_4$, dann $q_5 \CCSTrans {a} q_4$ und $(p_4, q_4) \in B$.\\
+Transitionen in $q_5$:\\
+-Wenn $q_5 \CCSTrans {a} q_4$, dann $p_5 \CCSTrans {a} p_4$ und $(p_4, q_4) \in B$.\\
+-Wenn $q_5 \CCSTrans {a} q_2$, dann $p_5 \WCCSTrans {a} p_2$ und $(p_2, q_2) \in B$.\\
+
+Betrachte $(p_2, q_3) \in B$\\
+Transitionen in $p_2$:\\
+-Wenn $p_2 \CCSTrans {c} p_1$, dann $q_3 \CCSTrans {c} q_1$ und $(p_1, q_1) \in B$.\\
+-Wenn $p_2 \CCSTrans {b} p_5$, dann $q_3 \CCSTrans {b} q_5$ und $(p_5, q_5) \in B$.\\
+Transitionen in $q_3$:\\
+-Wenn $q_3 \CCSTrans {c} q_1$, dann $p_2 \CCSTrans {c} p_1$ und $(p_1, q_1) \in B$.\\
+-Wenn $q_3 \CCSTrans {b} q_5$, dann $p_2 \WCCSTrans {b} p_5$ und $(p_5, q_5) \in B$.\\
+
+Betrachte $(p_3, q_5) \in B$\\
+Transitionen in $p_3$:\\
+-Wenn $p_3 \CCSTrans {\tau} p_1$, dann $q_5 \WCCSTrans {\tau} q_5$ und $(p_1, q_5) \in B$.\\
+Transitionen in $q_5$:\\
+-Wenn $q_5 \CCSTrans {a} q_2$, dann $p_2 \WCCSTrans {a} p_2$ und $(p_2, q_2) \in B$.\\
+-Wenn $q_5 \CCSTrans {a} q_4$, dann $p_2 \WCCSTrans {a} p_4$ und $(p_4, q_4) \in B$.\\
+
+Betrachte $(p_1, q_5) \in B$\\
+Transitionen in $p_1$:\\
+-Wenn $p_1 \CCSTrans {a} p_4$, dann $q_5 \WCCSTrans {a} q_4$ und $(p_4, q_4) \in B$.\\
+Transitionen in $q_5$:\\
+-Wenn $q_5 \CCSTrans {a} q_2$, dann $p_1 \WCCSTrans {a} p_2$ und $(p_2, q_2) \in B$.\\
+-Wenn $q_5 \CCSTrans {a} q_4$, dann $p_1 \CCSTrans {a} p_4$ und $(p_4, q_4) \in B$.\\
+
+Da $B$ eine schwache Bisimulation ist und $(p, q) \in B$, sind p und q schwach bisimilar.
+
+\subsection*{Aufgabe 7 b)}
+Nein.\\\\
+Angenommen $q$ und $r$ sind schwach bisimilar. Dann gibt es eine schwache Bisimulation $B$ und $(q,r) \in R$. Wegen $q \CCSTrans {b} q_1$ und $r \WCCSTrans {b} r_3$ muss $(q_1,r_3) \in R$. Wegen $q_1 \CCSTrans {a} q_4$ und $r_3 \CCSTrans {a} r_4$ muss $(q_4,r_4) \in R$. Aus $q_4 \CCSTrans {d}$ und $r_4 \NWCCSTrans {d}$ folgt, dass $(q_4,r_4) \not\in R$. Also können $q$ und $r$ nicht schwach bisimilar sein.
+
+\subsection*{Aufgabe 7 c)}
+Nein.\\
+Wegen $p \wbisim q$ aus a) und $q \not\wbisim r$ aus b) muss $p \not\wbisim r$.

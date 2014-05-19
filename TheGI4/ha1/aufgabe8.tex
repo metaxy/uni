@@ -1,0 +1,59 @@
+\section*{Aufgabe 8}
+\subsection*{a)}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {T1};
+  \node[main node] (2) [right of=1] {T2};
+  \node[main node] (3) [right of=2] {T3};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge node [above] {a} (2)
+        edge [bend right] node[above] {a} (3)
+    (2) edge [bend right] node[above] {a} (1)
+        edge node [above] {b} (3);
+\end{tikzpicture}
+\subsection*{b)}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {C1};
+  \node[main node] (2) [right of=1] {C2};
+  \node[main node] (3) [below right of=1] {C3};
+  \node[main node] (4) [below of=3] {C4};
+  \node[main node] (5) [right of=4] {C5};
+  \path[every node]
+    (1) edge node [left] {a} (3)
+    (2) edge node [left] {a} (3)
+    (3) edge node [left] {$\Co{a}$} (4)
+    (4) edge node [above] {$\tau$} (5)
+    	edge [loop left] node [above] {b} (4)
+    (5) edge [loop right] node [above] {b} (5);
+\end{tikzpicture}
+
+
+\subsection*{c)}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {A1};
+  \node[main node] (2) [right of=1] {A2};
+  \node[main node] (3) [below of=1] {A3};
+  \node[main node] (4) [right of=3] {A4};
+  \node[main node] (5) [right of=4] {A5};
+  \node[main node] (6) [right of=5] {A6};
+  \node[main node] (7) [below of=3] {A6};
+  
+  \path[every node]
+    (1) edge node [left] {a} (3)
+    (2) edge node [above] {$\tau$} (1)
+    	edge node [left] {$\tau$} (5)
+    	edge node [right] {$\tau$} (6)
+    (3) edge node [left] {b} (7)
+    (4) edge node [above] {$\tau$} (3)
+    (5) edge node [above] {a} (4)
+    (6) edge node [above] {$\tau$} (5);
+    
+\end{tikzpicture}

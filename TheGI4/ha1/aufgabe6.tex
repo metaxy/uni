@@ -1,54 +1,42 @@
 \section*{Aufgabe 6}
-
 \subsection*{Aufgabe 6 a)}
 Ja.\\\\
-$R =3D \Set{(q_1,p_1),(q_2,p_3),(q_3,p_4),(q_4,p_5)}$\\\\
+$R = \Set{(q_1,p_1),(q_2,p_3),(q_3,p_4),(q_4,p_5)}$\\\\
 
 Betrachte $(q_1, p_1) \in R$\\
 Transitionen in $q_1$:\\
--Wenn $q_1 \CCSTrans {a} q_2$, dann $p_1 \CCSTrans {a} p_3$ und $(q_2, p_3)=
- \in R$.\\
+-Wenn $q_1 \CCSTrans {a} q_2$, dann $p_1 \CCSTrans {a} p_3$ und $(q_2, p_3) \in R$.\\
 
 Betrachte $(q_2, p_3) \in R$\\
 Transitionen in $q_2$:\\
--Wenn $q_2 \CCSTrans {b} q_4$, dann $p_3 \CCSTrans {b} p_5$ und $(q_4, p_5)=
- \in R$.\\
--Wenn $q_2 \CCSTrans {c} q_3$, dann $p_3 \CCSTrans {c} p_4$ und $(q_3, p_4)=
- \in R$.\\
+-Wenn $q_2 \CCSTrans {b} q_4$, dann $p_3 \CCSTrans {b} p_5$ und $(q_4, p_5) \in R$.\\
+-Wenn $q_2 \CCSTrans {c} q_3$, dann $p_3 \CCSTrans {c} p_4$ und $(q_3, p_4) \in R$.\\
 
 Betrachte $(q_3, p_4) \in R$\\
 Transitionen in $q_3$:\\
--Wenn $q_3 \CCSTrans {a} q_1$, dann $p_4 \CCSTrans {a} p_1$ und $(q_1, p_1)=
- \in R$.\\
+-Wenn $q_3 \CCSTrans {a} q_1$, dann $p_4 \CCSTrans {a} p_1$ und $(q_1, p_1) \in R$.\\
 
 Betrachte $(q_4, p_5) \in R$\\
 Keine Transitionen in $q_4$ möglich.\\\\
-Da $R$ eine starke Simulation ist und $(q_1, p_1) \in R$, wird $q_1$ von $p=
-_1$ stark simuliert.
+Da $R$ eine starke Simulation ist und $(q_1, p_1) \in R$, wird $q_1$ von $p_1$ stark simuliert.
 \\\\
 \subsection*{Aufgabe 6 b)}
 Ja.\\\\
-$S =3D \Set{(p_1,q_1),(p_2,q_2),(p_3,q_2),(p_5,q_3,(p_5,q_4),(p_4,q_3)}$\\\=
-\
+$S = \Set{(p_1,q_1),(p_2,q_2),(p_3,q_2),(p_5,q_3),(p_5,q_4),(p_4,q_3)}$\\\\
 
 Betrachte $(p_1, q_1) \in S$\\
 Transitionen in $p_1$:\\
--Wenn $p_1 \CCSTrans {a} p_2$, dann $q_1 \CCSTrans {a} q_2$ und $(p_2, q_2)=
- \in S$.\\
--Wenn $p_1 \CCSTrans {a} p_3$, dann $q_1 \CCSTrans {a} q_2$ und $(p_3, q_2)=
- \in S$.\\
+-Wenn $p_1 \CCSTrans {a} p_2$, dann $q_1 \CCSTrans {a} q_2$ und $(p_2, q_2) \in S$.\\
+-Wenn $p_1 \CCSTrans {a} p_3$, dann $q_1 \CCSTrans {a} q_2$ und $(p_3, q_2) \in S$.\\
 
 Betrachte $(p_2, q_2) \in S$\\
 Transitionen in $p_2$:\\
--Wenn $p_2 \CCSTrans {c} p_5$, dann $q_2 \CCSTrans {c} q_3$ und $(p_5, q_3)=
- \in S$.\\
+-Wenn $p_2 \CCSTrans {c} p_5$, dann $q_2 \CCSTrans {c} q_3$ und $(p_5, q_3) \in S$.\\
 
 Betrachte $(p_3, q_2) \in S$\\
 Transitionen in $p_3$:\\
--Wenn $p_3 \CCSTrans {b} p_5$, dann $q_2 \CCSTrans {b} q_4$ und $(p_5, q_4)=
- \in S$.\\
--Wenn $p_3 \CCSTrans {c} p_4$, dann $q_2 \CCSTrans {c} q_3$ und $(p_4, q_3)=
- \in S$.\\
+-Wenn $p_3 \CCSTrans {b} p_5$, dann $q_2 \CCSTrans {b} q_4$ und $(p_5, q_4) \in S$.\\
+-Wenn $p_3 \CCSTrans {c} p_4$, dann $q_2 \CCSTrans {c} q_3$ und $(p_4, q_3) \in S$.\\
 
 Betrachte $(p_5, q_3) \in S$\\
 Keine Transitionen in $p_5$ möglich.\\
@@ -58,19 +46,12 @@ Keine Transitionen in $p_5$ möglich.\\
 
 Betrachte $(p_4, q_3) \in S$\\
 Transitionen in $p_4$:\\
--Wenn $p_2 \CCSTrans {c} p_5$, dann $q_2 \CCSTrans {c} q_3$ und $(p_5, q_3)=
- \in S$.\\\\
-Da $S$ eine starke Simulation ist und $(p_1, q_1) \in S$, wird $p_1$ von $q=
-_1$ stark simuliert.
+-Wenn $p_2 \CCSTrans {c} p_5$, dann $q_2 \CCSTrans {c} q_3$ und $(p_5, q_3) \in S$.\\\\
+Da $S$ eine starke Simulation ist und $(p_1, q_1) \in S$, wird $p_1$ von $q_1$ stark simuliert.
 \\\\
 \subsection*{Aufgabe 6 c)}
-Aus a) folgt, dass $q_1$ von $p_1$ stark simuliert wird und aus b) folgt, d=
-ass $p_1$ von $q_1$ stark simuliert wird. Also simulieren sich $q_1$ und $p=
-_1$ gegenseitig stark.\\\\
+Aus a) folgt, dass $q_1$ von $p_1$ stark simuliert wird und aus b) folgt, dass $p_1$ von $q_1$ stark simuliert wird. Also simulieren sich $q_1$ und $p_1$ gegenseitig stark.\\\\
 \subsection*{Aufgabe 6 d)}
 Nein.\\\\
-Angenommen $p_1$ und $q_1$ sind stark bisimilar, dann existiert eine Bisimulation $B$ mit $(p_1, q_1) \in B$. Mit $p_1 \CCSTrans {a} p_2$ muss dann auch gelten, dass $(p_2, q_2) \in B$, da $q_1 \CCSTrans {a} q_2$ die einzige
-mögliche Transition in $q_1$ ist. 
-Da nun aber gilt, dass $q_2 \CCSTrans {b}$, aber $p_2 \NCCSTrans {b}$, kann diese Bisimulation nicht existieren
-. Somit sind $p_1$ und $q_1$ nicht stark bisimilar.
+Angenommen $p_1$ und $q_1$ sind stark bisimilar, dann existiert eine Bisimulation $B$ mit $(p_1, q_1) \in B$. Mit $p_1 \CCSTrans {a} p_2$ muss dann auch gelten, dass $(p_2, q_2) \in B$, da $q_1 \CCSTrans {a} q_2$ die einzige mögliche Transition in $q_1$ ist. Da nun aber gilt, dass $q_2 \CCSTrans {b}$, aber $p_2 \NCCSTrans {b}$, kann diese Bisimulation nicht existieren. Somit sind $p_1$ und $q_1$ nicht stark bisimilar.
 \\\\
