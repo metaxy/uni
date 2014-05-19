@@ -1,12 +1,15 @@
 \section*{Aufgabe 1}
 
 \subsection*{Aufgabe 1 a)}
- 
+Sei $f_1$ die Umbennung \\ $[betritt/betreten, zuh"ort/aktiv, guteHA/erstellen, verl"asst/verlassen]$\\ \\
+und $f_2$ die Umbennung \\ $[betritt/betreten, redet/aktiv, schlechteHA/erstellen, verl"asst/verlassen]$\\
+
+
  	$SG \CCSDef \Out {betreten}{}. \In {aktiv}{}.SG1 $ \\ \\
  	$SG1 \CCSDef \Out {erstellen}{}.SG2 $ \\ \\
  	$SG2 \CCSDef \Out {verlassen}{}.SG  $ \\ \\
- 	 	$TG \CCSDef \Relabel {SG}{betritt/betreten, zuh"ort/aktiv, gute\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}  $ \\ \\
- 	 	$HG \CCSDef \Relabel {SG}{betritt/betreten, redet/aktiv, schlechte\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}  $ \\ \\
+ 	 	$TG \CCSDef SG[f_1] $ \\ \\
+ 	 	$HG \CCSDef \Relabel SG[f_2]  $ \\ \\
  	 	$T \CCSDef \Out {betreten}{}.T1$ \\ \\
  	 	$T1 \CCSDef \Out {verlassen}{}.T$ \\ \\
  	 	$R \CCSDef \Choice{TR}{HR}$ \\ \\
@@ -20,21 +23,10 @@
 
 
 \subsection*{Aufgabe 1 b)}
-Sei $f_1 die Umbennung \Relabel {SG}{betritt/betreten, zuh"ort/aktiv, gute\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}$
-und $f_2 die Umbennung \Relabel {SG}{betritt/betreten, redet/aktiv, schlechte\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}$
 
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-  thick,main node/.style={font=\sffamily\Large\bfseries}]
 
-  \node[main node] (1) {R|R|TG|HG};
-  \node[main node] (2) [below of=1] {TR|T1|TG1[f_1]|HG};
-  \node[main node] (3) [below of=1] {TR1|T1|TG2[f_1]|HG};
-  \node[main node] (4) [below of=3] {HR1|T|TG|HG[f_2]};
-  \node[main node] (5) [below of=4] {HR1|T|TG|HG2[f_2]};
-  
-  \path[every node]
-    (1) 
-    	edge [bend left] node [left] {$\tau$} (1)
-    	edge [bend left] node [left] {$\tau$} (1);
-    
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,thick]
+
+  \node (1) {$(R | T | TG | HG)$};
+
 \end{tikzpicture}

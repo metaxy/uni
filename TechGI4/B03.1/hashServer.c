@@ -20,27 +20,63 @@
 #define MAX_BUFFER_LENGTH 100
 
 struct entry {
-    int key;
-    int val;
-    int valid;
+    uint16_t key;
+    uint16_t val;
+    uint16_t valid;
 };
 struct entry table[256];
-
-struct entry* get(int key)
+int getPos(uint16_t key)
 {
+    int pos = key & 0xFF;
+    while(1) {
+        if(table[pos].valid == 1 && table[pos].key == key) {
+            printf("getPos return \n",pos);
+            return pos;
+        }
+        pos = (pos + 1) % 256;
+        if(pos == (key & 0xFF)) break;
+    }
+    printf("getPos not found\n");
+    return -1;
+}
+struct entry* get(uint16_t key)
+{
+    printf("get %i\n", key);
+    int pos = getPos(key);
+    if(pos >= 0)  {
+        return &table[pos];
+    }
     return NULL;
 }
 
-void set(int key, int val)
+void set(uint16_t key, uint16_t val)
 {
-    
+    printf("set %i %i\n", key, val);
+    int pos = key & 0xFF;
+    while(1) {
+        if(table[pos].valid == 0) {
+            break;
+        }
+        pos = (pos + 1) % 256;
+        if(pos == (key & 0xFF)) return;
+
+    }
+    table[pos].valid = 1;
+    table[pos].key = key;
+    table[pos].val = val;
 }
 
-void del(int key)
+void del(uint16_t key)
 {
-    
+    printf("del %i\n", key);
+    int pos = getPos(key);
+    if(pos >= 0)  {
+        table[pos].valid = 0;
+    }
 }
-void unpackData(unsigned char *buffer, char *command, unsigned int *a, unsigned int *b)
+
+
+void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b)
 {
     printf("unpack %s\n", buffer);
     command[0] = buffer[0];
@@ -51,8 +87,9 @@ void unpackData(unsigned char *buffer, char *command, unsigned int *a, unsigned 
     *b = (buffer[6]<<8) | buffer[7];
 }
 
-int packData(unsigned char *buffer, char command[], unsigned int a, unsigned int b) 
+int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b) 
 {
+    printf("pack %s %i %i\n", command, a, b);
     buffer[0] = command[0];
     buffer[1] = command[1];
     buffer[2] = command[2];
@@ -71,7 +108,12 @@ int main(int argc, char *argv[])
     struct sockaddr_in serv_addr, cli_addr;
     int clilen;
     printf("UDP Server\n\n");
-    
+    int i;
+    for(i = 0; i< 256; i++) {
+        table[i].key = 0;
+        table[i].val = 0;
+        table[i].valid = 0;
+    }
     if (argc != 2) {
         fprintf(stderr,"Usage: udpServer serverPort \n");
         exit(1);
@@ -98,10 +140,10 @@ int main(int argc, char *argv[])
 		clilen = sizeof cli_addr;
         unsigned char buffer[8];
 
-        int size = recvfrom(sockfd, buffer, sizeof(char)*8, 0,(struct sockaddr *) &cli_addr, &clilen);
+        int size = recvfrom(sockfd, buffer, 8, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
             printf("received len  %i\n", size);
-            unsigned int key,value;
+            uint16_t key,value;
             char command[4];
             unpackData(buffer, command, &key, &value);
     
