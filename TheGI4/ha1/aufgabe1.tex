@@ -17,43 +17,24 @@
  	 	$U \CCSDef \Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}  $ \\ \\
  	 	Anmerkung: \\ SG steht f"ur Studentengruppe, TG f"ur Tutoriumsgruppe, HG f"ur Hausaufgabengruppe, T f"ur Tutor, R f"ur Raum, TR f"ur Tutoriumsraum, HR f"ur Hausaufgabenraum und U f"ur Universit"at. \\
 \\ \\ \\
+
+
 \subsection*{Aufgabe 1 b)}
-Sei $\mathcal{A} = \{betritt, zuh"ort, verl"asst, redet, betreten, verlassen\}$\\
+Sei $f_1 die Umbennung \Relabel {SG}{betritt/betreten, zuh"ort/aktiv, gute\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}$
+und $f_2 die Umbennung \Relabel {SG}{betritt/betreten, redet/aktiv, schlechte\,Hausaufgaben\,erstellt/erstellen, verl"asst/verlassen}$
 
-Nun ist $LTS_U = (Proc, Act, \{ $ \CCSTrans {a} $ | a \in Act \})$\\
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={font=\sffamily\Large\bfseries}]
 
-$\Proc = \{ (R | T | TG | HG) \setminus \mathcal{A}, \\
-(TR1 | T1 | TG1 | HG) \setminus \mathcal{A}, \\
-(TR1 | T1 | TG2 | HG) \setminus \mathcal{A}, \\
-(HR1 | T | TG | HG1) \setminus \mathcal{A}, \\
-(HR1 | T | TG | HG2)  \setminus \mathcal{A} \}$ \\
-
-$\Act = \lbrace \tau , schlechte\,Hausaufgaben\,erstellt, gute\,Hausaufgaben\,erstellt \rbrace$ \\
-
- \begin{math}
-	$\CCSTrans {\tau}$ = \lbrace \\($\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {TR1} \Par {T1} \Par {TG1}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\ ($\Res *{\Par {TR1} \Par {T1} \Par {TG2}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\($\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {HR1} \Par {T} \Par {TG}{HG1}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$),\\($\Res *{\Par {HR1} \Par {T} \Par {TG}{HG2}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {R} \Par {T} \Par {TG}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)  \\ \rbrace
-	\\ \\
-	$\CCSTrans {schlechte\,Hausaufgaben\,erstellt}$ = \emptyset
-	\\ \\
-	$\CCSTrans {\overline{schlechte\,Hausaufgaben\,erstellt}}$ = \lbrace \\
-	($\Res *{\Par {HR1} \Par {T} \Par {TG}{HG1}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {HR1} \Par {T} \Par {TG}{HG2}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)
-	\\
-	\rbrace
-	\\ \\
-	$\CCSTrans {gute\,Hausaufgaben\,erstellt}$ = \emptyset
-	\\ \\
-	$\CCSTrans {\overline{gute\,Hausaufgaben\,erstellt}}$ = \lbrace \\
-	($\Res *{\Par {TR1} \Par {T1} \Par {TG1}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$,\\ $\Res *{\Par {TR1} \Par {T1} \Par {TG2}{HG}}{betritt, zuh"ort, verl"asst, redet, betreten, verlassen}$)
-	\\
-	\rbrace
-	\\ \\
-	 \end{math}	 
-\begin{figure}[h]
-\centering
-\includegraphics[width=15cm]{20140515_130354.jpg}
-\caption{Alternative zu Aufgabe 1 b)}
-\label{fig:B3}
-\end{figure}
-	% \begin{document}	
-%\includegraphics{20140515_130354.jpg}
-%	\end{document}
+  \node[main node] (1) {R|R|TG|HG};
+  \node[main node] (2) [below of=1] {TR|T1|TG1[f_1]|HG};
+  \node[main node] (3) [below of=1] {TR1|T1|TG2[f_1]|HG};
+  \node[main node] (4) [below of=3] {HR1|T|TG|HG[f_2]};
+  \node[main node] (5) [below of=4] {HR1|T|TG|HG2[f_2]};
+  
+  \path[every node]
+    (1) 
+    	edge [bend left] node [left] {$\tau$} (1)
+    	edge [bend left] node [left] {$\tau$} (1);
+    
+\end{tikzpicture}

@@ -67,8 +67,8 @@ Da $B$ eine schwache Bisimulation ist und $(p, q) \in B$, sind p und q schwach b
 
 \subsection*{Aufgabe 7 b)}
 Nein.\\\\
-Angenommen $q$ und $r$ sind schwach bisimilar. Dann gibt es eine schwache Bisimulation $B$ und $(q,r) \in R$. Wegen $q \CCSTrans {b} q_1$ und $r \WCCSTrans {b} r_3$ muss $(q_1,r_3) \in R$. Wegen $q_1 \CCSTrans {a} q_4$ und $r_3 \CCSTrans {a} r_4$ muss $(q_4,r_4) \in R$. Aus $q_4 \CCSTrans {d}$ und $r_4 \NWCCSTrans {d}$ folgt, dass $(q_4,r_4) \not\in R$. Also können $q$ und $r$ nicht schwach bisimilar sein.
+Angenommen $q$ und $r$ sind schwach bisimilar. Dann gibt es eine schwache Bisimulation $R$ und $(q,r) \in R$. Wegen $q \CCSTrans {b} q_1$ und $r \WCCSTrans {b} r_3$ muss $(q_1,r_3) \in R$. Wegen $q_1 \CCSTrans {a} q_4$ und $r_3 \CCSTrans {a} r_4$ muss $(q_4,r_4) \in R$. Aus $q_4 \CCSTrans {d}$ und $r_4 \NWCCSTrans {d}$ folgt, dass $(q_4,r_4) \not\in R$. Also können $q$ und $r$ nicht schwach bisimilar sein.
 
 \subsection*{Aufgabe 7 c)}
 Nein.\\
-Wegen $p \wbisim q$ aus a) und $q \not\wbisim r$ aus b) muss $p \not\wbisim r$.
+Wegen $p \wbisim q$ aus a) und $q \not\wbisim r$ aus b) muss $p \not\wbisim r$, da die schwache Bisimulation eine Äquivalenzrelation ist und somit auch transitiv ist.

@@ -60,8 +60,7 @@ In $\Par {Q}{P}$ gibt es den Übergang.
 \end{displaymath}
 
 Nach Definition von $\mathcal{B}$ gilt, 
-dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.
-
+dass $(\Par{P}{Q'},\Par{Q'}{P}) \in \mathcal{B}$.\\ \\
 3.Fall $COM3$ \\
 \begin{displaymath}
     \inference[COM2]
@@ -169,8 +168,11 @@ Nach Definition von $\mathcal{B}$ gilt,
 dass $(\Par{P'}{Q'},\Par{Q'}{P'}) \in \mathcal{B}$.
 \subsection*{Aufgabe 4 b)}
 $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$ gilt nicht.\\
-Gegenbeispiel: $P \CCSDef a.\nil$\\
+Angenommen $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$\\ Dann gibt es eine starke Bisimulation $ \mathcal{R}$
+Dann muss $(\Res *{\Par{a.\nil}{\Co{a}}.P}{a}, \tau.P) \in \mathcal{R}$ \\
+Dann aber auch $(\Res *{\nil | P}{a}, P) \in \mathcal{R}$.\\
+Sei nun $P \CCSDef a.\nil$\\
+Nun aber ist $(\Res *{\Par{\nil}{a.\nil}}{a}, a.\nil) \not\in \mathcal{R}$ da da $a$ von der sichtbaren Ausführung ausgeschlossen ist. \\
 Unter der der Bedingung, dass weder die Aktion $a$, noch ihre co-Aktion $\Co{a}$ in $P$ enthalten ist, gilt diese Bisimulation.
-%Wiederspruchsbeweis:\\
-%Wir nehmen an $\Res *{\Par{a.\nil}{\Co{a}}.P}{a} \bisim \tau.P$ gilt, d.h es $\mathcal{B}$ ist eine Bisimulation mit $(\Res *{\Par{a.\nil}{\Co{a}}.P}{a},\tau.P) \in \mathcal{B}$.
+
 
