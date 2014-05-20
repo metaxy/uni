@@ -1,0 +1,9 @@
+Aufgabe 8)
+
+a) 
+
+b) ja da server selbst sagt"Cache-Control: max-age=200, public". 
+
+c) Ja, da alle Daten die er wissen muss, ich in der Url übergebe.
+
+d) Da es Responses und 
