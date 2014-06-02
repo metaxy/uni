@@ -1,9 +1,9 @@
 Aufgabe 8)
 
-a) 
+a) Weil des den Zwecken des Client-Server Models am besten genügt.
 
-b) ja da server selbst sagt"Cache-Control: max-age=200, public". 
+b) Ja, da server selbst sagt "Cache-Control: max-age=200, public". 
 
 c) Ja, da alle Daten die er wissen muss, ich in der Url übergebe.
 
-d) Da es Responses und 
+d) Durchaus könne man diesen Service als RESTful bezeichen, da es nunmal dem Client-Server Model folgt, Zustandslos und Cachable ist, und ein Uniform Interface hat.

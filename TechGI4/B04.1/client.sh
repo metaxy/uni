@@ -1,2 +1,2 @@
 gcc -lnsl -lresolv hashClient.c -o hashClient
-./hashClient 147.0.1.1 3000
+./hashClient 127.0.1.1 3000 127.0.0.1
