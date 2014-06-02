@@ -27,18 +27,20 @@ uint16_t m_port;
 int send_data(char command[], uint16_t key, uint16_t val)
 {
     printf("send_data %s %i %i\n", command, key, val);
-    unsigned char buffer[14];
+    unsigned char buffer[PACKLEN];
     packData(buffer, command, key, val, m_ip, m_port);
-    if(sendto(sockfd, buffer, sizeof(char)*8, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in)) < 0) {
+    if(sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in)) < 0) {
         printf("could not send\n");
     }
 }
 
 int receive(char *command, uint16_t *key, uint16_t *val)
 {
-    unsigned char buffer[14];
-    recvfrom(sockfd, buffer, sizeof(char)*8, 0, NULL, NULL);
+    unsigned char buffer[PACKLEN];
+    recvfrom(sockfd, buffer, PACKLEN, 0, NULL, NULL);
     unpackData(buffer, command, key, val, NULL, NULL);
+    printf("receive %s %i %i\n", command, key, val);
+
 }
 
 int set(uint16_t key, uint16_t val)
@@ -80,23 +82,26 @@ int del(uint16_t key)
 int main(int argc, char *argv[])
 {
     struct hostent *he;
+    struct sockaddr_in my_addr;
     int numbytes;
     printf("Hash client\n\n");
     
-    if (argc != 4) {
-        fprintf(stderr,"Usage: hashClient serverName serverPort myIP\n");
+    if (argc != 5) {
+        fprintf(stderr,"Usage: hashClient serverName serverPort myIP myPort\n");
         exit(1);
     }
     
-    m_port = atoi(argv[2]);
-
-   
+    m_ip = inet_addr(argv[3]);
+    m_port = atoi(argv[4]);
     //Resolv my hostname to IP Address
     if ((he=gethostbyname(argv[3])) == NULL) {  // get the host info
         herror("gethostbyname");
         exit(1);
     }
     //m_ip = *((struct in_addr *)he->h_addr);
+    my_addr.sin_family = AF_INET;     
+    my_addr.sin_port = htons(m_port);
+    my_addr.sin_addr = *((struct in_addr *)he->h_addr);
     
     //Resolv hostname to IP Address
     if ((he=gethostbyname(argv[1])) == NULL) {  // get the host info
@@ -108,22 +113,28 @@ int main(int argc, char *argv[])
     sockfd = socket(PF_INET, SOCK_DGRAM, 0);
     //setup transport address
     their_addr.sin_family = AF_INET;     
-    their_addr.sin_port = htons(m_port);
+    their_addr.sin_port = htons(atoi(argv[2]));
     their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
     
+    if(bind(sockfd, (struct sockaddr*)&my_addr, sizeof(my_addr)) <0) {
+         perror("could not connect");
+         return 0;
+    }
+ 
+     
     srand(time(NULL));
     int i;
     printf("\n");
-    int a[25];
-    for(i = 0; i< 2; i++) {
-        uint16_t key = (uint16_t)rand() ;
+    uint16_t a[25];
+    for(i = 0; i< 25; i++) {
+        uint16_t key = (uint16_t)rand();
         a[i] = key;
         printf("set data[%i] = %i\n", key, key+1);
         set(key, key+1);
     }
-    /*for(i = 0; i< 25; i++) {
+    for(i = 0; i< 25; i++) {
         printf("\n");
         printf("data for %i is %i\n\n", a[i], get(a[i]));
     }
@@ -132,7 +143,7 @@ int main(int argc, char *argv[])
     }
     for(i = 0; i< 25; i++) {
         printf("data for %i is %i (should be -1)\n", a[i], get(a[i]));
-    }*/
+    }
     close(sockfd);
 
     return 0;

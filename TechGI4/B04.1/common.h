@@ -1,4 +1,7 @@
-
+#define RANGE sizeof(unint16_t)
+#define TABLESIZE 256
+#define LEN 0xFF
+#define PACKLEN 14
 void printBuffer(unsigned char *buffer, int size)
 {
     int i;
@@ -7,6 +10,7 @@ void printBuffer(unsigned char *buffer, int size)
     }
 }
 void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, uint32_t *ip, uint16_t *port) {
+    printf("unpackData\n");
     command[0] = buffer[0];
     command[1] = buffer[1];
     command[2] = buffer[2];
@@ -18,14 +22,19 @@ void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, 
         *b = (buffer[6]<<8) | buffer[7];
     } 
     if(ip != NULL) {
-        *ip = (buffer[9]<<24) | (buffer[9]<<16) | (buffer[9]<<8) | buffer[11];
+        *ip = (buffer[11]<<24) | (buffer[10]<<16) | (buffer[9]<<8) | buffer[8];
+        printf("ip=%x\n",*ip);
     }
     if(port != NULL) {
         *port = (buffer[12]<<8) | buffer[13];
+        printf("port=%x\n",*port);
+
     }
+   // printBuffer(buffer,PACKLEN);
+
 }
 
-int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, int ip, short port) {
+int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, int ip, uint16_t port) {
     buffer[0] = command[0];
     buffer[1] = command[1];
     buffer[2] = command[2];
@@ -36,13 +45,15 @@ int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, int 
     buffer[6] = htons(b) & 0xFF;
     buffer[7] = htons(b) >> 8;
     
-    buffer[8] = htonl(ip) & 0xFF;
-    buffer[9] = (htonl(ip) >> 8) & 0xFF;
-    buffer[10] = (htonl(ip) >> 16) & 0xFF;
-    buffer[11] = htonl(ip) >> 24;
+    buffer[8] = ip & 0xFF;
+    buffer[9] = (ip >> 8) & 0xFF;
+    buffer[10] = (ip >> 16) & 0xFF;
+    buffer[11] = ip >> 24;
     
     buffer[12] = htons(port) & 0xFF;
     buffer[13] = htons(port) >> 8;
     //printf("port = %i\n",port);
-    printBuffer(buffer,14);
+    printf("packData\n");
+
+   // printBuffer(buffer,PACKLEN);
 }

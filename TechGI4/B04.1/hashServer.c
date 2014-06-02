@@ -23,27 +23,31 @@ struct entry {
     uint16_t val;
     uint16_t valid;
 };
-struct entry table[256];
+struct entry table[TABLESIZE];
 /*****************/
 struct node {
     int ip;
-    short port;
+    uint16_t port;
     struct sockaddr_in addr;
     int id;
-}
+};
 struct node nodes[3];
 /******************/
 
+void print_nodes()
+{
+    printf("%i <- %i -> %i\n", nodes[1].id, nodes[0].id, nodes[2].id);
+}
 int getPos(uint16_t key)
 {
-    int pos = key & 0xFF;
+    int pos = key & LEN;
     while(1) {
         if(table[pos].valid == 1 && table[pos].key == key) {
             printf("getPos return \n",pos);
             return pos;
         }
-        pos = (pos + 1) % 256;
-        if(pos == (key & 0xFF)) break;
+        pos = (pos + 1) % TABLESIZE;
+        if(pos == (key & LEN)) break;
     }
     printf("getPos not found\n");
     return -1;
@@ -61,13 +65,13 @@ struct entry* get(uint16_t key)
 void set(uint16_t key, uint16_t val)
 {
     printf("set %i %i\n", key, val);
-    int pos = key & 0xFF;
+    int pos = key & LEN;
     while(1) {
         if(table[pos].valid == 0) {
             break;
         }
-        pos = (pos + 1) % 256;
-        if(pos == (key & 0xFF)) return;
+        pos = (pos + 1) % TABLESIZE;
+        if(pos == (key & LEN)) return;
 
     }
     table[pos].valid = 1;
@@ -86,15 +90,25 @@ void del(uint16_t key)
 
 int getNode(uint16_t key)
 {
-    if(key <= nodes[0].id) return 0;
-    if(key <= nodes[1].id) return 1;
-    return 2;
+    print_nodes();
+    if(nodes[0].id < nodes[1].id) { //i am the last
+        printf("i am the last\n");
+        if(key > nodes[1].id || key <= nodes[0].id) return 0;
+        if(key <= nodes[2].id) return 2;
+        if(key <= nodes[1].id) return 1;
+    } else {
+        printf("i am NOT the last\n");
+
+        if(key <= nodes[1].id) return 1;
+        if(key >= nodes[0].id) return 2;
+        return 0;
+    }
 }
-int createAddr(int node)
+int createAddr(int node, char *ip, int port)
 {
     nodes[node].addr.sin_family = AF_INET;     
-    nodes[node].addr.sin_port = htons(nodes[node]);
-    nodes[0].addr.sin_addr.s_addr = nodes[node];
+    nodes[node].addr.sin_port = htons(port);
+    inet_aton(ip, &nodes[node].addr.sin_addr);
 }
 int main(int argc, char *argv[])
 {
@@ -104,7 +118,7 @@ int main(int argc, char *argv[])
     int clilen;
     printf("UDP Server\n\n");
     int i;
-    for(i = 0; i< 256; i++) {
+    for(i = 0; i< TABLESIZE; i++) {
         table[i].key = 0;
         table[i].val = 0;
         table[i].valid = 0;
@@ -113,18 +127,16 @@ int main(int argc, char *argv[])
         fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID \n");
         exit(1);
     }
-    nodes[1].id = atoi(argv[2]);
-    nodes[1].port = atoi(argv[1]);
+    nodes[0].port = atoi(argv[1]);
     serverPort = atoi(argv[1]);
+    nodes[0].id = atoi(argv[2]);
     
-    nodes[0].ip = inet_aton(argv[3]);
-    nodes[0].port = atoi(argv[4]);
-    nodes[0].id = atoi(argv[5]);
+    createAddr(1, argv[3], atoi(argv[4]));
+    nodes[1].id = atoi(argv[5]);
    
-    nodes[2].ip = inet_aton(argv[6]);
-    nodes[2].port = atoi(argv[7]);
+    createAddr(2, argv[6], atoi(argv[7]));
     nodes[2].id = atoi(argv[8]);
-    
+    print_nodes();
     printf("port = %i\n", serverPort);
 
     memset(&serv_addr, 0, sizeof(serv_addr));
@@ -141,24 +153,25 @@ int main(int argc, char *argv[])
     listen(sockfd, 1);
     
     while(1) {
+        printf("waiting\n");
 		clilen = sizeof cli_addr;
-        unsigned char buffer[14];
+        unsigned char buffer[PACKLEN];
 
-        int size = recvfrom(sockfd, buffer, 8, 0,(struct sockaddr *) &cli_addr, &clilen);
+        int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
             printf("received len  %i\n", size);
             uint16_t key,value;
             int ip;
-            short port;
+            uint16_t port;
             char command[4];
             unpackData(buffer, command, &key, &value, &ip, &port);
             int n = getNode(key);
-            if(n != 1) {
-                printf("send key=%i to node=%i\n",key, n);
-                sendto(sockfd, buffer, 14, 0, (struct sockaddr *)(nodes[n].addr), sizeof(struct sockaddr_in));
+            if(n != 0) {
+                printf("[%i] send key=%i to node=%i\n",nodes[0].id, key, n);
+                sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&(nodes[n].addr), sizeof(struct sockaddr_in));
                 continue;
             }
-            printf("key=%i, mine id = %i --- its mine!!\n", key, nodes[1].id);
+            printf("[%i] key=%i--- its mine!!\n",nodes[0].id, key);
             
             if(command[0] == 'S') {
                 set(key, value);
@@ -174,7 +187,13 @@ int main(int argc, char *argv[])
                 del(key);
                 packData(buffer, "OK!", 0, 0,0,0);
             }
-			sendto(sockfd, buffer, 14, 0, (struct sockaddr *) &cli_addr, clilen);
+            struct sockaddr_in cli;
+
+            cli.sin_family = AF_INET;     
+            cli.sin_port = htons(port);
+            cli.sin_addr.s_addr = ip;
+            printf("port = %i, addr = %i\n", port, ip);
+			sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli, sizeof(struct sockaddr_in));
         }
     }
     close(sockfd);
