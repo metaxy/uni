@@ -28,7 +28,7 @@ struct entry table[256];
 struct node {
     int ip;
     short port;
-    struct sockaddr_in serv_addr;
+    struct sockaddr_in addr;
     int id;
 }
 struct node nodes[3];
@@ -90,7 +90,12 @@ int getNode(uint16_t key)
     if(key <= nodes[1].id) return 1;
     return 2;
 }
-
+int createAddr(int node)
+{
+    nodes[node].addr.sin_family = AF_INET;     
+    nodes[node].addr.sin_port = htons(nodes[node]);
+    nodes[0].addr.sin_addr.s_addr = nodes[node];
+}
 int main(int argc, char *argv[])
 {
     int sockfd;
@@ -112,11 +117,11 @@ int main(int argc, char *argv[])
     nodes[1].port = atoi(argv[1]);
     serverPort = atoi(argv[1]);
     
-    nodes[0].ip = atoi(argv[3]);
+    nodes[0].ip = inet_aton(argv[3]);
     nodes[0].port = atoi(argv[4]);
     nodes[0].id = atoi(argv[5]);
-    
-    nodes[2].ip = atoi(argv[6]);
+   
+    nodes[2].ip = inet_aton(argv[6]);
     nodes[2].port = atoi(argv[7]);
     nodes[2].id = atoi(argv[8]);
     
@@ -137,7 +142,7 @@ int main(int argc, char *argv[])
     
     while(1) {
 		clilen = sizeof cli_addr;
-        unsigned char buffer[8];
+        unsigned char buffer[14];
 
         int size = recvfrom(sockfd, buffer, 8, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
@@ -149,25 +154,27 @@ int main(int argc, char *argv[])
             unpackData(buffer, command, &key, &value, &ip, &port);
             int n = getNode(key);
             if(n != 1) {
-                //send to right node
-                break;
+                printf("send key=%i to node=%i\n",key, n);
+                sendto(sockfd, buffer, 14, 0, (struct sockaddr *)(nodes[n].addr), sizeof(struct sockaddr_in));
+                continue;
             }
-    
+            printf("key=%i, mine id = %i --- its mine!!\n", key, nodes[1].id);
+            
             if(command[0] == 'S') {
                 set(key, value);
-                packData(buffer, "OK!", 0, 0);
+                packData(buffer, "OK!", 0, 0,0,0);
             } else if(command[0] == 'G') {
                 struct entry *ret = get(key);
                 if(ret == 0) {
-                    packData(buffer, "NOF", 0, 0);
+                    packData(buffer, "NOF", 0, 0,0,0);
                 } else {
-                    packData(buffer, "VAL", ret->key, ret->val);
+                    packData(buffer, "VAL", ret->key, ret->val,0,0);
                 }
             } else if(command[0] == 'D') {
                 del(key);
-                packData(buffer, "OK!", 0, 0);
+                packData(buffer, "OK!", 0, 0,0,0);
             }
-			sendto(sockfd, buffer, 8, 0, (struct sockaddr *) &cli_addr, clilen);
+			sendto(sockfd, buffer, 14, 0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);
