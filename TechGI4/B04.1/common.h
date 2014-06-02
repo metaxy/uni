@@ -10,7 +10,6 @@ void printBuffer(unsigned char *buffer, int size)
     }
 }
 void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, uint32_t *ip, uint16_t *port) {
-    printf("unpackData\n");
     command[0] = buffer[0];
     command[1] = buffer[1];
     command[2] = buffer[2];
@@ -23,18 +22,13 @@ void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, 
     } 
     if(ip != NULL) {
         *ip = (buffer[11]<<24) | (buffer[10]<<16) | (buffer[9]<<8) | buffer[8];
-        printf("ip=%x\n",*ip);
     }
     if(port != NULL) {
         *port = (buffer[12]<<8) | buffer[13];
-        printf("port=%x\n",*port);
-
     }
-   // printBuffer(buffer,PACKLEN);
-
 }
 
-int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, int ip, uint16_t port) {
+int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, uint32_t ip, uint16_t port) {
     buffer[0] = command[0];
     buffer[1] = command[1];
     buffer[2] = command[2];
@@ -52,8 +46,5 @@ int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, int 
     
     buffer[12] = htons(port) & 0xFF;
     buffer[13] = htons(port) >> 8;
-    //printf("port = %i\n",port);
-    printf("packData\n");
-
    // printBuffer(buffer,PACKLEN);
 }

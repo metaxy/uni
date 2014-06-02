@@ -90,15 +90,11 @@ void del(uint16_t key)
 
 int getNode(uint16_t key)
 {
-    print_nodes();
     if(nodes[0].id < nodes[1].id) { //i am the last
-        printf("i am the last\n");
         if(key > nodes[1].id || key <= nodes[0].id) return 0;
         if(key <= nodes[2].id) return 2;
         if(key <= nodes[1].id) return 1;
     } else {
-        printf("i am NOT the last\n");
-
         if(key <= nodes[1].id) return 1;
         if(key >= nodes[0].id) return 2;
         return 0;
@@ -153,15 +149,13 @@ int main(int argc, char *argv[])
     listen(sockfd, 1);
     
     while(1) {
-        printf("waiting\n");
-		clilen = sizeof cli_addr;
+        clilen = sizeof cli_addr;
         unsigned char buffer[PACKLEN];
 
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
-		if(size > 0) {
-            printf("received len  %i\n", size);
+        if(size > 0) {
             uint16_t key,value;
-            int ip;
+            uint32_t ip;
             uint16_t port;
             char command[4];
             unpackData(buffer, command, &key, &value, &ip, &port);
@@ -192,7 +186,7 @@ int main(int argc, char *argv[])
             cli.sin_family = AF_INET;     
             cli.sin_port = htons(port);
             cli.sin_addr.s_addr = ip;
-            printf("port = %i, addr = %i\n", port, ip);
+            //printf("port = %i, addr = %i\n", port, ip);
 			sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli, sizeof(struct sockaddr_in));
         }
     }
