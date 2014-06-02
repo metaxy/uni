@@ -17,14 +17,23 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#define MAX_BUFFER_LENGTH 100
-
+#include "common.h"
 struct entry {
     uint16_t key;
     uint16_t val;
     uint16_t valid;
 };
 struct entry table[256];
+/*****************/
+struct node {
+    int ip;
+    short port;
+    struct sockaddr_in serv_addr;
+    int id;
+}
+struct node nodes[3];
+/******************/
+
 int getPos(uint16_t key)
 {
     int pos = key & 0xFF;
@@ -75,30 +84,11 @@ void del(uint16_t key)
     }
 }
 
-
-void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b)
+int getNode(uint16_t key)
 {
-    printf("unpack %s\n", buffer);
-    command[0] = buffer[0];
-    command[1] = buffer[1];
-    command[2] = buffer[2];
-    command[3] = buffer[3];
-    *a = (buffer[4]<<8) | buffer[5];
-    *b = (buffer[6]<<8) | buffer[7];
-}
-
-int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b) 
-{
-    printf("pack %s %i %i\n", command, a, b);
-    buffer[0] = command[0];
-    buffer[1] = command[1];
-    buffer[2] = command[2];
-    buffer[3] = command[3];
-    buffer[4] = htons(a) & 0xFF;
-    buffer[5] = htons(a) >> 8;
-    
-    buffer[6] = htons(b) & 0xFF;
-    buffer[7] = htons(b) >> 8;
+    if(key <= nodes[0].id) return 0;
+    if(key <= nodes[1].id) return 1;
+    return 2;
 }
 
 int main(int argc, char *argv[])
@@ -114,13 +104,22 @@ int main(int argc, char *argv[])
         table[i].val = 0;
         table[i].valid = 0;
     }
-    if (argc != 2) {
-        fprintf(stderr,"Usage: hashServer serverPort \n");
+    if (argc != 9) {
+        fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID \n");
         exit(1);
     }
-        
+    nodes[1].id = atoi(argv[2]);
+    nodes[1].port = atoi(argv[1]);
     serverPort = atoi(argv[1]);
-
+    
+    nodes[0].ip = atoi(argv[3]);
+    nodes[0].port = atoi(argv[4]);
+    nodes[0].id = atoi(argv[5]);
+    
+    nodes[2].ip = atoi(argv[6]);
+    nodes[2].port = atoi(argv[7]);
+    nodes[2].id = atoi(argv[8]);
+    
     printf("port = %i\n", serverPort);
 
     memset(&serv_addr, 0, sizeof(serv_addr));
@@ -144,8 +143,15 @@ int main(int argc, char *argv[])
 		if(size > 0) {
             printf("received len  %i\n", size);
             uint16_t key,value;
+            int ip;
+            short port;
             char command[4];
-            unpackData(buffer, command, &key, &value);
+            unpackData(buffer, command, &key, &value, &ip, &port);
+            int n = getNode(key);
+            if(n != 1) {
+                //send to right node
+                break;
+            }
     
             if(command[0] == 'S') {
                 set(key, value);
@@ -167,6 +173,7 @@ int main(int argc, char *argv[])
     close(sockfd);
     return 0;
 }
+
 
 
 

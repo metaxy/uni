@@ -18,65 +18,17 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-
+#include "common.h"
 int sockfd;
 struct sockaddr_in their_addr;
 uint32_t m_ip;
 uint16_t m_port;
 
-void printBuffer(unsigned char *buffer, int size)
-{
-    int i;
-    for(i = 0; i< size; i++) {
-        printf("buffer[%i]=%x\n",i, buffer[i]);
-    }
-}
-void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, uint32_t *ip, uint16_t *port) {
-    command[0] = buffer[0];
-    command[1] = buffer[1];
-    command[2] = buffer[2];
-    command[3] = buffer[3];
-    if(a != NULL) {
-        *a = (buffer[4]<<8) | buffer[5];
-    }
-    if(b != NULL) {
-        *b = (buffer[6]<<8) | buffer[7];
-    } 
-    if(ip != NULL) {
-        *ip = (buffer[9]<<24) | (buffer[9]<<16) | (buffer[9]<<8) | buffer[11];
-    }
-    if(port != NULL) {
-        *port = (buffer[12]<<8) | buffer[13];
-    }
-}
-
-int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b) {
-    buffer[0] = command[0];
-    buffer[1] = command[1];
-    buffer[2] = command[2];
-    buffer[3] = command[3];
-    buffer[4] = htons(a) & 0xFF;
-    buffer[5] = htons(a) >> 8;
-    
-    buffer[6] = htons(b) & 0xFF;
-    buffer[7] = htons(b) >> 8;
-    
-    buffer[8] = htonl(m_ip) & 0xFF;
-    buffer[9] = (htonl(m_ip) >> 8) & 0xFF;
-    buffer[10] = (htonl(m_ip) >> 16) & 0xFF;
-    buffer[11] = htonl(m_ip) >> 24;
-    
-    buffer[12] = htons(m_port) & 0xFF;
-    buffer[13] = htons(m_port) >> 8;
-    //printf("port = %i\n",port);
-    printBuffer(buffer,14);
-}
-
 int send_data(char command[], uint16_t key, uint16_t val)
 {
     printf("send_data %s %i %i\n", command, key, val);
     unsigned char buffer[14];
-    packData(buffer, command, key, val);
+    packData(buffer, command, key, val, m_ip, m_port);
     if(sendto(sockfd, buffer, sizeof(char)*8, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in)) < 0) {
         printf("could not send\n");
     }
