@@ -26,12 +26,13 @@ struct entry {
 struct entry table[TABLESIZE];
 /*****************/
 struct node {
-    int ip;
+    uint32_t ip;
     uint16_t port;
     struct sockaddr_in addr;
     int id, prev;
+    //if not initalizied id == -1
 };
-struct node nodes[3];
+struct node nodes[4];
 /******************/
 
 void print_nodes()
@@ -120,6 +121,10 @@ int main(int argc, char *argv[])
         table[i].key = 0;
         table[i].val = 0;
         table[i].valid = 0;
+    }
+    for(i = 0: i< 4;i++) {
+    	nodes[i].id=-1;
+    }
     }
     if (argc != 9) {
         fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID \n");
