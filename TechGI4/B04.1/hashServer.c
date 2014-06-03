@@ -17,6 +17,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include "time.h"
 #include "common.h"
 struct entry {
     uint16_t key;
@@ -29,7 +30,8 @@ struct node {
     uint32_t ip;
     uint16_t port;
     struct sockaddr_in addr;
-    int id, prev;
+    int id;
+    int prev;
     //if not initalizied id == -1
 };
 struct node nodes[4];
@@ -122,9 +124,8 @@ int main(int argc, char *argv[])
         table[i].val = 0;
         table[i].valid = 0;
     }
-    for(i = 0: i< 4;i++) {
+    for(i = 0; i< 4;i++) {
     	nodes[i].id=-1;
-    }
     }
     if (argc != 9) {
         fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID \n");
