@@ -29,7 +29,7 @@ struct node {
     int ip;
     uint16_t port;
     struct sockaddr_in addr;
-    int id;
+    int id, prev;
 };
 struct node nodes[3];
 /******************/
@@ -112,6 +112,8 @@ int main(int argc, char *argv[])
     int serverPort;
     struct sockaddr_in serv_addr, cli_addr;
     int clilen;
+    time_t start;
+    time_t now;
     printf("UDP Server\n\n");
     int i;
     for(i = 0; i< TABLESIZE; i++) {
@@ -147,9 +149,15 @@ int main(int argc, char *argv[])
     }
 
     listen(sockfd, 1);
-    
+    time(&start);
     while(1) {
-        clilen = sizeof cli_addr;
+        time(&now);
+        double seconds;
+        seconds = difftime(start, now);
+        if(seconds > 15) {
+            printf("builing fingertable\n");
+            continue;
+        }
         unsigned char buffer[PACKLEN];
 
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
