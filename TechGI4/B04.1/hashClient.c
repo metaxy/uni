@@ -19,13 +19,17 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include "common.h"
+#include <time.h>
+
 int sockfd;
 struct sockaddr_in their_addr;
 uint32_t m_ip;
 uint16_t m_port;
+long time_request = 0;
+int time_count = 0;
+struct timespec requestStart, requestEnd;
 
-int send_data(char command[], uint16_t key, uint16_t val)
-{
+int send_data(char command[], uint16_t key, uint16_t val){
     printf("send_data %s %i %i\n", command, key, val);
     unsigned char buffer[PACKLEN];
     packData(buffer, command, key, val, m_ip, m_port);
@@ -34,32 +38,37 @@ int send_data(char command[], uint16_t key, uint16_t val)
     }
 }
 
-int receive(char *command, uint16_t *key, uint16_t *val)
-{
+int receive(char *command, uint16_t *key, uint16_t *val){
     unsigned char buffer[PACKLEN];
     recvfrom(sockfd, buffer, PACKLEN, 0, NULL, NULL);
     unpackData(buffer, command, key, val, NULL, NULL);
     printf("receive %s %i %i\n", command, key, val);
 
 }
-
-int set(uint16_t key, uint16_t val)
-{
+    
+int set(uint16_t key, uint16_t val){
+	clock_gettime(CLOCK_MONOTONIC, &requestStart);
     send_data("SET", key, val);
     char ret[4];
     receive(ret, NULL, NULL);
+    clock_gettime(CLOCK_MONOTONIC, &requestEnd);
+    time_request += requestEnd.tv_nsec - requestStart.tv_nsec;
+    time_count++;
     if(ret[0] == 'O') {
         return 0;
     }
     return -2;
 }
 
-int get(uint16_t key)
-{
+int get(uint16_t key){
+	clock_gettime(CLOCK_MONOTONIC, &requestStart);
     send_data("GET", key, 0);
     uint16_t val;
     char ret[4];
     receive(ret, NULL, &val);
+    clock_gettime(CLOCK_MONOTONIC, &requestEnd);
+    time_request += requestEnd.tv_nsec - requestStart.tv_nsec;
+    time_count++;
     if(ret[0] == 'V') {
         return val;
     } else {
@@ -68,19 +77,21 @@ int get(uint16_t key)
     }   
 }
 
-int del(uint16_t key)
-{
+int del(uint16_t key){
+	clock_gettime(CLOCK_MONOTONIC, &requestStart);
     send_data("DEL", key, 0);
     char ret[4];
     receive(ret, NULL, NULL);
+    clock_gettime(CLOCK_MONOTONIC, &requestEnd);
+    time_request += requestEnd.tv_nsec - requestStart.tv_nsec;
+    time_count++;
     if(ret[0] == 'O') {
         return 0;
     }
     return 1;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     struct hostent *he;
     struct sockaddr_in my_addr;
     int numbytes;
@@ -145,7 +156,10 @@ int main(int argc, char *argv[])
         printf("data for %i is %i (should be -1)\n", a[i], get(a[i]));
     }
     close(sockfd);
-
+    
+    time_request = time_request/time_count;
+    printf(" brauchte eine durchschnittliche Anfrage: %lu ns\n",time_request);
+    
     return 0;
 }
 

@@ -4,6 +4,8 @@
 #define PACKLEN 14
 #define FINGERTABLE_LEN 4
 typedef uint16_t key;
+typedef uint16_t value;
+
 void printBuffer(unsigned char *buffer, int size)
 {
     int i;
@@ -11,7 +13,7 @@ void printBuffer(unsigned char *buffer, int size)
         printf("buffer[%i]=%x\n",i, buffer[i]);
     }
 }
-void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, uint32_t *ip, uint16_t *port) {
+void unpackData(unsigned char *buffer, char *command, key *a, value *b, uint32_t *ip, uint16_t *port) {
     command[0] = buffer[0];
     command[1] = buffer[1];
     command[2] = buffer[2];
@@ -30,7 +32,7 @@ void unpackData(unsigned char *buffer, char *command, uint16_t *a, uint16_t *b, 
     }
 }
 
-int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, uint32_t ip, uint16_t port) {
+int packData(unsigned char *buffer, char command[], key a, value b, uint32_t ip, uint16_t port) {
     printf("packData command=%s, key=%i, data=%i, ip=%i, port=%i\n",command,a,b,ip,port);
     buffer[0] = command[0];
     buffer[1] = command[1];
@@ -52,11 +54,11 @@ int packData(unsigned char *buffer, char command[], uint16_t a, uint16_t b, uint
    // printBuffer(buffer,PACKLEN);
 }
 //
-uint16_t calc_fingertable_key(int pos)
+key calc_fingertable_key(int pos)
 {
     return pos*2000;
 }
-int calc_fingertable_pos(uint16_t key)
+int calc_fingertable_pos(key key)
 {
     return key/2000;
 }

@@ -1,1 +1,1 @@
-gcc -lnsl -lresolv hashClient.c -o hashClient && ./hashClient 127.0.0.1 3000 127.0.0.1 2999
+gcc -lnsl -lresolv hashClient.c -lrt -o hashClient && ./hashClient 127.0.0.1 3000 127.0.0.1 2999
