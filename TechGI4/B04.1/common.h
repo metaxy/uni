@@ -2,7 +2,7 @@
 #define TABLESIZE 256
 #define LEN 0xFF
 #define PACKLEN 14
-#define FINGERTABLE_LEN 4
+#define FINGERTABLE_LEN 16
 typedef uint16_t key;
 typedef uint16_t value;
 
@@ -53,12 +53,13 @@ int packData(unsigned char *buffer, char command[], key a, value b, uint32_t ip,
     buffer[13] = htons(port) >> 8;
    // printBuffer(buffer,PACKLEN);
 }
-//
+//max(pos) == FINGERTABLE_LEN
 key calc_fingertable_key(int pos)
 {
-    return pos*2000;
+    return 1 << pos;
 }
 int calc_fingertable_pos(key key)
 {
-    return key/2000;
+   printf("[fingertable] calc_pos key = %i, pos = %i\n",key,__builtin_clz(key));
+   return 32 - __builtin_clz(key);
 }

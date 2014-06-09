@@ -40,11 +40,11 @@ struct node nodes[FINGERTABLE_LEN+1];
 
 void print_nodes()
 {
-    int i;
-    printf("i | id | prev | valid\n");
+    /*int i;
+    printf("i | id | prev | port | valid\n");
     for(i = 0; i < FINGERTABLE_LEN; i++) {
-         printf("%i | %i | %i| %i\n",i, nodes[i].id, nodes[i].prev, nodes[i].valid);
-    }
+         printf("%i | %i | %i| %i | %i\n",i, nodes[i].id, nodes[i].prev, nodes[i].port, nodes[i].valid);
+    }*/
 }
 int getPos(uint16_t key)
 {
@@ -96,17 +96,19 @@ void del(uint16_t key)
     }
 }
 
-int getNode(uint16_t key)
+int getNode(key key)
 {
+    printf("getNode(%i)", key);
+    print_nodes();
     int i;
     for(i = 0; i < FINGERTABLE_LEN; i++) {
         if(nodes[i].valid == 0) continue;
         if(nodes[i].id >= key && nodes[i].prev < key) {
-            //printf("[%i].id = %i, [%i].prev = %i; key = %i\n",i,nodes[i].id, i, nodes[i].prev, key);
+            printf("[%i].id = %i, [%i].prev = %i; key = %i\n",i,nodes[i].id, i, nodes[i].prev, key);
             return i;
         }
     }
-    //printf("getNode(%i) nothing found\n",key);
+    printf("getNode(%i) nothing found\n",key);
     return 0;
 }
 int createNode(int node, int ip, int port, key id, key prev)
@@ -118,7 +120,7 @@ int createNode(int node, int ip, int port, key id, key prev)
     nodes[node].ip = ip;
     nodes[node].addr.sin_family = AF_INET;     
     nodes[node].addr.sin_port = htons(port);
-    //nodes[node].addr.sin_addr.s_addr = ntohl(ip);
+    nodes[node].addr.sin_addr.s_addr = ip;
     
 }
 int createNode2(int node, char *ip, int port, key id, key prev)
@@ -145,14 +147,14 @@ int main(int argc, char *argv[])
     	nodes[i].valid=0;
     }
     if (argc != 10) {
-        fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID serverIP\n");
+        fprintf(stderr,"Usage: hashServer serverIP serverPort serverID prevIP prevPort prevID nextIP nextPort nextID\n");
         exit(1);
     }
-    createNode2(0, argv[9], atoi(argv[1]), atoi(argv[2]), 0);
-    serverPort = atoi(argv[1]);
+    createNode2(0, argv[1], atoi(argv[2]), atoi(argv[3]), 0);
+    serverPort = atoi(argv[2]);
     
-    createNode2(2, argv[6], atoi(argv[8]), atoi(argv[8]), nodes[0].id);
-    createNode2(1, argv[3], atoi(argv[4]), atoi(argv[5]), nodes[2].id);
+    createNode2(2, argv[7], atoi(argv[8]), atoi(argv[9]), nodes[0].id);
+    createNode2(1, argv[4], atoi(argv[5]), atoi(argv[6]), nodes[2].id);
     
     nodes[0].prev = nodes[1].id;//ring structure
 
@@ -173,21 +175,22 @@ int main(int argc, char *argv[])
     listen(sockfd, 10);
     time(&start);
     while(1) {
-        printf("start while\n");
+        //printf("start while\n");
         unsigned char buffer[PACKLEN];
         if(build_fingertable == 0) {
             time_t now;
             time(&now);
             double seconds;
             seconds = difftime(now, start);
-            printf("diff = %i\n", seconds);
+            //printf("diff = %i\n", seconds);
             if(seconds > 10) {
                 printf("[%i] builing fingertable\n", nodes[0].id);
                 print_nodes();
                 int i;
-                for(i = 0; i< FINGERTABLE_LEN; i++) {
+                for(i = 1; i< FINGERTABLE_LEN; i++) {
                     int key = calc_fingertable_key(i);
                     int n = getNode(key);
+                    if(isMe(n)) continue;
                     printf("[%i] sending fingertable request to %i with key=%i\n",nodes[0].id,nodes[n].id,key);
                     packData(buffer, "GET", key, 0, nodes[0].ip, nodes[0].port);
                     sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&(nodes[n].addr), sizeof(struct sockaddr_in));
@@ -197,22 +200,23 @@ int main(int argc, char *argv[])
                 continue;
             }
         }
-        printf("start reciving\n");
+        //printf("start reciving\n");
         clilen = sizeof cli_addr;
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
-        printf("size=%i\n",size);
-        perror("receive");
+        //printf("size=%i\n",size);
+        //perror("receive");
         if(size > 0) {
             uint16_t key,value;
             uint32_t ip;
             uint16_t port;
             char command[4];
-            printf("[i] i received data %s\n",buffer);
+            printf("[%i] i received data %s\n",nodes[0].id, buffer);
             unpackData(buffer, command, &key, &value, &ip, &port);
             int n = getNode(key);
-            if(n != 0) {
+            if(!isMe(n)) {
                 printf("[%i] send key=%i to node=%i\n",nodes[0].id, key, n);
-                sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&(nodes[n].addr), sizeof(struct sockaddr_in));
+                sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&(nodes[n].addr), sizeof(nodes[n].addr));
+                //perror("sendto");
                 continue;
             }
             printf("[%i] key=%i--- its mine!!\n",nodes[0].id, key);
@@ -246,11 +250,15 @@ int main(int argc, char *argv[])
             cli.sin_port = htons(port);
             cli.sin_addr.s_addr = ip;
 			sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli, sizeof(struct sockaddr_in));
-            perror("sendto");
+            //perror("sendto");
         }
     }
     close(sockfd);
     return 0;
+}
+int isMe(int pos)
+{
+    return nodes[pos].port == nodes[0].port;
 }
 
 
