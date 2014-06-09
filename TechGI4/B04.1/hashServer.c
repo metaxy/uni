@@ -30,11 +30,11 @@ struct node {
     uint32_t ip;
     uint16_t port;
     struct sockaddr_in addr;
-    int id;
-    int prev;
+    key id;
+    key prev;
     //if not initalizied id == -1
 };
-struct node nodes[4];
+struct node nodes[FINGERTABLE_LEN+1];
 /******************/
 
 void print_nodes()
@@ -55,7 +55,7 @@ int getPos(uint16_t key)
     printf("getPos not found\n");
     return -1;
 }
-struct entry* get(uint16_t key)
+struct entry* get(key key)
 {
     printf("get %i\n", key);
     int pos = getPos(key);
@@ -65,7 +65,7 @@ struct entry* get(uint16_t key)
     return NULL;
 }
 
-void set(uint16_t key, uint16_t val)
+void set(key key, uint16_t val)
 {
     printf("set %i %i\n", key, val);
     int pos = key & LEN;
@@ -93,21 +93,27 @@ void del(uint16_t key)
 
 int getNode(uint16_t key)
 {
-    if(nodes[0].id < nodes[1].id) { //i am the last
-        if(key > nodes[1].id || key <= nodes[0].id) return 0;
-        if(key <= nodes[2].id) return 2;
-        if(key <= nodes[1].id) return 1;
-    } else {
-        if(key <= nodes[1].id) return 1;
-        if(key >= nodes[0].id) return 2;
-        return 0;
+    int i;
+    for(i = 0; i < FINGERTABLE_LEN; i++) {
+        struct node n = nodes[i];
+        if(nodes[i].id == -1) continue;
+        if(nodes[i].id <= key && nodes[i].prev > key) return i;
     }
 }
-int createAddr(int node, char *ip, int port)
+int createNode(int node, int ip, int port, key id, key prev)
 {
+    nodes[node].id = id;
+    nodes[node].prev = prev;
+    nodes[node].port = port;
+    nodes[node].ip = ip;
     nodes[node].addr.sin_family = AF_INET;     
-    nodes[node].addr.sin_port = htons(port);
-    inet_aton(ip, &nodes[node].addr.sin_addr);
+    nodes[node].addr.sin_port = port;
+    nodes[node].addr.sin_addr.s_addr = ip;
+    
+}
+int createNode2(int node, char *ip, int port, key id, key prev)
+{
+    createNode(node, inet_addr(ip), port, id, prev);
 }
 int main(int argc, char *argv[])
 {
@@ -116,8 +122,8 @@ int main(int argc, char *argv[])
     struct sockaddr_in serv_addr, cli_addr;
     int clilen;
     time_t start;
-    time_t now;
     printf("UDP Server\n\n");
+    int build_fingertable = 0;
     int i;
     for(i = 0; i< TABLESIZE; i++) {
         table[i].key = 0;
@@ -127,19 +133,18 @@ int main(int argc, char *argv[])
     for(i = 0; i< 4;i++) {
     	nodes[i].id=-1;
     }
-    if (argc != 9) {
-        fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID \n");
+    if (argc != 10) {
+        fprintf(stderr,"Usage: hashServer serverPort serverID prevIP prevPort prevID nextIP nextPort nextID serverIP\n");
         exit(1);
     }
-    nodes[0].port = atoi(argv[1]);
+    createNode2(0, argv[9], atoi(argv[1]), atoi(argv[2]), 0);
     serverPort = atoi(argv[1]);
-    nodes[0].id = atoi(argv[2]);
     
-    createAddr(1, argv[3], atoi(argv[4]));
-    nodes[1].id = atoi(argv[5]);
-   
-    createAddr(2, argv[6], atoi(argv[7]));
-    nodes[2].id = atoi(argv[8]);
+    createNode2(2, argv[6], atoi(argv[8]), atoi(argv[8]), nodes[0].id);
+    createNode2(1, argv[3], atoi(argv[4]), atoi(argv[5]), nodes[2].id);
+    
+    nodes[0].prev = nodes[2].id;//ring structure
+
     print_nodes();
     printf("port = %i\n", serverPort);
 
@@ -157,14 +162,28 @@ int main(int argc, char *argv[])
     listen(sockfd, 1);
     time(&start);
     while(1) {
-        time(&now);
-        double seconds;
-        seconds = difftime(start, now);
-        if(seconds > 15) {
-            printf("builing fingertable\n");
-            continue;
-        }
         unsigned char buffer[PACKLEN];
+        if(build_fingertable == 0) {
+            time_t now;
+            time(&now);
+            double seconds;
+            seconds = difftime(now, start);
+            printf("diff = %i\n", seconds);
+            if(seconds > 1) {
+                printf("[%i] builing fingertable\n", nodes[0].id);
+                int i;
+                for(i = 0; i< FINGERTABLE_LEN; i++) {
+                    int key = calc_fingertable_key(i);
+                    int n = getNode(key);
+                    printf("[%i] sending fingertable request to %i with key=%i\n",nodes[0].id,n,key);
+                    packData(buffer, "GET", key, 0, nodes[0].ip, nodes[0].port);
+                    sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&(nodes[n].addr), sizeof(struct sockaddr_in));
+
+                }
+                build_fingertable = 1;
+                continue;
+            }
+        }
 
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
         if(size > 0) {
@@ -183,24 +202,31 @@ int main(int argc, char *argv[])
             
             if(command[0] == 'S') {
                 set(key, value);
-                packData(buffer, "OK!", 0, 0,0,0);
+                packData(buffer, "OK!", 0, 0,nodes[0].ip, nodes[0].port);
             } else if(command[0] == 'G') {
                 struct entry *ret = get(key);
                 if(ret == 0) {
-                    packData(buffer, "NOF", 0, 0,0,0);
+                    packData(buffer, "NOF", key, 0, nodes[0].ip, nodes[0].port);
                 } else {
-                    packData(buffer, "VAL", ret->key, ret->val,0,0);
+                    packData(buffer, "VAL", ret->key, ret->val,nodes[0].ip,nodes[0].port);
                 }
             } else if(command[0] == 'D') {
                 del(key);
-                packData(buffer, "OK!", 0, 0,0,0);
+                packData(buffer, "OK!", 0, 0,nodes[0].ip, nodes[0].port);
+            } else if(command[0] == 'N' || command[0] == 'V') {
+                printf("[i](fingertable) got fingertable response key = %i, port = %i\n",nodes[0].id, key, port);
+                //update fingertable
+                int pos = calc_fingertable_pos(key) + 1;
+                int next= getNode(pos);
+                createNode(pos, ip, port, key, nodes[next].prev);
+                nodes[next].prev = key;
+                continue;
             }
+            
             struct sockaddr_in cli;
-
             cli.sin_family = AF_INET;     
             cli.sin_port = htons(port);
             cli.sin_addr.s_addr = ip;
-            //printf("port = %i, addr = %i\n", port, ip);
 			sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli, sizeof(struct sockaddr_in));
         }
     }
