@@ -79,8 +79,11 @@ ein Supremum existiert (insbesondere nicht für die unendliche Menge
 \end{math}
 ).
 \subsection*{f)}
-\begin{math}
-z.z. \forall d_1, d_2 \in (\N \times \N).d_1\leq_{2}d_2\rightarrow f(d_1)\leq_{2}f(d_2)
-\\ \\
-\end{math}
-Weil sowohl 2y2+2y-1 als auch x! komponentenweise monoton sind, ist auch f monoton!
+Ja.\\
+z.z. $\forall x_1, x_2, y_1, y_2 \in \N^{+}.(x_1, y_1) \leq_2 (x_2, y_2) \rightarrow f(x_1, y_1) \leq_2 f(x_2, y_2)$\\
+Seien $x_1, x_2, y_1, y_2$ beliebig und fest.\\
+Annahme A: $(x_1, y_1) \leq_2 (x_2, y_2)$\\
+Aus der Definition von $\leq_2$ wissen wir, dass $x_1 \leq x_2$ und $y_1 \leq y_2$ gilt.\\\\
+Es gilt: $x_1 \leq x_2 \rightarrow x_1! \leq x_2!$ und $y_1 \leq y_2 \rightarrow 2y_1^2+2y_1-1 \leq 2y_2^2+2y_2-1$, da sowohl $2x^2+2x-1$ als auch $x!$ f\"ur $x \in \N^{+}$ monoton sind.\\\\
+Also gilt auch: $f(x_1, y_1) = (2y_1^2+2y_1-1, x_1!) \leq_2 (2y_2^2+2y_2-1, x_2!) = f(x_2, y_2)$\\\\
+Somit haben wir bewiesen, dass $f(x, y)$ monoton ist.
