@@ -1,13 +1,12 @@
 \section*{Aufgabe 2}
 
-z.Z.: Wenn $(X,R)$ ein Verband ist mit $X$ endlich, dann ist $(X,R)$ auch ein vollständiger Verband.\\
-
+z.Z.: Wenn $(X,R)$ ein Verband ist mit $X$ endlich, dann ist $(X,R)$ auch ein vollständiger Verband.\\\\
 Beweis:\\
 Sei $(X,R)$ ein beliebiger Verband mit $X$ endlich.\\
 Daraus folgt dass für beliebige $d_1, d_2 \in X$ auch $\bigsqcap \{d_1,d_2\}$ existiert.
 Beweis mittels vollständiger Induktion.\\
 Sei $A_i$ eine beliebige Menge mit $A_i \subseteq X$ und $\#(A_i) = i$\\\\
-Beweis der Existenz von $\bigsqcap$\\
+\textbf{Beweis der Existenz von $\bigsqcap$}\\
 Induktionsanfang: $A_2 = \{d_1,d_2\}$. Nach Voraussetzung existiert $\bigsqcap \{d_1,d_2\}$.\\
 Inuktionsvorausetzung(IV): $\bigsqcap A_i$ existiert.\\
 Inuktionsschritt: $\bigsqcap A_{i+1}$ \\
@@ -15,7 +14,7 @@ $\bigsqcap A_{i+1} = \bigsqcap(A_{i} \cup \{d\})$ für ein $d \in A_{i+1}$\\
 Falls $\bigsqcap A_{i} \sqsubseteq d$ dann ist $\bigsqcap A_{i+1} = \bigsqcap A_{i}$ (1)\\
 Falls $d \sqsubseteq \bigsqcap A_{i}$ dann ist $\bigsqcap A_{i+1} = d$ (2)\\
 Aus $(1)$ und $(2)$ und (IV) folgt dass $\bigsqcap A_{i+1}$ existiert (3)\\\\
-Beweis der Existenz von $\bigsqcup$\\
+\textbf{Beweis der Existenz von $\bigsqcup$}\\
 Induktionsanfang: $A_2 = \{d_1,d_2\}$. Nach Voraussetzung existiert $\bigsqcup \{d_1,d_2\}$.\\
 Inuktionsvorausetzung(IV): $\bigsqcup A_i$ existiert.\\
 Inuktionsschritt: $\bigsqcup A_{i+1}$ \\
