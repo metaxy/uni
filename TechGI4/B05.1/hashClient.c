@@ -47,9 +47,9 @@ int main(int argc, char *argv[])
     their_addr.sin_port = htons(serverPort);
     their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
+    char buffer[PACKLEN];
     
-    
-    sendto(sockfd, buffer, PACKSIZE, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
+    sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
 
     return 0;
 }

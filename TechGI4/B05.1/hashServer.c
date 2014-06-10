@@ -53,13 +53,13 @@ int main(int argc, char *argv[])
 		clilen = sizeof cli_addr;
         unsigned char buffer[8];
 
-        int size = recvfrom(sockfd, buffer, PACKSIZE, 0,(struct sockaddr *) &cli_addr, &clilen);
+        int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
             char command[4];
             unpackData(buffer, command, NULL, NULL, NULL, NULL);
             //todo: command == REQ
             packData(buffer, "RES", s2, n2, s3, n3);
-            sendto(sockfd, buffer, PACKSIZE, 0, (struct sockaddr *) &cli_addr, clilen);
+            sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);
