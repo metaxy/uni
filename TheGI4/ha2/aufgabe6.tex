@@ -7,20 +7,23 @@ Z.z $z_{min} = \bigsqcap A$ ist der kleinste Fixpunkt.\\
 Wir brauchen zu zeigen, dass\\\\
 \textbf{1. $z_{min}$ ist ein Fixpunkt von $f$.}\\
 Da $\sqsubseteq$ antisymmetrisch ist müssen wir zeigen dass:\\
-$z_{min} \sqsubseteq f(z_{min}) $ (*) und \\
-$f(z_{min}) \sqsubseteq z_{min}$ (**)\\
+$f(z_{min}) \rr z_{min}$ (*)  und\\
+$z_{min} \rr f(z_{min}) $ (**) \\
 \begin{itemize}
-\item (*)\\
+\item(*)\\
 Nach $z_{min} = \bigsqcap A$ gilt $\forall x \in A : z_{min} \rr x$\\
-Da $f$ monoton ist gilt: $f(z_{min}) \rr f(x)$\\
-Nach Defintion von $A$ gilt $\forall x \in A : f(z_{min}) \rr f(x)  \rr x$\\
-$\Rightarrow f(z_{min}) \in A$.\\
-$\Rightarrow z_{min} \rr f(z_{min})$ da $z_{min}$ das Infimum ist.\\
+Da $f$ monoton ist gilt: $\forall x \in A : f(z_{min}) \rr f(x)$\\
+$\Rightarrow \forall x \in A : f(z_{min}) \rr f(x)  \rr x$\\
+$\Rightarrow f(z_{min})$ ist einem untere Schranke.\\
+$\Rightarrow  f(z_{min}) \rr z_{min} $ da $z_{min}$ das größte untere Schranke  ist.\\
 
-\item (**)\\
-Da $z_{min} \in A$ gilt $f(z_{min}) \rr z_{min}$
+\item(**)\\
+Mit (*) gilt dass $f(z_{min}) \rr z_{min}$\\
+$\Rightarrow f(f(z_{min})) \rr f(z_{min})$ da $f$ monoton \\
+$\Rightarrow f(z_{min}) \in A$ nach Defintion von $A$\\
+$\Rightarrow z_{min} \rr f(z_{min})$ da $z_{min}$ die untere Schranke ist\\
 \end{itemize}
-Aus (*) und (**) folgt mit Der Antisymetrie von $\rr$ dass $z_{min}$ ein Fixpunkt ist.\\\\
+Aus (*) und (**) folgt mit der Antisymmetrie von $\rr$ dass $z_{min}$ ein Fixpunkt ist.\\\\
 \textbf{2. $z_{min}$ ist der kleinste Fixpunkt}.\\
 Widerspruchsbeweis.\\
 Sei $z_{min2}$ ein Fixpunkt mit $z_{min2} \sqsubseteq z_{min}$ (1).\\
