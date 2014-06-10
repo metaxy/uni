@@ -1,21 +1,28 @@
 \section*{Aufgabe 6}
 
 \subsection*{a)}
-Seite 108
+\textbf{1. $z_{min}$ ist ein Fixpunkt von $f$.}\\
 
+\textbf{2. $z_{min}$ ist der kleinste Fixpunkt}.\\
+Wiederspruchsbeweis.\\
+Sei $z_{min2}$ ein Fixpunkt mit $z_{min2} \sqsubseteq z_{min}$ (1).\\
+Es gilt $z_{min} = \bigsqcap \{x \in D | f(x) \sqsubseteq x \}$\\
+Nun ist aber $z_{min2} \in \{x \in D | f(x) \sqsubseteq x \}$ da es ein Fixpunkt ist.\\
+Das aber steht im Wiederspruch zu (1), wenn $z_{min}$ das Infimum ist, kann $z_{min2}$ nicht Element der Prä-Fixpunkte sein.
+ 
 \subsection*{(b)}
 z.Z Aus $(D,\sqsubseteq)$ ein endlicher vollstänger Verband und $f$ monoton folgt dass, $z_{max} = f^M(\top)$ ein $M \in \mathbb{N}$ der größte Fixpunkt von $f$ ist.\\
 Sei $(D,\sqsubseteq)$ ein endlicher vollstänger Verband und $f$ monoton.
-z.Z $z_{max} = f^M(\top)$ ein $M \in \N$ der größte Fixpunkt von $f$.\\
-
-1. $z_{max}$ ist ein Fixpunkt von $f$.\\
-$z_{max} = f^M(\top) = f^{M+1}(\top)$ da $\top$ das maximale Element ist und $f$ monton ist.\\
-
-2. $z_{max}$ ist der größte Fixpunkt.\\
+z.Z $z_{max} = f^M(\top)$ ein $M \in \N$ der größte Fixpunkt von $f$.\\\\
+Wir brauchen zu zeigen, dass\\\\
+\textbf{1. $z_{max}$ ist ein Fixpunkt von $f$.}\\
+$z_{max} = f^M(\top) = f^{M+1}(\top)$ da $\top$ das maximale Element ist und $f$ monton ist.\\\\
+\textbf{2. $z_{max}$ ist der größte Fixpunkt}.\\
 Sei $z$ ein Fixpunkt.\\
 Nun gilt $z \sqsubseteq \top$. Da $f$ monoton ist
 $f(z) = z  \sqsubseteq f(\top)$. Wir wenden $f$ $M-1$ mal an, und wir bekommen $z  \sqsubseteq f^M(\top) = z_{max} $\\
-Daraus folgt dass $ z_{max}$ der größte Fixpunkt ist.
+Daraus folgt dass $ z_{max}$ der größte Fixpunkt ist.\\\\
+Mit 1. und 2. folgt dass $z_{max}$ der größte Fixpunkt ist.$\blacksquare$
 
 
 
