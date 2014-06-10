@@ -1,1 +1,29 @@
- 
+\section*{Aufgabe 3}
+\subsection*{a)}
+
+Z.z $\leq$ ist eine partielle Ordnung auf $B$.\\
+Es genügt zu zeigen dass $\leq$ reflexiv, antisymetrisch und transitiv ist.\\
+
+Reflexiv\\
+Sei $f \in B$ beliebig. Dann gilt $f \leq f$ da $\Inv{f} \subseteq \Inv{f}$ (1)\\
+
+Antisymetrisch \\
+Es muss gelten $\forall f,g \in B : f \leq g \land g \leq f \rightarrow f =g$.\\
+Sei $f,g \in B$ beliebig. 
+Annahme: $f \leq g \land g \leq f $ \\
+Z.z $f =g$\\
+Aus der Annamhe folgt $\Inv{f} \subseteq \Inv{g} \land \Inv{g} \subseteq \Inv{f} $\\
+ $\Rightarrow \Inv{f} = \Inv{g}$\\
+Dies impliziert aber auch $\InvN{f} = \InvN{g}$ da es sich um eine boolsche Funktion handelt.\\
+Daraus folgt dass $f=g$ (2)\\
+
+Transitiv\\
+Es muss gelten $\forall f,g,h \in B : f \leq g \land g \leq h \rightarrow f \leq h$.\\
+Sei $f,g,h \in B$ beliebig. 
+Annahme: $f \leq g \land g \leq h$\\
+z.Z.: $f \leq h$\\
+Aus der Annahme folgt, dass  $\Inv{f} \subseteq \Inv{g} \land \Inv{g} \subseteq \Inv{h}$\\
+$\Rightarrow \Inv{f} \subseteq \Inv{h}$\\
+$\Rightarrow f \leq g$ (3)\\
+
+Mit (1) und (2) und (3) folgt, dass $\leq$ eine partielle Ordung auf $B$ ist. $\blacksquare$
