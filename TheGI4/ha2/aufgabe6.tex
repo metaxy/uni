@@ -1,22 +1,40 @@
 \section*{Aufgabe 6}
 
 \subsection*{a)}
+Sei $(D,\sqsubseteq)$ ein vollständiger Verband. Sei $f$ monoton.\\
+Sei $A = \{x \in D | f(x) \sqsubseteq x \}$\\
+Z.z $z_{min} = \bigsqcap A$ ist der kleinste Fixpunkt.\\
+Wir brauchen zu zeigen, dass\\\\
 \textbf{1. $z_{min}$ ist ein Fixpunkt von $f$.}\\
+Da $\sqsubseteq$ antisymmetrisch ist müssen wir zeigen dass:\\
+$z_{min} \sqsubseteq f(z_{min}) $ (*) und \\
+$f(z_{min}) \sqsubseteq z_{min}$ (**)\\
+\begin{itemize}
+\item (*)\\
+Nach $z_{min} = \bigsqcap A$ gilt $\forall x \in A : z_{min} \rr x$\\
+Da $f$ monoton ist gilt: $f(z_{min}) \rr f(x)$\\
+Nach Defintion von $A$ gilt $\forall x \in A : f(z_{min}) \rr f(x)  \rr x$\\
+$\Rightarrow f(z_{min}) \in A$.\\
+$\Rightarrow z_{min} \rr f(z_{min})$ da $z_{min}$ das Infimum ist.\\
 
+\item (**)\\
+Da $z_{min} \in A$ gilt $f(z_{min}) \rr z_{min}$
+\end{itemize}
+Aus (*) und (**) folgt mit Der Antisymetrie von $\rr$ dass $z_{min}$ ein Fixpunkt ist.\\\\
 \textbf{2. $z_{min}$ ist der kleinste Fixpunkt}.\\
-Wiederspruchsbeweis.\\
+Widerspruchsbeweis.\\
 Sei $z_{min2}$ ein Fixpunkt mit $z_{min2} \sqsubseteq z_{min}$ (1).\\
 Es gilt $z_{min} = \bigsqcap \{x \in D | f(x) \sqsubseteq x \}$\\
 Nun ist aber $z_{min2} \in \{x \in D | f(x) \sqsubseteq x \}$ da es ein Fixpunkt ist.\\
-Das aber steht im Wiederspruch zu (1), wenn $z_{min}$ das Infimum ist, kann $z_{min2}$ nicht Element der Prä-Fixpunkte sein.
+Das aber steht im Widerspruch zu (1), wenn $z_{min}$ das Infimum ist, kann $z_{min2}$ nicht Element der Prä-Fixpunkte sein.
  
-\subsection*{(b)}
-z.Z Aus $(D,\sqsubseteq)$ ein endlicher vollstänger Verband und $f$ monoton folgt dass, $z_{max} = f^M(\top)$ ein $M \in \mathbb{N}$ der größte Fixpunkt von $f$ ist.\\
-Sei $(D,\sqsubseteq)$ ein endlicher vollstänger Verband und $f$ monoton.
+\subsection*{b)}
+z.Z Aus $(D,\sqsubseteq)$ ein endlicher vollständiger Verband und $f$ monoton folgt dass, $z_{max} = f^M(\top)$ ein $M \in \mathbb{N}$ der größte Fixpunkt von $f$ ist.\\
+Sei $(D,\sqsubseteq)$ ein endlicher vollständiger Verband und $f$ monoton.
 z.Z $z_{max} = f^M(\top)$ ein $M \in \N$ der größte Fixpunkt von $f$.\\\\
 Wir brauchen zu zeigen, dass\\\\
 \textbf{1. $z_{max}$ ist ein Fixpunkt von $f$.}\\
-$z_{max} = f^M(\top) = f^{M+1}(\top)$ da $\top$ das maximale Element ist und $f$ monton ist.\\\\
+$z_{max} = f^M(\top) = f^{M+1}(\top)$ da $\top$ das maximale Element ist und $f$ monoton ist.\\\\
 \textbf{2. $z_{max}$ ist der größte Fixpunkt}.\\
 Sei $z$ ein Fixpunkt.\\
 Nun gilt $z \sqsubseteq \top$. Da $f$ monoton ist
