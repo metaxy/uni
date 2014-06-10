@@ -1,0 +1,160 @@
+Hash client
+
+
+set data[63377] = 63378
+set data[10795] = 10796
+set data[19616] = 19617
+set data[48298] = 48299
+set data[21643] = 21644
+set data[14214] = 14215
+set data[30654] = 30655
+set data[4527] = 4528
+set data[12671] = 12672
+set data[16609] = 16610
+set data[14453] = 14454
+set data[39737] = 39738
+set data[39600] = 39601
+set data[22635] = 22636
+set data[54804] = 54805
+set data[51717] = 51718
+set data[11230] = 11231
+set data[10969] = 10970
+set data[4357] = 4358
+set data[35418] = 35419
+set data[65016] = 65017
+set data[23489] = 23490
+set data[52904] = 52905
+set data[12401] = 12402
+set data[10059] = 10060
+
+
+
+data for 63377 is 63378
+
+data for 10795 is 10796
+
+data for 19616 is 19617
+
+data for 48298 is 48299
+
+data for 21643 is 21644
+
+data for 14214 is 14215
+
+data for 30654 is 30655
+
+data for 4527 is 4528
+
+data for 12671 is 12672
+
+data for 16609 is 16610
+
+data for 14453 is 14454
+
+data for 39737 is 39738
+
+data for 39600 is 39601
+
+data for 22635 is 22636
+
+data for 54804 is 54805
+
+data for 51717 is 51718
+
+data for 11230 is 11231
+
+data for 10969 is 10970
+
+data for 4357 is 4358
+
+data for 35418 is 35419
+
+data for 65016 is 65017
+
+data for 23489 is 23490
+
+data for 52904 is 52905
+
+data for 12401 is 12402
+
+data for 10059 is 10060
+
+
+delete key = 63377
+delete key = 10795
+delete key = 19616
+delete key = 48298
+delete key = 21643
+delete key = 14214
+delete key = 30654
+delete key = 4527
+delete key = 12671
+delete key = 16609
+delete key = 14453
+delete key = 39737
+delete key = 39600
+delete key = 22635
+delete key = 54804
+delete key = 51717
+delete key = 11230
+delete key = 10969
+delete key = 4357
+delete key = 35418
+delete key = 65016
+delete key = 23489
+delete key = 52904
+delete key = 12401
+delete key = 10059
+
+
+key not found
+data for 63377 is -1 (should be -1)
+key not found
+data for 10795 is -1 (should be -1)
+key not found
+data for 19616 is -1 (should be -1)
+key not found
+data for 48298 is -1 (should be -1)
+key not found
+data for 21643 is -1 (should be -1)
+key not found
+data for 14214 is -1 (should be -1)
+key not found
+data for 30654 is -1 (should be -1)
+key not found
+data for 4527 is -1 (should be -1)
+key not found
+data for 12671 is -1 (should be -1)
+key not found
+data for 16609 is -1 (should be -1)
+key not found
+data for 14453 is -1 (should be -1)
+key not found
+data for 39737 is -1 (should be -1)
+key not found
+data for 39600 is -1 (should be -1)
+key not found
+data for 22635 is -1 (should be -1)
+key not found
+data for 54804 is -1 (should be -1)
+key not found
+data for 51717 is -1 (should be -1)
+key not found
+data for 11230 is -1 (should be -1)
+key not found
+data for 10969 is -1 (should be -1)
+key not found
+data for 4357 is -1 (should be -1)
+key not found
+data for 35418 is -1 (should be -1)
+key not found
+data for 65016 is -1 (should be -1)
+key not found
+data for 23489 is -1 (should be -1)
+key not found
+data for 52904 is -1 (should be -1)
+key not found
+data for 12401 is -1 (should be -1)
+key not found
+data for 10059 is -1 (should be -1)
+Ein durchschnittliche Anfrage brauchte: 75869 ns

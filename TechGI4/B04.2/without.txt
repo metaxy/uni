@@ -1,0 +1,160 @@
+Hash client
+
+
+set data[8381] = 8382
+set data[12005] = 12006
+set data[57001] = 57002
+set data[27405] = 27406
+set data[53440] = 53441
+set data[62085] = 62086
+set data[53185] = 53186
+set data[15307] = 15308
+set data[21985] = 21986
+set data[14496] = 14497
+set data[64850] = 64851
+set data[4941] = 4942
+set data[61441] = 61442
+set data[19012] = 19013
+set data[24106] = 24107
+set data[17342] = 17343
+set data[61637] = 61638
+set data[20147] = 20148
+set data[36984] = 36985
+set data[35568] = 35569
+set data[17462] = 17463
+set data[14095] = 14096
+set data[27856] = 27857
+set data[4580] = 4581
+set data[18107] = 18108
+
+
+
+data for 8381 is 8382
+
+data for 12005 is 12006
+
+data for 57001 is 57002
+
+data for 27405 is 27406
+
+data for 53440 is 53441
+
+data for 62085 is 62086
+
+data for 53185 is 53186
+
+data for 15307 is 15308
+
+data for 21985 is 21986
+
+data for 14496 is 14497
+
+data for 64850 is 64851
+
+data for 4941 is 4942
+
+data for 61441 is 61442
+
+data for 19012 is 19013
+
+data for 24106 is 24107
+
+data for 17342 is 17343
+
+data for 61637 is 61638
+
+data for 20147 is 20148
+
+data for 36984 is 36985
+
+data for 35568 is 35569
+
+data for 17462 is 17463
+
+data for 14095 is 14096
+
+data for 27856 is 27857
+
+data for 4580 is 4581
+
+data for 18107 is 18108
+
+
+delete key = 8381
+delete key = 12005
+delete key = 57001
+delete key = 27405
+delete key = 53440
+delete key = 62085
+delete key = 53185
+delete key = 15307
+delete key = 21985
+delete key = 14496
+delete key = 64850
+delete key = 4941
+delete key = 61441
+delete key = 19012
+delete key = 24106
+delete key = 17342
+delete key = 61637
+delete key = 20147
+delete key = 36984
+delete key = 35568
+delete key = 17462
+delete key = 14095
+delete key = 27856
+delete key = 4580
+delete key = 18107
+
+
+key not found
+data for 8381 is -1 (should be -1)
+key not found
+data for 12005 is -1 (should be -1)
+key not found
+data for 57001 is -1 (should be -1)
+key not found
+data for 27405 is -1 (should be -1)
+key not found
+data for 53440 is -1 (should be -1)
+key not found
+data for 62085 is -1 (should be -1)
+key not found
+data for 53185 is -1 (should be -1)
+key not found
+data for 15307 is -1 (should be -1)
+key not found
+data for 21985 is -1 (should be -1)
+key not found
+data for 14496 is -1 (should be -1)
+key not found
+data for 64850 is -1 (should be -1)
+key not found
+data for 4941 is -1 (should be -1)
+key not found
+data for 61441 is -1 (should be -1)
+key not found
+data for 19012 is -1 (should be -1)
+key not found
+data for 24106 is -1 (should be -1)
+key not found
+data for 17342 is -1 (should be -1)
+key not found
+data for 61637 is -1 (should be -1)
+key not found
+data for 20147 is -1 (should be -1)
+key not found
+data for 36984 is -1 (should be -1)
+key not found
+data for 35568 is -1 (should be -1)
+key not found
+data for 17462 is -1 (should be -1)
+key not found
+data for 14095 is -1 (should be -1)
+key not found
+data for 27856 is -1 (should be -1)
+key not found
+data for 4580 is -1 (should be -1)
+key not found
+data for 18107 is -1 (should be -1)
+Ein durchschnittliche Anfrage brauchte: 103758 ns
