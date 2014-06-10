@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     struct sockaddr_in their_addr;
     int numbytes;
     int serverPort;
+     sec s2,s3;
+    nsec n2,n3;
     printf("Hash client\n\n");
     
     if (argc != 3) {
@@ -48,9 +50,10 @@ int main(int argc, char *argv[])
     their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
     char buffer[PACKLEN];
+    char command[4];
     packData(buffer, "REQ", 0,0,0,0);
     sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
-    recvfrom(sockfd, buffer, PACKLEN, 0, NULL);
+    recvfrom(sockfd, buffer, PACKLEN, 0, NULL, NULL);
     unpackData(buffer, command, &s2,&n2,&s3,&n3);
     return 0;
 }
