@@ -26,3 +26,54 @@
     (12) edge node [] {} (11)
     (21) edge node [] {} (11);
 \end{tikzpicture} 
+
+\subsection*{b)}
+ \begin{math}
+\\
+f_{inf}((x_1,y_1),(x_2,y_2)) = \left\{
+\begin{array}{l} (x_1,y_1), falls \; x_1 \leq x_2 \land y_1 \leq y_2 \\ (x_1,y_2), falls \; x_1 \leq x_2 \land y_2 \leq y_1 \\ (x_2,y_1), falls \; x_2 \leq x_1 \land y_1 \leq y_2 \\ (x_2,y_2), falls \; x_2 \leq x_1 \land y_2 \leq y_1 \end{array}\right. \\
+\\ \\ \\
+f_{sup}((x_1,y_1),(x_2,y_2)) = \left\{
+\begin{array}{l} (x_1,y_1), falls \; x_1 \geq x_2 \land y_1 \geq y_2 \\ (x_1,y_2), falls \; x_1 \geq x_2 \land y_2 \geq y_1 \\ (x_2,y_1), falls \; x_2 \geq x_1 \land y_1 \geq y_2 \\ (x_2,y_2), falls \; x_2 \geq x_1 \land y_2 \geq y_1 \end{array}\right. \\
+\end{math}	 	
+\subsection*{c)}
+\begin{math}
+Sei \; f: 2^{\N \times \N} \rightarrow \N \times \N \; die \; Funktion,\; die \; \sqcap{X} \; bestimmt \; mit \\ \\
+f(X) = \left\{
+\begin{array}{l} a \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\; , falls \; \#(X)=1 \land a \in X \\ 
+f((min(x_1,x_2),min(y_1,y_2)) \cup (X \setminus \lbrace (x_1,y_1),(x_2,y_2) \rbrace ))\; , sonst \; mit \; (x_1,y_1),(x_2,y_2) \in X \\
+\end{array}\right. \\
+\\
+Sei \; g: 2^{\N \times \N} \rightarrow \N \times \N \; die \; Funktion,\; die \; \sqcup{X} \; bestimmt \; mit \\ \\
+g(X) = \left\{
+\begin{array}{l} a \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\; , falls \; \#(X)=1 \land a \in X \\ 
+g((max(x_1,x_2),max(y_1,y_2)) \cup (X \setminus \lbrace (x_1,y_1),(x_2,y_2) \rbrace ))\; , sonst \; mit \; (x_1,y_1),(x_2,y_2) \in X \\
+\end{array}\right. \\
+\end{math}
+\subsection*{d)}
+\begin{math}
+\bot = (1,1) \\
+\top \; existiert \; nicht
+\end{math}
+\subsection*{e)}
+Der Verband ist nicht vollständig, weil nicht für jedes 
+\begin{math}
+A \subseteq (\N \times \N)
+\end{math}
+ein Supremum existiert (insbesondere nicht für die unendliche Menge
+\begin{math}
+(\N \times \N)
+\end{math}
+).
+\subsection*{f)}
+\begin{math}
+z.z. \forall d_1, d_2 \in (\N \times \N).d_1\leq_{2}d_2\rightarrow f(d_1)\leq_{2}f(d_2)
+\\ \\
+\end{math}
+Weil sowohl 2y2+2y-1 als auch x! komponentenweise monoton sind, ist auch f monoton!
