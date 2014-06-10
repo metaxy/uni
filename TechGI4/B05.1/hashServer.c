@@ -46,19 +46,20 @@ int main(int argc, char *argv[])
     }
 
     listen(sockfd, 1);
-    
+    sec s2,s3;
+    nsec n2,n3;
+    //todo: calc time
     while(1) {
 		clilen = sizeof cli_addr;
         unsigned char buffer[8];
 
-        int size = recvfrom(sockfd, buffer, 8, 0,(struct sockaddr *) &cli_addr, &clilen);
+        int size = recvfrom(sockfd, buffer, PACKSIZE, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
             char command[4];
-            sec s2,s3;
-            nsec n2,n3;
-            unpackData(buffer, command, &s2, &n2, &s3, &n3);
-            
-            sendto(sockfd, buffer, 8, 0, (struct sockaddr *) &cli_addr, clilen);
+            unpackData(buffer, command, NULL, NULL, NULL, NULL);
+            //todo: command == REQ
+            packData(buffer, "RES", s2, n2, s3, n3);
+            sendto(sockfd, buffer, PACKSIZE, 0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);

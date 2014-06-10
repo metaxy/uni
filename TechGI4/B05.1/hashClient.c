@@ -49,8 +49,7 @@ int main(int argc, char *argv[])
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
     
     
-    
-    close(sockfd);
+    sendto(sockfd, buffer, PACKSIZE, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
 
     return 0;
 }
