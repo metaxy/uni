@@ -48,9 +48,10 @@ int main(int argc, char *argv[])
     their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(their_addr.sin_zero, '\0', sizeof their_addr.sin_zero);
     char buffer[PACKLEN];
-    
+    packData(buffer, "REQ", 0,0,0,0);
     sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *)&their_addr, sizeof(struct sockaddr_in));
-
+    recvfrom(sockfd, buffer, PACKLEN, 0, NULL);
+    unpackData(buffer, command, &s2,&n2,&s3,&n3);
     return 0;
 }
 
