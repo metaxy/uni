@@ -1,9 +1,9 @@
 /*
 ############################################################################
-#                                                                          #
-# Copyright TU-Berlin, 2011-2014                                           #
-# Die Weitergabe, VerÃ¶ffentlichung etc. auch in Teilen ist nicht gestattet #
-#                                                                          #
+# #
+# Copyright TU-Berlin, 2011-2014 #
+# Die Weitergabe, Veröffentlichung etc. auch in Teilen ist nicht gestattet #
+# #
 ############################################################################
 */
 
@@ -17,10 +17,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <time.h>
 #include "common.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     int sockfd;
     int serverPort;
     struct sockaddr_in serv_addr, cli_addr;
@@ -48,24 +48,34 @@ int main(int argc, char *argv[])
     listen(sockfd, 1);
     sec s2,s3;
     nsec n2,n3;
-    //todo: calc time
+    struct timespec begin, end;
     while(1) {
 		clilen = sizeof cli_addr;
         unsigned char buffer[8];
 
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
+			clock_gettime(CLOCK_REALTIME, &begin);
+			s2 = begin.tv_sec;
+			n2 = begin.tv_nsec;
             char command[4];
             unpackData(buffer, command, NULL, NULL, NULL, NULL);
-            //todo: command == REQ
-            packData(buffer, "RES", s2, n2, s3, n3);
+            //todo: command == "REQ"
+            if(command[0] == 'R'){
+				clock_gettime(CLOCK_REALTIME, &end);
+				s3 = end.tv_sec;
+				n3 = end.tv_nsec;
+				packData(buffer, "RES", s2, n2, s3, n3);
+			}
+            
+			/*clock_gettime(CLOCK_REALTIME, &end);
+            s3 = end.tv_sec;
+			n3 = end.tv_nsec;
+            packData(buffer, "RES", s2, n2, s3, n3);*/
             sendto(sockfd, buffer, PACKLEN, 0, (struct sockaddr *) &cli_addr, clilen);
         }
     }
     close(sockfd);
     return 0;
 }
-
-
-
 

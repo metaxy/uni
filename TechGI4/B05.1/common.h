@@ -23,7 +23,7 @@ void toBuf(uint32_t value, unsigned char *buffer, int start) {
     buffer[start+3] = value >> 24;
 }
 
-void unpackData(unsigned char *buffer, char *command, sec *s2,  nsec *n2, sec *s3, nsec *n3) {
+void unpackData(unsigned char *buffer, char *command, sec *s2, nsec *n2, sec *s3, nsec *n3) {
     command[0] = buffer[0];
     command[1] = buffer[1];
     command[2] = buffer[2];
@@ -34,7 +34,7 @@ void unpackData(unsigned char *buffer, char *command, sec *s2,  nsec *n2, sec *s
     fromBuf(n3,buffer,16);
 }
 
-int packData(unsigned char *buffer, char command[], sec s2,  nsec n2, sec s3, nsec n3) {
+int packData(unsigned char *buffer, char command[], sec s2, nsec n2, sec s3, nsec n3) {
     buffer[0] = command[0];
     buffer[1] = command[1];
     buffer[2] = command[2];
