@@ -1,0 +1,4 @@
+Aufagbe 5
+
+a) 62856
+b) 614 byte
