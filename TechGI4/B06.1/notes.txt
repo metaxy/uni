@@ -2,3 +2,16 @@ Aufagbe 5
 
 a) 62856
 b) 614 byte
+c) 172
+d)
+00:0d:56:c7:76:0e -> 192.168.0.4
+00:0f:3d:fc:75:2b -> 192.168.0.1 
+00:11:25:43:ca:fe -> 192.168.0.2
+e) bei 62854 von 62856
+g) 90%
+h) BitTorrent, HTTP, TLSv1
+i) BROWSER, DNS, NBNS, RDT, 
+
+r) Ja ein uralt Firefox 1.0.7
+
+t) Jep, Bittorrent wurde benuzt
