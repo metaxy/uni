@@ -11,13 +11,13 @@ Da $\mathcal{R}$ symmetrisch ist (aufgrund dessen dass $\nbisim$ symmetrisch ist
 Wir machen einen Widerspruchsbeweis:\\
 Annahme: Es gibt kein $S'$ mit $S \CCSTrans{a} S'$ und $(R',S') \in \mathcal{R}$(1)\\
 Sei $\{S_1,..,S_n\}$ die Menge der Prozesse zu denen man mit einem $a$ von $S$ kommt. Diese ist endlich, da das LTS image-finite ist.\\\\
-
 Nun ist aber $(R,S) \in \mathcal{R}$ mit $R \CCSTrans{a} R'$, was bedeutet dass \\
 $R \kbisim{n+1} S 
 = (R,S) \in  \kbisim{n+1} \\ 
 = (R,S) \in \mathcal{F}^{n+1}(\Proc \times \Proc)\\
 = (R,S) \in \mathcal{F}(\mathcal{F}^{n}(\Proc \times \Proc))\\
-= (R,S) \in \mathcal{F}(\nbisim)$. \\
-
-Daraus folgt aber dass $\forall x \in \Act . \forall q' \in Der(q,a) . \exists p' \in Der(p,a) .(p',q')  \in (R \nbisim S)$. \\
-Dies ist aber ein Wiederspruch zur Annahme, dass es $\exists n \in \mathbb{N}. \lnot (R' \nbisim S')$.\\
+= (R,S) \in \mathcal{F}(\nbisim)\\
+= (R,S) \in \{(p,q) \in \Proc \times \Proc | p {\stackrel{1}{\bisim}}_{\nbisim} q \}$. \\
+Daraus folgt aber dass $\forall a \in \Act . \forall p' \in Der(p,a) . \exists q' \in Der(q,a) .(p',q')  \in \nbisim$. \\
+Das heißt wieder dass es ein gibt $q' \in Der(q,a) .(p',q') \in \nbisim$.\\
+Dies ist aber ein Widerspruch zur Annahme(1), dass es $\exists n \in \mathbb{N}. \lnot (R' \nbisim S')$.\\
