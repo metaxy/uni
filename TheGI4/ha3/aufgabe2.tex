@@ -1,0 +1,81 @@
+\section*{Aufgabe 2}
+\subsection*{Aufgabe 2 a)}
+(i)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$F_1$ \> = \> 
+$\poss{auflegen} \poss{warte1min} \poss{warte1min} \poss{warte1min} \poss{warte1min}$
+\\ Links \= Mitte \= Rechts \kill
+\>  \> $\poss{wenden} \poss{warte1min} \poss{warte1min} \poss{warte1min} \poss{warte1min} \poss{essen}\true$
+  \end{tabbing}
+  (ii)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$F_2$ \> = \> 
+$\necess{marinieren} \poss{marinieren} \false$ 
+\\ Links \= Mitte \= Rechts \kill
+\\Eigentlich sollte die Formel doch so lauten, oder?\\ $ \poss{marinieren} \necess{marinieren} \false$ \\
+\\Begr"undung: \\Nein, es wird lediglich ausgeschlossen, dass nicht zweimal hintereinander mariniert werden kann.\\
+Sp"ater im LTS k"onnte es weiterhin m"oglich sein zu marinieren. \\
+Wenn wirklich ausgeschlossen werden soll, dass zweimal mariniert wird,\\ m"usste die Formel rekursiv aufgebaut werden.\\ 
+  \end{tabbing}
+  (iii)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$F_3$ \> = \> 
+$\poss{wenden} \poss{warte1min} \poss{wenden} \true$
+\\
+  \end{tabbing}
+  (iv)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$F_4$ \> = \> 
+$\Neg *{F_3}$
+\\
+  \end{tabbing}
+  (v)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$F_5$ \> = \> 
+$\necess{essen} \poss{l"oschen} \false \land \necess{auflegen} \necess{warte1min} \necess{wenden} $
+\\ Links \= Mitte \= Rechts \kill
+ \>  \> $ (\poss{essen} (\poss{l"oschen} \true \lor \poss{warte1min} \true))$
+ \\
+  \end{tabbing}
+  \subsection*{Aufgabe 2 b)}
+  (i)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$\denot{F_1}$ \> = \> 
+$\lbrace GuF, N \rbrace ~,~und~weil ~ GuF \in \denot{F_1} gilt ~ GuF \Models F_{2.a(i)}$
+\\
+  \end{tabbing}
+    (ii)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$\denot{F_3}$ \> = \> 
+$\lbrace W \rbrace ~,~und~weil ~ W \in \denot{F_3} gilt ~ W \Models F_{2.a(iii)}$
+\\
+  \end{tabbing}
+     (iii)
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$\denot{F_5}$ \> = \> 
+$\Res {\Proc}{GuF,S},~ ~$
+\\
+Links \= Mitte \= Rechts \kill
+\> \> $d.h~es~ gilt ~nicht~f"ur~alle~Zust"ande~X~des~LTS:~ X \Models F_{2.a(v)}$
+  \end{tabbing}
+     Restliche Auswertungen
+\begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$\denot{F_4}$ \> = \> 
+$\Res {\Proc}{W}$
+\\
+  \end{tabbing}
+  \begin{tabbing}
+    Links \= Mitte \= Rechts \kill
+$\denot{F_2}$ \> = \> 
+$\lbrace F, GuF, A, W, H, S, N, E \rbrace $
+\\
+  \end{tabbing}

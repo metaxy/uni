@@ -45,17 +45,18 @@ int main(int argc, char *argv[]){
         printf("could not bind\n");
     }
 
-    listen(sockfd, 1);
+    listen(sockfd, 10);
     sec s2,s3;
     nsec n2,n3;
     struct timespec begin, end;
     while(1) {
 		clilen = sizeof cli_addr;
-        unsigned char buffer[8];
+        unsigned char buffer[PACKLEN];
 
         int size = recvfrom(sockfd, buffer, PACKLEN, 0,(struct sockaddr *) &cli_addr, &clilen);
 		if(size > 0) {
 			clock_gettime(CLOCK_REALTIME, &begin);
+            printf("received\n");
 			s2 = begin.tv_sec;
 			n2 = begin.tv_nsec;
             char command[4];
