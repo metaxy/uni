@@ -1,4 +1,14 @@
-\section*{Aufgabe 3}
+\section*{Aufgabe 6}
 
-
-
+Zu zeigen ist $(\forall n \in \mathbb{N}. P \nbisim Q) \Rightarrow P \bisim Q$\\
+Annahme: $(\forall n \in \mathbb{N}. P \nbisim Q)$\\
+Zu zeigen ist nun $P \bisim Q$ was aber äquivalent zu dass \\
+$\mathcal{R} = \{(R,S) | R,S \in \Proc \land (\forall n \in \mathbb{N}. R \nbisim S) \}$ eine starke Bisimulation ist.\\
+Unsere Annahme ist:\\
+$(R,S) \in \mathcal{R}$ und $R \CCSTrans{a} R'$\\\\
+Wir zeigen nun dass $\exists S' \in \Proc$ sodass $S \CCSTrans{a} S'$ und $(R',S') \in \mathcal{R}$\\
+Da $\mathcal{R}$ symmetrisch ist (aufgrund dessen dass $\nbisim$ symmetrisch ist) genügt es nur diesen Fall zu zeigen.\\
+Wir machen einen Widerspruchsbeweis:\\
+Annahme: Es gibt kein $S'$ mit $S \CCSTrans{a} S'$ und $(R',S') \in \mathcal{R}$\\
+Sei $\{S_1,..,S_n\}$ die Menge der Prozesse zu denen man mit einem $a$ von $S$ kommt. Diese ist endlich, da das LTS image-finite ist.\\
+Nach Annahme gibt $\exists n \in \mathbb{N}. (R',S') \notin \nbisim$\\
