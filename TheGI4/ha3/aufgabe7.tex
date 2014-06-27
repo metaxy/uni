@@ -1,4 +1,36 @@
-\section*{Aufgabe 3}
-
-
+\section*{Aufgabe 7}
+Seien $A,B \subseteq 2^{\Proc}$ beliebig\\
+Zu zeigen ist $\eqS{A}{B} \Rightarrow \eqO{V}{A}{B}$ für alle $V \in {\mathcal{M}}_{\{X\}}$\\
+Beweis durch strukturelle Induktion:\\
+Induktionsanfang:\\
+1. $V := X$\\
+\begin{align*}
+\eqS{A}{B} & \Rightarrow \eqO{X}{A}{B} \\
+\Leftrightarrow \eqS{A}{B} & \Rightarrow \eqS{A}{B}
+\end{align*}
+2. $V := \true$\\
+\begin{align*}
+\eqS{A}{B} & \Rightarrow \eqO{\true}{A}{B} \\
+\Leftrightarrow \eqS{A}{B} & \Rightarrow \eqS{\Proc}{\Proc}
+\end{align*}
+3. $V := \false$\\
+\begin{align*}
+\eqS{A}{B} & \Rightarrow \eqO{\true}{A}{B} \\
+\Leftrightarrow \eqS{A}{B} & \Rightarrow \eqS{\emptyset}{\emptyset}
+\end{align*}\\
+Induktionsvorrausetzung:\\
+$\eqS{A}{B} \Rightarrow \eqO{V}{A}{B}$\\\\
+Induktionsschritt:\\
+4. $V := F \lor G$\\
+\begin{align*}
+\eqS{A}{B} & \Rightarrow \eqO{F \lor G}{A}{B} \\
+\Leftrightarrow \eqS{A}{B} & \Rightarrow \eqS{\OSem{F}{A} \cup \OSem{G}{A}}{\OSem{F}{B} \cup \OSem{G}{B}}
+\end{align*}
+gilt da $\eqO{F}{A}{B}$ und $\eqO{G}{A}{B}$\\\\
+5. $V := \poss{a}F$\\
+\begin{align*}
+\eqS{A}{B} & \Rightarrow \eqO{\poss{a}F}{A}{B} \\
+\Leftrightarrow \eqS{A}{B} & \Rightarrow \eqS{\possDenot{a}\OSem{F}{A}}{\possDenot{a}\OSem{F}{B}}
+\end{align*}
+gilt da $\eqO{F}{A}{B}$ und $\possDenot{a}$ TODO
 
