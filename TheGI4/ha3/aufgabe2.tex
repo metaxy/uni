@@ -12,9 +12,8 @@ $\poss{auflegen} \poss{warte1min} \poss{warte1min} \poss{warte1min} \poss{warte1
 \begin{tabbing}
     Links \= Mitte \= Rechts \kill
 $F_2$ \> = \> 
-$\necess{marinieren} \poss{marinieren} \false$ 
+$\necess{marinieren} \necess{marinieren} \false$ 
 \\ Links \= Mitte \= Rechts \kill
-\\Eigentlich sollte die Formel doch so lauten, oder?\\ $ \poss{marinieren} \necess{marinieren} \false$ \\
 \\Begr"undung: \\Nein, es wird lediglich ausgeschlossen, dass nicht zweimal hintereinander mariniert werden kann.\\
 Sp"ater im LTS k"onnte es weiterhin m"oglich sein zu marinieren. \\
 Wenn wirklich ausgeschlossen werden soll, dass zweimal mariniert wird,\\ m"usste die Formel rekursiv aufgebaut werden.\\ 
@@ -37,7 +36,7 @@ $\Neg *{F_3}$
 \begin{tabbing}
     Links \= Mitte \= Rechts \kill
 $F_5$ \> = \> 
-$\necess{essen} \poss{l"oschen} \false \land \necess{auflegen} \necess{warte1min} \necess{wenden} $
+$\necess{essen} \necess{l"oschen} \false \land \necess{auflegen} \necess{warte1min} \necess{wenden} $
 \\ Links \= Mitte \= Rechts \kill
  \>  \> $ (\poss{essen} (\poss{l"oschen} \true \lor \poss{warte1min} \true))$
  \\
@@ -61,7 +60,7 @@ $\lbrace W \rbrace ~,~und~weil ~ W \in \denot{F_3} gilt ~ W \Models F_{2.a(iii)}
 \begin{tabbing}
     Links \= Mitte \= Rechts \kill
 $\denot{F_5}$ \> = \> 
-$\Res {\Proc}{GuF,S},~ ~$
+$\Res {\Proc}{GuF,S,N},~ ~$
 \\
 Links \= Mitte \= Rechts \kill
 \> \> $d.h~es~ gilt ~nicht~f"ur~alle~Zust"ande~X~des~LTS:~ X \Models F_{2.a(v)}$
@@ -76,6 +75,6 @@ $\Res {\Proc}{W}$
   \begin{tabbing}
     Links \= Mitte \= Rechts \kill
 $\denot{F_2}$ \> = \> 
-$\lbrace F, GuF, A, W, H, S, N, E \rbrace $
+$\Proc $
 \\
   \end{tabbing}
