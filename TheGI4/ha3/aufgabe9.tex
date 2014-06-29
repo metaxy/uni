@@ -1,4 +1,28 @@
 \section*{Aufgabe 9}
-
+  \subsection*{a)}
+  Die zugrunde liegende Formel ist $X \HMmin \HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}$.\\\\
+  $\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{\emptyset}=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\emptyset$\\\\
+  $=(\Set{p_1,p_2,p_5} \cup \Set{p_1,p_3,p_4}) \cap \Set{p_6}$\\\\
+  $=\Set{p_1,p_2,p_3,p_4,p_5}\cap\Set{p_6}$\\\\
+  $=\emptyset$\\\\
+  An dieser Stelle haben wir einen Fixpunkt erreicht, denn $\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{\emptyset}=\emptyset$.
+  \subsection*{b)}
+ Die zugrunde liegende Formel ist $X \HMmax \HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}$.\\\\
+ $\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{\Proc}=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\Proc$\\\\
+ $=(\Set{p_1,p_2,p_5} \cup \Set{p_1,p_3,p_4}) \cap \Proc$\\\\
+ $=\Set{p_1,p_2,p_3,p_4,p_5}$\\\\\\
+ $(\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{})^{2}(\Proc)=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\Set{p_1,p_2,p_3,p_4,p_5}$\\\\
+ $=\Set{p_1,p_2,p_3,p_4,p_5}\cap\Set{p_1,p_2,p_3,p_5,p_6}$\\\\
+ $=\Set{p_1,p_2,p_3,p_5}$\\\\\\
+  $(\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{})^{3}(\Proc)=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\Set{p_1,p_2,p_3,p_5}$\\\\
+ $=\Set{p_1,p_2,p_3,p_4,p_5}\cap\Set{p_2,p_5,p_6}$\\\\
+ $=\Set{p_2,p_5}$\\\\\\
+  $(\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{})^{4}(\Proc)=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\Set{p_2,p_5}$\\\\
+ $=\Set{p_1,p_2,p_3,p_4,p_5}\cap\Set{p_2,p_6}$\\\\
+ $=\Set{p_2}$\\\\\\
+  $(\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{})^{5}(\Proc)=(\possDenot{a}\Proc \cup \possDenot{b}\Proc) \cap \necessDenot{\Act}\Set{p_2}$\\\\
+ $=\Set{p_1,p_2,p_3,p_4,p_5}\cap\Set{p_2,p_6}$\\\\
+ $=\Set{p_2}$\\\\\\
+ An dieser Stelle haben wir einen Fixpunkt erreicht, denn $\OSem {\HMand {\HMor *{\poss {a}\true}{\poss {b}\true}}{\necess {\Act}X}}{\Set{p_2}}=\Set{p_2}$.
 
 
