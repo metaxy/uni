@@ -16,7 +16,7 @@ INSERT INTO `Abteilung` (`AbteilungsNr`, `Name`, `Ort`) VALUES
 
 CREATE TABLE IF NOT EXISTS `Angestellter` (
   `PersonalNr` int(11) NOT NULL,
-  `Name` text NOT NULL,
+  `Name` text NOT NULL UNIQUE,
   `Vorname` text NOT NULL,
   `Gehalt` int(11) NOT NULL,
   `Wohnort` text NOT NULL,
