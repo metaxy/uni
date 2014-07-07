@@ -1,0 +1,8 @@
+(BufferEmpty | Camera) | (Processor | Processor) \ {put, get};
+
+BufferEmpty := put?.BufferOne
+BufferOne := put?.BufferTwo + get?.BufferEmpty
+BufferTwo := get?.BufferOne
+
+Camera := produce!.put!.Camera
+Processor := get!.compress!.Processor

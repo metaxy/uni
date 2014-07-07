@@ -1,0 +1,9 @@
+Protocol; 
+
+Protocol := (Sender | Receiver | DupMedium) \ {send, receive, sendAck, receiveAck},
+Sender := put?.send!.Sending, Sending := receiveAck?.Sender,
+Receiver := receive?.get?.sendAck!.Receiver,
+DupMedium := Medium | AckMedium,
+Medium := send?.receive!.Medium,
+AckMedium := sendAck?.
+receiveAck!.AckMedium

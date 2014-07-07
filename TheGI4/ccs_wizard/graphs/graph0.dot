@@ -1,0 +1,33 @@
+digraph 
+{
+0 [shape = plaintext, label = ""]
+1 [shape = box, label = "X", style = rounded];
+2 [shape = box, label = "0 | 0 | b!.0", style = rounded];
+3 [shape = box, label = "0 | 0 | 0", style = rounded];
+2 -> 3[label = "b!"]
+1 -> 2[label = "[a]"]
+4 [shape = box, label = "0 | a?.0 | 0", style = rounded];
+4 -> 3[label = "a?"]
+1 -> 4[label = "[b]"]
+5 [shape = box, label = "0 | a?.0 | b!.0", style = rounded];
+5 -> 2[label = "a?"]
+5 -> 4[label = "b!"]
+1 -> 5[label = "a!"]
+1 -> 5[label = "b?"]
+6 [shape = box, label = "a!.0 + b?.0 | 0 | b!.0", style = rounded];
+6 -> 3[label = "[b]"]
+6 -> 2[label = "a!"]
+6 -> 2[label = "b?"]
+7 [shape = box, label = "a!.0 + b?.0 | 0 | 0", style = rounded];
+7 -> 3[label = "a!"]
+7 -> 3[label = "b?"]
+6 -> 7[label = "b!"]
+1 -> 6[label = "a?"]
+8 [shape = box, label = "a!.0 + b?.0 | a?.0 | 0", style = rounded];
+8 -> 3[label = "[a]"]
+8 -> 4[label = "a!"]
+8 -> 4[label = "b?"]
+8 -> 7[label = "a?"]
+1 -> 8[label = "b!"]
+0 -> 1
+}

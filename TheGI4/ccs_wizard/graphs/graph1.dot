@@ -1,0 +1,8 @@
+digraph 
+{
+0 [shape = plaintext, label = ""]
+1 [shape = box, label = "P", style = rounded];
+2 [shape = box, label = "a!.A | A \\ {a}", style = rounded];
+1 -> 2[label = "b?"]
+0 -> 1
+}

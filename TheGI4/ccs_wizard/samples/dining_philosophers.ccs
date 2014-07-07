@@ -1,0 +1,8 @@
+ (Chopstick1 | PhilA | Chopstick2 | PhilB | Chopstick3 | PhilC)\ {getC1, getC2, getC3, putC1, putC2, putC3} ;
+
+Chopstick1 := getC1?.putC1?.Chopstick1,
+Chopstick2 := getC2?.putC2?.Chopstick2,
+Chopstick3 := getC3?.putC3?.Chopstick3,
+PhilA := getC1!.getC2!.eat!.putC1!.putC2!.think!.PhilA,
+PhilB := getC2!.getC3!.eat!.putC2!.putC3!.think!.PhilB,
+PhilC := getC3!.getC1!.eat!.putC3!.putC1!.think!.PhilC 
