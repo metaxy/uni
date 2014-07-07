@@ -1,0 +1,34 @@
+a) DHCP
+Wir finden hier den DHCP Request und den DHCP Ack.
+
+DHCP Request:
+	Source: 0.0.0.0 (= ich habe keine ip)
+	Dest: 255.255.255.255 (= an alle)
+DHCP ACK:
+	Source: 192.168.1.1 (=IP con Router)
+	Dest: 192.168.1.109 (=meine neue IP)
+
+Der Rechner möcjhte die Adresse: 192.168.1.109 und bekommt sie.
+
+Die Adresse ist 12h gültig.
+
+DNS = 192.168.1.1.
+
+b) Es sind Pakete des Adress Resolutions Protocols.
+Und sie sind dazu da, denn Netzwerkadressen dazugehörigen Hardwareadressen zu bestimmen, damit die Packt6e auch in Multi-Acess-Network ihr Ziel finden.
+c)
+Query:  www.tkn.tu-berlin.de
+Answer: 130.149.7.204
+
+d)
+url: www.tkn.tu-berlin.de/
+browser: Lynx/2.8.8dev.15 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/2.12.20
+server: apache
+Nein, es handelt sich nicht um eine persitente Verbindung, da "Connection: close"
+
+e) hyperion.tkn.tu-berlin.de wird aufgelöst.
+Port: 22 = ssh
+Da das erste s in ssh secure bedeutet, und es hoffentlich auch so ist.
+
+
+f) Das mögliche Mitschneiden der Benutzerdaten und Passwörter.
