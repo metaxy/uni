@@ -1,0 +1,54 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\wk}[1]{\ensuremath{\mathbb{P}(#1)}}
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+
+
+\subsection{Aufgabe 2}
+\subsubsection{(i)}
+$\wk{X=Y} = \wk{X=1,Y=1} + \wk{X=2,X=2} = \frac{3}{8}$
+
+\subsection{(ii)}
+ $\wk{2X=Y} = \wk{X=1,Y=2} + \wk{X=2,X=4} = 0$
+
+\subsubsection{(iii)}
+$\wk{X \leq Y} = 1$ da Wertebereich von X immer $\leq$ von Y ist.
+
+\subsection{(iv)}
+$\wk{X < Y} = \wk{X \leq Y} - \wk{X=Y} = \frac{5}{8}$
+
+\subsubsection{(v)}
+$\wk{Y+X gerade} = \wk{X=1,Y=1} + \wk{X=1,Y=3} + \wk{X=2,Y=2} + \wk{X=2,Y=4} = \frac{4}{8}$
+
+\subsection{Aufgabe 3}
+\subsubsection{(i)}
+\begin{center}
+  \begin{tabular}{ c || c | c | c || c}
+    $X,Y$ & 1              & 2              & 3               & $\wk{X = i}$ \\ \hline
+    1     & $\frac{2}{20}$ & $\frac{1}{20}$ & $\frac{1}{20}$  & $\frac{4}{20}$ \\ \hline
+    2     & $\frac{3}{20}$ & $\frac{3}{20}$ & $\frac{0}{20}$  & $\frac{6}{20}$ \\ \hline
+    3     & $\frac{0}{20}$ & $\frac{4}{20}$ & $\frac{2}{20}$  & $\frac{6}{20}$ \\ \hline
+    4     & $\frac{2}{20}$ & $\frac{1}{20}$ & $\frac{1}{20}$  & $\frac{4}{20}$ \\ \hline \hline
+$\wk{X = i}$& $\frac{7}{20}$ & $\frac{9}{20}$ & $\frac{4}{20}$  &  1 \\
+  \end{tabular}
+\end{center}
+
+\subsubsection{(ii)}
+Die bedingte Verteilung $p_{X|Y=1}(x|y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}$ ist:\\
+\begin{center}
+  \begin{tabular}{ c || c | c | c | c | c}
+    $\wk{X|Y=1}$ & 1              & 2              & 3               & 4  &  \\ \hline
+    $\wk{X=i|Y=1}$  & $\frac{2}{7}$ & $\frac{3}{7}$ & $\frac{0}{20}$  & $\frac{2}{7}$ \\
+  \end{tabular}
+\end{center}
+
+\end{document}

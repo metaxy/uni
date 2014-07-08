@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{}
+\newcommand{\Wk}[1]{\ensuremath{\mathbb{P}(#1)}}
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section*{Aufgabe 2}
+Aus der Aufgabenstellung folgt, dass $n = 360$ und $p = \frac{1}{3}$.\\
+Damit ist $X ~ Bin(n,p)$ \\
+Ein Normalapproximation sieht so aus:\\
+\begin {align*}
+\Wk{a \leq X \leq b} & \approx \Phi_{0,1}(\frac{b+0.5-np}{\sqrt{np(1-p)}}) -   \Phi_{0,1}(\frac{a-0.5-np}{\sqrt{np(1-p)}})  \\
+\Wk{110 \leq X \leq 135} & \approx \Phi_{0,1}(\frac{135+0.5-np}{\sqrt{np(1-p)}}) -   \Phi_{0,1}(\frac{110-0.5-np}{\sqrt{np(1-p)}}) \\
+\Wk{110 \leq X \leq 135} & \approx \Phi_{0,1}(\frac{135+0.5-120}{\sqrt{120(1-p)}}) -   \Phi_{0,1}(\frac{110-0.5-120}{\sqrt{120(1-p)}}) \\
+\Wk{110 \leq X \leq 135} & \approx \Phi_{0,1}(\frac{15.5}{\sqrt{80}}) -   \Phi_{0,1}(\frac{-10.5}{\sqrt{80}}) \\
+\Wk{110 \leq X \leq 135} & \approx \Phi_{0,1}(1.73295) - \Phi_{0,1}(-1.17394) \\
+\Wk{110 \leq X \leq 135} & \approx 0.95818 -(1-0.87900) \\
+\Wk{110 \leq X \leq 135} & \approx 0.837
+\end {align*}
+
+\end{document}

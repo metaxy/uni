@@ -1,0 +1,5 @@
+P(i,j) := 'write_bi(true).write_k(j).Q(i,j).write_bi(false).P(i,j)
+Q(i,j) := read_k(K)(read_bj(x)(if(x == true and K == j) then P2(i,j) else K_j)
+
+B_i(x) .= read_bi(x).B_i(x) + write_bi(y).B_i(y)
+K_i(x) .= read_bi(x).K_i(x) + write_bi(y).K_i(y)
