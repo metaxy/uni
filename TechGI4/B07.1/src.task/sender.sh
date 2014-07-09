@@ -1,4 +1,4 @@
 killall GoBackNSender.musterlsg 
 killall GoBackNSender
 
-./GoBackNSender.musterlsg -d 10/5 localhost ./GoBackNSender.c
+./GoBackNSender.musterlsg -r 4334 -d 10/5 localhost ./GoBackNSender.c

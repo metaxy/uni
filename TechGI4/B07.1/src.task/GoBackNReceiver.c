@@ -184,30 +184,33 @@ int main(int argc, char** argv) {
         
         data->size = bytesRead;
         totalBytes += bytesRead - sizeof(*data);
-		if(data->hasErrors || data->	
-		/*
-Rn = 0
-Do the following forever:
-If the packet received = Rn and the packet is error free
-        Accept the packet and send it to a higher layer
-        Rn = Rn + 1
-        Send a Request for Rn
-Else
-        Refuse packet
-        Send a Request for Rn
-*/
-
+		if(data->hasErrors || data->seqNo != lastReceivedSeqNo+1) {
+			DEBUGOUT("data->seqNo = %l != lastReceivedSeq = %l\n", 
+					data->seqNo, lastReceivedSeqNo);
+			continue;
+		} else {
+        	goodBytes += bytesRead - sizeof(*data);
+			sendAck(s, data, lastReceivedSeqNo);
+			DEBUGOUT("send ack %l\n", lastReceivedSeqNo);
+			lastReceivedSeqNo++;
+			writeBuffer(output, data);
+		}
+		
+		if(data->size == sizeof(*data)) { //last one
+        	freeGoBackNMessageStruct(data);
+			break;
+		}
 		
         /* YOUR TASK:
-         * - Check packet for errors
+         * - Check packet for errors x
          * - Check if packet is
          *   # the one we are expecting
          *   # an older one
          *   # too new (we missed at least one packet)
-         * - Acknowledge the packet if appropriate (in which of the cases?)
+         * - Acknowledge the packet if appropriate (in which of the cases?) x
          * - Write packet to file if appropriate
-         * - Update sequence number counter
-         * - Update goodBytes
+         * - Update sequence number counter x
+         * - Update goodBytes x
          * - If this was the last packet of the transmission
          *   (data->size == sizeof(*data)) close the file with fclose and
          *   output totalBytes and goodBytes
@@ -220,4 +223,7 @@ Else
 
         freeGoBackNMessageStruct(data);
     }
+	fclose(output);
+	DEBUGOUT("totalBytes = %i, goodBytes = %i, lost = %i\n", 
+			totalBytes, goodBytes, totalBytes - goodBytes);
 }
