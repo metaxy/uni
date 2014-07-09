@@ -134,8 +134,8 @@ void sendAck(int s, GoBackNMessageStruct* packet, long expected) {
 
     int retval;
     if ((retval = send(s, ack, ack->size, 0)) < 0) {
-	perror("send");
-	exit(1);
+		perror("send");
+		exit(1);
     }
     DEBUGOUT("SOCKET: %d bytes sent\n", (unsigned int) retval);
     freeGoBackNMessageStruct(ack);
@@ -156,20 +156,22 @@ int main(int argc, char** argv) {
 
     ssize_t bytesRead = 0;
     while (1) {
-	GoBackNMessageStruct* data = allocateGoBackNMessageStruct(DEFAULT_PAYLOAD_SIZE);
+		GoBackNMessageStruct* data = allocateGoBackNMessageStruct(DEFAULT_PAYLOAD_SIZE);
         if (recv(s, data, sizeof(*data), MSG_PEEK) < 0) {
             perror("recv(MSG_PEEK)");
             exit(1);
         }
         bytesRead = data->size;
         bytesRead = recv(s, data, data->size, 0);
-            if (bytesRead < 0) {
-            perror("recv");
+        if (bytesRead < 0) {
+           	perror("recv");
             exit(1);
         }
-        if (bytesRead < data->size) {
+        
+		if (bytesRead < data->size) {
             fprintf(stderr,"WARNING: Truncated read\n");
         }
+
         DEBUGOUT("SOCKET: %d bytes received from %u.%u\n", (int) bytesRead, data->srcNode, data->srcAppl);
         DEBUGOUT("%d.%d -> %d.%d, #%d/%d, size: %u, errors: %d\n",
                  data->srcNode, data->srcAppl, data->destNode, data->destAppl, data->seqNo,
@@ -181,8 +183,21 @@ int main(int argc, char** argv) {
         }
         
         data->size = bytesRead;
-        totalBytes += bytesRead-sizeof(*data);
+        totalBytes += bytesRead - sizeof(*data);
+		if(data->hasErrors || data->	
+		/*
+Rn = 0
+Do the following forever:
+If the packet received = Rn and the packet is error free
+        Accept the packet and send it to a higher layer
+        Rn = Rn + 1
+        Send a Request for Rn
+Else
+        Refuse packet
+        Send a Request for Rn
+*/
 
+		
         /* YOUR TASK:
          * - Check packet for errors
          * - Check if packet is
