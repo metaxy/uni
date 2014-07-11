@@ -71,7 +71,7 @@ void initialize(int argc, char** argv) {
     timerExpiration.tv_sec = LONG_MAX;
     timerExpiration.tv_usec = 0;
 
-    window = 25;
+    window = 3;
     localPort = DEFAULT_LOCAL_PORT;
     remotePort = DEFAULT_REMOTE_PORT;
 
@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
     // open connection
     int s = openConnection();
 
-    while (1/* YOUR TASK: When are we finished? */) {
+    while (lastAckSeqNo < veryLastSeqNo) { //send util all packages are ack'ed
         DEBUGOUT("nextSendSeqNo: %ld, lastAckSeqNo: %ld\n", nextSendSeqNo, lastAckSeqNo);
 
         fd_set readfds, writefds;
@@ -241,18 +241,32 @@ int main(int argc, char** argv) {
                 perror("recv");
                 exit(1);
             }
-            DEBUGOUT("SOCKET: %d bytes received\n", bytesRead);
+            DEBUGOUT("SOCKET: %d bytes received, ack #%i\n", 
+					bytesRead, ack->seqNoExpected);
+			if(ack->hasErrors 
+					|| ack->seqNoExpected <= lastAckSeqNo 
+					|| ack->seqNoExpected > veryLastSeqNo) {
+				DEBUGOUT("drop ack packet #%i\n", ack->seqNoExpected);
+				//continue;
+			} else {
+				DEBUGOUT("good ack packet from #%ld #%i\n", 
+						lastAckSeqNo, ack->seqNoExpected);
+				int diff = ack->seqNoExpected - lastAckSeqNo;
+				freeBuffer(dataBuffer, getFirstSeqNoOfBuffer(dataBuffer), ack->seqNoExpected);
+				lastAckSeqNo = ack->seqNoExpected;
+				nextSendSeqNo = lastAckSeqNo+1;
 
+			}
             /* YOUR TASK:
-             * - Check acknowledgement for errors
-             * - Are new packets acknowledged by this packet?
-             * - Free buffers of acknowledged packets
-             * - Set lastAckSeqNo as needed
+             * - Check acknowledgement for errors x
+             * - Are new packets acknowledged by this packet? x
+             * - Free buffers of acknowledged packets x
+             * - Set lastAckSeqNo as needed x
              * - Recalculate timerExpiration, distinguish between two cases:
              *   # Still sent but unacknowledged packets in the buffer
              *   # No packets waiting for acknowledgement
              * - If needed: Set nextSendSeqNo so that never packets are sent
-             *              that where already acknowledged
+             *              that where already acknowledged x
              *
              * FUNCTIONS YOU MAY NEED:
              * - freeBuffer()
@@ -288,7 +302,7 @@ int main(int argc, char** argv) {
 
         // Send packets
         if (FD_ISSET(s, &writefds)) {
-            while (1/* YOUR TASK: When are you allowed to send new packets? */) {
+            while (nextSendSeqNo <= lastAckSeqNo + window && nextSendSeqNo <= veryLastSeqNo) {
                 DataPacket * data = getDataPacketFromBuffer(dataBuffer, nextSendSeqNo);
 
                 // Send data
@@ -306,6 +320,7 @@ int main(int argc, char** argv) {
                 /* YOUR TASK: Sending was successful, what now? 
                  * - Update sequence numbers
                  */
+				nextSendSeqNo++;
 
 
                 // Update timers
@@ -316,7 +331,7 @@ int main(int argc, char** argv) {
                 }
                 DEBUGOUT("current time: %ld,%ld\n",
                          currentTime.tv_sec, currentTime.tv_usec);
-
+				
                 /* YOUR TASK:
                  * - Store the timeout with the packet
                  * - Recalculate timerExpiration if needed

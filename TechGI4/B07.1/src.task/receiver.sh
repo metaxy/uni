@@ -1,3 +1,3 @@
-killall GoBackNReceiver
-./GoBackNReceiver -r 4334 localhost test.out
+killall GoBackNReceiver.musterlsg 
+./GoBackNReceiver.musterlsg -r 4334 localhost test.out
 
