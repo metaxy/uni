@@ -243,21 +243,7 @@ int main(int argc, char** argv) {
             }
             DEBUGOUT("SOCKET: %d bytes received, ack #%i\n", 
 					bytesRead, ack->seqNoExpected);
-			if(ack->hasErrors 
-					|| ack->seqNoExpected <= lastAckSeqNo 
-					|| ack->seqNoExpected > veryLastSeqNo) {
-				DEBUGOUT("drop ack packet #%i\n", ack->seqNoExpected);
-				//continue;
-			} else {
-				DEBUGOUT("good ack packet from #%ld #%i\n", 
-						lastAckSeqNo, ack->seqNoExpected);
-				int diff = ack->seqNoExpected - lastAckSeqNo;
-				freeBuffer(dataBuffer, getFirstSeqNoOfBuffer(dataBuffer), ack->seqNoExpected);
-				lastAckSeqNo = ack->seqNoExpected;
-				nextSendSeqNo = lastAckSeqNo+1;
-
-			}
-            /* YOUR TASK:
+			 /* YOUR TASK:
              * - Check acknowledgement for errors x
              * - Are new packets acknowledged by this packet? x
              * - Free buffers of acknowledged packets x
@@ -274,6 +260,25 @@ int main(int argc, char** argv) {
              */
 
 
+			if(ack->hasErrors 
+					|| ack->seqNoExpected <= lastAckSeqNo 
+					|| ack->seqNoExpected > veryLastSeqNo) {
+				DEBUGOUT("drop ack packet #%i\n", ack->seqNoExpected);
+				//continue;
+			} else {
+				DEBUGOUT("good ack packet from #%ld #%i\n", 
+						lastAckSeqNo, ack->seqNoExpected);
+				int diff = ack->seqNoExpected - lastAckSeqNo;
+				freeBuffer(
+						dataBuffer, 
+						getFirstSeqNoOfBuffer(dataBuffer), 
+						ack->seqNoExpected);
+
+				lastAckSeqNo = ack->seqNoExpected;
+				nextSendSeqNo = lastAckSeqNo+1;
+
+			}
+           
             freeGoBackNMessageStruct(ack);
         }
 
@@ -288,21 +293,24 @@ int main(int argc, char** argv) {
             DEBUGOUT("TIMEOUT (Current: %ld,%ld; expiration: %ld,%ld)\n",
                      currentTime.tv_sec, currentTime.tv_usec,
                      timerExpiration.tv_sec, timerExpiration.tv_usec);
-            /* YOUR TASK:
+			/* YOUR TASK:
              * - Make sure that all unacknowledged packets will be resent (do
-             *   NOT send them here!)
-             * - Reset timers
+             *   NOT send them here!) x
+             * - Reset timers x
              *
              * FUNCTIONS YOU MAY NEED:
              * - resetTimers()
              */
-
+			nextSendSeqNo = lastAckSeqNo;
+			resetTimers(dataBuffer);
+            
 
         }
 
         // Send packets
         if (FD_ISSET(s, &writefds)) {
-            while (nextSendSeqNo <= lastAckSeqNo + window && nextSendSeqNo <= veryLastSeqNo) {
+            while (nextSendSeqNo <= lastAckSeqNo + window 
+					&& nextSendSeqNo <= veryLastSeqNo) {
                 DataPacket * data = getDataPacketFromBuffer(dataBuffer, nextSendSeqNo);
 
                 // Send data
@@ -331,9 +339,13 @@ int main(int argc, char** argv) {
                 }
                 DEBUGOUT("current time: %ld,%ld\n",
                          currentTime.tv_sec, currentTime.tv_usec);
-				
+
+				timeradd(&currentTime, &timeout, &data->timeout);
+				if(timercmp(&timerExpiration, &data->timeout, >)) {
+					timerExpiration = data->timeout;
+				}	
                 /* YOUR TASK:
-                 * - Store the timeout with the packet
+                 * - Store the timeout with the packet x
                  * - Recalculate timerExpiration if needed
                  *
                  * MACROS YOU MAY NEED:
