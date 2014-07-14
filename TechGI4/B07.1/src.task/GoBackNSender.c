@@ -275,10 +275,14 @@ int main(int argc, char** argv) {
 						ack->seqNoExpected);
 
 				lastAckSeqNo = ack->seqNoExpected;
+				if(lastAckSeqNo < nextSendSeqNo && lastAckSeqNo < veryLastSeqNo) {
+					timerExpiration = getDataPacketFromBuffer(dataBuffer, lastAckSeqNo+1)->timeout;
+				} else {
+					timerExpiration.tv_sec = LONG_MAX; 
+				}
 				nextSendSeqNo = lastAckSeqNo+1;
 
 			}
-           
             freeGoBackNMessageStruct(ack);
         }
 
@@ -342,7 +346,7 @@ int main(int argc, char** argv) {
 
 				timeradd(&currentTime, &timeout, &data->timeout);
 				if(timercmp(&timerExpiration, &data->timeout, >)) {
-					timerExpiration = data->timeout;
+					//timerExpiration = data->timeout;
 				}	
                 /* YOUR TASK:
                  * - Store the timeout with the packet x
