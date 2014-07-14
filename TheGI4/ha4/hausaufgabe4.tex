@@ -1,0 +1,35 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[arrow, matrix, curve]{xy}
+\RequirePackage{etoolbox}
+\usepackage{xifthen}
+\usepackage{ifthen}
+\usepackage{ifmtarg}
+\usepackage{semantic}
+\usepackage{paralist}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\newcommand{\rr}{\sqsubseteq}
+\usetikzlibrary{arrows}
+\RequirePackage{etoolbox}
+\usepackage{Macros}
+\newcommand{\nbisim}{\,{\bisim}_{n}\,}
+\newcommand{\kbisim}[1]{\,{\bisim}_{#1}\,}
+\newcommand{\eqS}[2]{#1 \subseteq #2}
+\newcommand{\eqO}[3]{\OSem{#1}{#2} \subseteq \OSem{#1}{#3}}
+\title{TheGI4 HA4}
+\author{David Konopek(349333),\\ Paul Walger(349968),\\ Lukas Klammt(332263)}
+
+
+\begin{document}
+
+\maketitle
+
+\include{aufgabe1}
+\include{aufgabe2}
+\include{aufgabe3}
+\include{aufgabe4}
+\end{document}

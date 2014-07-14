@@ -1,0 +1,320 @@
+
+  \section*{Aufgabe 1}
+
+\subsection*{Aufgabe 1 a)}
+Wir bestimmen zunächst $\denot{X}$: \\
+Sei $F_X = \poss{a}X \land \necess{c}\false $
+
+\begin{align*}
+\OSem {F_X}{\Proc } & = \possDenot{a}\Proc \cap \necessDenot{c}\false \\
+& = \{ p_1, p_2, p_5 \} \cap \{ p_2, p_3, p_5, p_6 \} \\
+& = \{ p_2, p_5 \} \\
+(\OSem{F_{X}}{})^{2}(\Proc) & = \possDenot{a}\{ p_2, p_5 \} \cap \necessDenot{c}\false\\
+&= \{ p_2 \} \cap \{ p_2, p_3, p_5, p_6 \} \\
+& = \{ p_2 \}\\
+(\OSem{F_{X}}{})^{3}(\Proc) & = \possDenot{a}\{ p_2 \} \cap \necessDenot{c}\false \\
+& = \{ p_2 \} \cap \{ p_2, p_3, p_5, p_6 \}\\
+& =
+\{ p_2 \} \Rightarrow Fixpunkt!\\
+\end{align*}
+
+Nun können wir $Safe(\poss{b}X) $ berechnen.\\
+Wir wissen: $Safe(F): Y \HMmax F \land (\necess{Act}\false \lor \poss{Act}Y) $\\
+Sei nun $F_{Safe(G)} = G \land (\necess{Act}\false \lor \poss{Act}Y) $
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+$\OSem{F_{Safe(\poss{b}X)}}{}(\Proc)$ \> \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_{Safe(G)}}{}, X$}}{=}
+\end{math}
+\> $\possDenot{b}\{ p_2 \} \cap (\necessDenot{a}\false \cup \necessDenot{b}\false \cup \necessDenot{c}\false \cup \possDenot{a}\Proc \cup \possDenot{b}\Proc \cup \possDenot{c}\Proc) $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{}  $}}{=}
+\end{math}
+\> $\{ p_1 \} \cap (\{ p_3, p_4, p_6 \} \cup \{ p_2, p_5, p_6 \} \cup \{ p_2, p_3, p_5, p_6 \}$ \\ \> \> \> \> $\cup \{ p_1, p_2, p_5 \} \cup \{ p_1, p_3, p_4 \} \cup \{ p_1, p_4 \}) $
+
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\cap, \cup  $}}{=}
+\end{math}
+\> $\{ p_1 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+$ (\OSem{F_{Safe(\poss{b}X)}}{})^{2}(\Proc) $ \> \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_{Safe(G)}}{}, X$}}{=}
+\end{math}
+\> $\possDenot{b}\{ p_2 \} \cap (\necessDenot{a}\false \cup \necessDenot{b}\false \cup \necessDenot{c}\false \cup \possDenot{a}\{ p_1 \} \cup \possDenot{b}\{ p_1 \} \cup \possDenot{c}\{ p_1 \}) $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{}  $}}{=}
+\end{math}
+\> $\{ p_1 \} \cap (\{ p_3, p_4, p_6 \} \cup \{ p_2, p_5, p_6 \} \cup \{ p_2, p_3, p_5, p_6 \} \cup \emptyset \cup \emptyset \cup \emptyset) $
+
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\cap, \cup  $}}{=}
+\end{math}
+\> $\emptyset $
+\\
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+$ (\OSem{F_{Safe(\poss{b}X)}}{})^{3}(\Proc) $ \> \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_{Safe(G)}}{}, X$}}{=}
+\end{math}
+\> $\possDenot{b}\{ p_2 \} \cap (\necessDenot{a}\false \cup \necessDenot{b}\false \cup \necessDenot{c}\false \cup \possDenot{a}\emptyset \cup \possDenot{b}\emptyset \cup \possDenot{c}\emptyset) $
+\\
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{}  $}}{=}
+\end{math}
+\> $\{ p_1 \} \cap (\{ p_3, p_4, p_6 \} \cup \{ p_2, p_5, p_6 \} \cup \{ p_2, p_3, p_5, p_6 \} \cup \emptyset \cup \emptyset \cup \emptyset) $
+
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 =\ Mitte4 \= Rechts \kill
+\> \> \>
+\begin{math}
+\overset{\text{Def. $\cap, \cup  $}}{=}
+\end{math}
+\> $\emptyset  \Rightarrow Fixpunkt!$
+\end{tabbing}
+$\Rightarrow Safe(\poss{b}X)  = \emptyset$
+\\ \\ \\
+\subsection*{Aufgabe 1 b)}
+Wir bestimmen zun"achst $\denot{X}$: \\
+Sei $F_X = \poss{a}X \lor \poss{b}X $
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$\OSem {F_X}{\Proc }$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_X}{}$}}{=}
+\end{math}
+\> \> $\possDenot{a}\Proc \cup \possDenot{b}\Proc  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5 \} \cup \{ p_1, p_3, p_4 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_3, p_4, p_5 \} $
+\end{tabbing}
+
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$ (\OSem{F_{X}}{})^{2}(\Proc)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_X}{}$}}{=}
+\end{math}
+\> \> $\possDenot{a}\{ p_1, p_2, p_3, p_4, p_5 \} \cup \possDenot{b}\{ p_1, p_2, p_3, p_4, p_5 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5 \} \cup \{ p_1, p_3 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_3, p_5 \} $
+\end{tabbing}
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$ (\OSem{F_{X}}{})^{3}(\Proc)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_X}{}$}}{=}
+\end{math}
+\> \> $\possDenot{a}\{ p_1, p_2, p_3, p_5 \} \cup \possDenot{b}\{ p_1, p_2, p_3, p_5 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5 \} \cup \{ p_1 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5 \} $
+\end{tabbing}
+
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$ (\OSem{F_{X}}{})^{4}(\Proc)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_X}{}$}}{=}
+\end{math}
+\> \> $\possDenot{a}\{ p_1, p_2, p_5 \} \cup \possDenot{b}\{ p_1, p_2, p_5 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_2 \} \cup \{ p_1 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2 \} $
+\\
+\end{tabbing}
+
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$ (\OSem{F_{X}}{})^{5}(\Proc)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_X}{}$}}{=}
+\end{math}
+\> \> $\possDenot{a}\{ p_1, p_2 \} \cup \possDenot{b}\{ p_1, p_2 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_2 \} \cup \{ p_1 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2 \} \Rightarrow Fixpunkt! $
+\end{tabbing}
+
+Nun k"onnen wir $\denot{Y}$ bestimmen: \\
+Sei $F_Y = \necess{b}X \lor \necess{b}Y $ \\
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$\OSem {F_Y}{\emptyset }$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_Y}{}$, X}}{=}
+\end{math}
+\> \> $\necessDenot{b}\{ p_1, p_2 \} \cup \necessDenot{b}\emptyset  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5, p_6 \} \cup \{ p_2, p_5, p_6 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5, p_6 \} $
+\end{tabbing}
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$(\OSem {F_Y}{})^{2}(\emptyset)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_Y}{}$, X}}{=}
+\end{math}
+\> \> $\necessDenot{b}\{ p_1, p_2 \} \cup \necessDenot{b}\{ p_1, p_2, p_5, p_6 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5, p_6 \} \cup \{ p_1, p_2, p_4, p_5, p_6 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_4, p_5, p_6 \} $
+\end{tabbing}
+
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+$(\OSem {F_Y}{})^{3}(\emptyset)$ \> \>
+\begin{math}
+\overset{\text{Def. $\OSem {F_Y}{}$, X}}{=}
+\end{math}
+\> \> $\necessDenot{b}\{ p_1, p_2 \} \cup \necessDenot{b}\{ p_1, p_2, p_4, p_5, p_6 \}  $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\possDenot{}, \necessDenot{} $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_5, p_6 \} \cup \{ p_1, p_2, p_3, p_4, p_5, p_6 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+\begin{math}
+\overset{\text{Def. $\cup $}}{=}
+\end{math} 
+\> \> $\{ p_1, p_2, p_3, p_4, p_5, p_6 \} $
+\end{tabbing}
+\begin{tabbing}
+    Links \= Mitte1 \= Mitte2 \= Mitte3 \= Rechts \kill
+\> \>
+=
+\> \> $\Proc $
+\end{tabbing}
+$\Rightarrow$ F gilt in allen Zust"anden des LTS!
+
