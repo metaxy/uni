@@ -1,0 +1,39 @@
+TechGI4 Block 6
+
+A5
+
+a) Der Trace umfasst 62856 Pakete
+b) Die Pakete sind im Durchschnitt 614,574 Bytes groß
+c) Alle im Trace auftauchenden MAC-Adressen: 00:11:25:43:ca:fe(Ibm_43:ca:fe), 00:0d:56:c7:76:0e(DellEsgP_c7:76:0e), 00:0f:3d:fc:75:2b(D-Link_fc:75:2b)
+d) Anzahl von IP-Adressen im Trace: 171
+e) Auftauchede IP-/MAC-Adressen Zuordnungen: 00:0d:56:c7:76:0e(DellEsgP_c7:76:0e) -> 192.168.0.4, 00:11:25:43:ca:fe(Ibm_43:ca:fe) -> 192.168.0.2, 
+f) Bei 100% der Pakete wird das Internet Protocol auf der Netzwerkschicht verwendet
+g) Bei 90,07% der Pakete wird das Transmission Control Protocol auf der Transportschicht verwendet
+h) Protokolle der Applikationsschicht, die TCP benutzen: Data, SSM Protocol, Secure Sockets Layer, Hypertext Transfer Protocol, Bit Torrent, Real Time Streaming Protocol
+i) Protokolle der Applikationsschicht, die UDP benutzen: DNS, NetBios Datagram Service, NetBios Name Service, Real Data Transport
+j) Protokolle der Netzwerkschicht: Internet Protocol Version 4
+k) Protokolle der Sicherungsschicht: Ethernet
+l) Es fanden 17 DNS Abfragen statt.
+m) (ip.ttl == 48)
+Anzahl Pakete mit TTL-Wert > 200: 23 (DNS- Abfragen)
+Anzahl Pakete mit TTL-Wert == 128: 26757 (Pakete vom lokalen Rechner)
+Anzahl Pakete mit TTL-Wert == 48: 105 (Antworten von Servern)
+
+Verteilung kommt durch Art des Paketes zustande.
+
+n)
+a) Ein Ethernet-Header besteht aus der MAC-Adresse des Senders und des Empfängers, eine MAC-Adresse besteht aus 6 Hexadezimal-Zahlen = 6 Bytes => 12 Bytes
+b) Der IP-Header ist 20 bytes groß
+c) Das IP-Datagram ist 1380 bytes groß
+d) Der TCP-Header ist 20 bytes groß
+e) Das TCP-Segment ist 1340 bytes groß
+
+o) Die meisten Bytes pro Sekunde wurden bei 30s, zwischen 60s u. 70s und ab 140s empfangen, es wurden immer mindestens 125000 Bytes pro Sekunde empfangen.
+p) Es wurden zwischen 60.254.20.53 u. 192.168.0.4, zwichen 69.114.102.51 u. 192.168.0.4, zwischen 81.170149.205 u. 192.168.0.4, 
+zwischen 66.171.184.188 u. 192.168.0.4 u. zwischen 24.236.178.22 u. 192.168.0.4 die meisten Bytes ausgetauscht. Der Austausch zwischen 60.254.20.53 u. 192.168.0.4
+ ist fast zu jeder Zeit am größten.
+q) Es bestand eine SSH-Verbindung zwischen 192.16.0.4 und 136.159.5.20
+r) Es wurde der Firefox 1.0.7 benutzt
+s) Es wurde ein Medienstream empfangen: rtsp://a1651.v87522.c8752.g.vr.akamaistream.net:554/ondemand/7/1651/8752/1137095087000/origin.media.cbc.ca/
+newsworld/real/clips/rm-newsworld/debate_060110.rm?title="Harper%20fends%20off%20attacks%20from%20Duceppe%
+t) Es fand P2P Filesharing statt: Es wurde BitTorrent benutzt, insgesamt 413 Pakete, Größe insgesamt: 61933 Bytes
