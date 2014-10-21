@@ -1,0 +1,11 @@
+Name:           Aufgabe1
+Version:        0.0
+Cabal-Version:  >= 1.20
+License:        BSD3
+Author:         Paul Walger
+Synopsis:       Small package with two programs
+Build-Type:     Simple
+
+Executable t1
+  Build-Depends:  base, fgl, graphviz, text
+  Main-Is:        t1.hs

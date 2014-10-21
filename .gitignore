@@ -23,4 +23,6 @@
 *.synctex.gz
 *.o
 .directory
+.cabal-sandbox/
+*dist/
 
