@@ -1,19 +1,29 @@
-module Helper ( parseFile,headSafe, make_p3, neighbore, G , uDelEdge, uInsEdge, P3) where
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
+module Helper ( parseFile,headSafe, neighbore, G , uDelEdge, uInsEdge, P3, printEdges) where
 import Data.Graph.Inductive
 import Data.Graph.Inductive.Example
 import Prelude
 import Data.List
 import Data.Maybe
 import Data.GraphViz
+import Debug.Trace
 type G = Gr String ()
 type P3 = (Node,Node,Node)
 
 parseFile :: String -> G
-parseFile content = mkGraph nodes edges
+parseFile content =  mkGraph nodes edges
     where
-        nodes' = nub $ concat $ map (words) $ lines content
-        nodes =  zip [0..length nodes' - 1] nodes'
-        edges = labUEdges $ map (tuplify2   .map (hashGet nodes). words) $ lines content
+        lines' = filter(\x -> not $ head x == ' ') $ 
+            filter(\x -> not $ head x == '#') $ 
+            lines content
+        nodes' =  nub $ concat $ map (words) $ lines'
+          
+            
+        nodes = zip [0..length nodes' - 1] nodes'
+        edges = labUEdges $ map (tuplify2   .map (hashGet nodes). words) $ lines'
         tuplify2 [x,y] = (x,y)
         hashGet table needle = fst $ fromMaybe (0,"") $ find (\x -> snd x == needle) table 
 
@@ -21,11 +31,7 @@ headSafe [] = Nothing
 headSafe x = head $ x
 
 
-make_p3 (Nothing,_,_) = Nothing
-make_p3 (_,_,Nothing) = Nothing
-make_p3 (Just x,m,Just y) = Just $ (x,m,y)
-
-
+neighbore :: G -> Node -> Node -> Bool
 neighbore graph x y = x `elem` (neighbors graph y) 
 
 uDelEdge :: Edge -> G -> G
@@ -36,3 +42,10 @@ uInsEdge (x,y,_) graph = insEdge (y,x,()) $ insEdge (x,y,()) graph
 
 defaultVis :: G -> DotGraph Node
 defaultVis = setDirectedness graphToDot nonClusteredParams
+
+printEdges graph (Just x) = map (printEdge graph) x
+printEdges _ Nothing = []
+
+printEdge graph (u,v) = (fromMaybe "" $ lab graph u) ++ " " ++ (fromMaybe "" $ lab graph v) ++"\n"
+
+--connected graph x y = n

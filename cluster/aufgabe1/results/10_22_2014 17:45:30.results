@@ -1,0 +1,72 @@
+Building Aufgabe1-0.0...
+Preprocessing executable 'elns' for Aufgabe1-0.0...
+Preprocessing executable 'simple' for Aufgabe1-0.0...
+[3 of 4] Compiling Simple           ( Simple.hs, dist/build/simple/simple-tmp/Simple.o )
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package array-0.4.0.1 ... linking ... done.
+Loading package deepseq-1.3.0.1 ... linking ... done.
+Loading package containers-0.5.0.0 ... linking ... done.
+Loading package bytestring-0.10.0.2 ... linking ... done.
+Loading package text-1.1.1.3 ... linking ... done.
+Loading package hashable-1.2.2.0 ... linking ... done.
+Loading package nats-0.2 ... linking ... done.
+Loading package unordered-containers-0.2.5.1 ... linking ... done.
+Loading package semigroups-0.15.3 ... linking ... done.
+Loading package tagged-0.7.2 ... linking ... done.
+Loading package transformers-0.4.1.0 ... linking ... done.
+Loading package transformers-compat-0.3.3.4 ... linking ... done.
+Loading package void-0.6.1 ... linking ... done.
+Loading package contravariant-1.2 ... linking ... done.
+Loading package distributive-0.4.4 ... linking ... done.
+Loading package comonad-4.2.2 ... linking ... done.
+Loading package semigroupoids-4.2 ... linking ... done.
+Loading package bifunctors-4.1.1.1 ... linking ... done.
+Loading package mtl-2.2.1 ... linking ... done.
+Loading package exceptions-0.6.1 ... linking ... done.
+Loading package filepath-1.3.0.1 ... linking ... done.
+Loading package prelude-extras-0.4 ... linking ... done.
+Loading package profunctors-4.2.0.1 ... linking ... done.
+Loading package pretty-1.1.1.0 ... linking ... done.
+Loading package template-haskell ... linking ... done.
+Loading package free-4.9 ... linking ... done.
+Loading package parallel-3.2.0.4 ... linking ... done.
+Loading package primitive-0.5.4.0 ... linking ... done.
+Loading package reflection-1.5.1 ... linking ... done.
+Loading package split-0.2.2 ... linking ... done.
+Loading package vector-0.10.12.1 ... linking ... done.
+Loading package zlib-0.5.4.1 ... linking ... done.
+Loading package lens-4.4.0.2 ... linking ... done.
+Loading package colour-2.3.3 ... linking ... done.
+Loading package old-locale-1.0.0.5 ... linking ... done.
+Loading package time-1.4.0.1 ... linking ... done.
+Loading package unix-2.6.0.1 ... linking ... done.
+Loading package directory-1.2.0.1 ... linking ... done.
+Loading package dlist-0.7.1 ... linking ... done.
+Loading package fgl-5.5.0.1 ... linking ... done.
+Loading package polyparse-1.9 ... linking ... done.
+Loading package process-1.1.0.2 ... linking ... done.
+Loading package temporary-1.2.0.3 ... linking ... done.
+Loading package wl-pprint-text-1.1.0.2 ... linking ... done.
+Loading package graphviz-2999.17.0.1 ... linking ... done.
+[4 of 4] Compiling Main             ( t1.hs, dist/build/simple/simple-tmp/Main.o ) [Simple changed]
+Linking dist/build/simple/simple ...
+test000.graph       error: solution size 38, optimal solution size 4
+test001.graph       error: solution size 21, optimal solution size 3
+test002.graph       error: solution size 4, optimal solution size 3
+test003.graph       error: solution size 5, optimal solution size 1
+test004.graph       error: solution size 6, optimal solution size 1
+test005.graph       error: solution size 26, optimal solution size 5
+test006.graph       error: solution size 21, optimal solution size 3
+test007.graph       error: solution size 14, optimal solution size 6
+test008.graph       error: solution size 46, optimal solution size 4
+test009.graph       error: solution size 35, optimal solution size 3
+test010.graph       error: solution size 22, optimal solution size 7
+test011.graph       error: solution size 40, optimal solution size 5
+test012.graph       error: solution size 27, optimal solution size 3
+test013.graph       error: solution size 34, optimal solution size 4
+test014.graph       error: solution size 26, optimal solution size 6
+test015.graph       error: solution size 41, optimal solution size 5
+test016.graph       error: solution size 20, optimal solution size 7
+test017.graph       

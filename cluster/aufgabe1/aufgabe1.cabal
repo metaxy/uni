@@ -6,6 +6,6 @@ Author:         Paul Walger
 Synopsis:       Small package with two programs
 Build-Type:     Simple
 
-Executable t1
-  Build-Depends:  base, fgl, graphviz, text
+Executable simple
+  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
   Main-Is:        t1.hs
