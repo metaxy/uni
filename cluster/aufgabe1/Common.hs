@@ -35,31 +35,32 @@ makeFields ''State
 
 branch :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int) => st -> st
 branch state
-    | (view k state) < 0 = set resEdges Nothing state
+    | (view k state) < 0 = trace "::branch run out of fuel" $ set resEdges Nothing state
     | otherwise = 
+        trace ("::branch" ++ " edges =" ++ show (view resEdges state) ++ " k =" ++ show (view k state)) $
         case find_p3 state of
-            Just p -> 
-                case select_branch p state of
-                    Just b -> b
-                    Nothing -> set resEdges Nothing state
-            Nothing -> state
+            Just p3 -> 
+                case select_branch p3 (state) of
+                    Just good_branch -> trace "::::branch good_branch" $ good_branch
+                    Nothing -> trace ":::: branch no good branch" $ set resEdges Nothing $ state
+            Nothing -> trace "::::branch no p3" $ state
             
 
 kstep :: (HasK a Int) => a -> a
-kstep = over k ((-)1)
+kstep st = trace ("::kstep k " ++show (view k st)) $ over k (\x -> x - 1) st
 
 solved :: (HasResEdges st (Maybe [Edge])) => st -> Bool
-solved state = isJust $ view resEdges state
+solved state =  isJust $ view resEdges state
 
 find_min :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => G -> st
 find_min = find_min_state' 0
 
 find_min_state' :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => Int -> G -> st
-find_min_state' k graph 
+find_min_state' min_k graph 
     | (solved run) = run
-    | otherwise = find_min_state' (k+1) graph
+    | otherwise = trace "next min_state" $ find_min_state' (min_k+1) graph
         where
-            run = branch $ start_state graph k
+            run = trace ("run branch min_k = " ++ show min_k) $ branch $ start_state graph min_k
             
             
 parseInput = do
@@ -69,12 +70,7 @@ parseInput = do
      
 output res = do
      mapM_ putStr (printEdges (view graph res) (view resEdges res))
-{--
-run_main :: IO ()
-run_main = do
-    s <- getContents
-    let graph' = parseFile s
-        res = find_min_state' 0 $ undir graph'
-    writeFile "out.dot" $ LT.unpack $ renderDot $ toDot $ setDirectedness graphToDot nonClusteredParams (view graph res)
-    mapM_ putStr (printEdges (view graph res) (view resEdges res))
-    return ()--}
+
+genImage name graph = do
+    writeFile name $ LT.unpack $ renderDot $ toDot $ setDirectedness graphToDot nonClusteredParams graph
+

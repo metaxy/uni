@@ -1,5 +1,5 @@
 cabal build
-./dist/build/t1/t1 < /home/paul/Cloud/studium/Cluster/programs/material/ce-data/test000.graph
-#./dist/build/t1/t1 < /home/paul/uni/cluster/aufgabe1/graph.1
-cat out.dot | dot -Tpng > graph.png
-gwenview graph.png
+./dist/build/simple/simple < /home/paul/Cloud/studium/Cluster/programs/material/ce-data/test000.graph
+cat before.dot | dot -Tpng > before.png
+cat after.dot | dot -Tpng > after.png
+#gwenview before.png after.png
