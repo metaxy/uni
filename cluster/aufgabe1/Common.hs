@@ -35,19 +35,19 @@ makeFields ''State
 
 branch :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int) => st -> st
 branch state
-    | (view k state) < 0 = trace "::branch run out of fuel" $ set resEdges Nothing state
+    | (view k state) < 0 = set resEdges Nothing state
     | otherwise = 
-        trace ("::branch" ++ " edges =" ++ show (view resEdges state) ++ " k =" ++ show (view k state)) $
+
         case find_p3 state of
             Just p3 -> 
                 case select_branch p3 (state) of
-                    Just good_branch -> trace "::::branch good_branch" $ good_branch
-                    Nothing -> trace ":::: branch no good branch" $ set resEdges Nothing $ state
-            Nothing -> trace "::::branch no p3" $ state
+                    Just good_branch ->  good_branch
+                    Nothing -> set resEdges Nothing $ state
+            Nothing -> state
             
 
 kstep :: (HasK a Int) => a -> a
-kstep st = trace ("::kstep k " ++show (view k st)) $ over k (\x -> x - 1) st
+kstep st =  over k (\x -> x - 1) st
 
 solved :: (HasResEdges st (Maybe [Edge])) => st -> Bool
 solved state =  isJust $ view resEdges state
@@ -58,9 +58,9 @@ find_min = find_min_state' 0
 find_min_state' :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => Int -> G -> st
 find_min_state' min_k graph 
     | (solved run) = run
-    | otherwise = trace "next min_state" $ find_min_state' (min_k+1) graph
+    | otherwise =  find_min_state' (min_k+1) graph
         where
-            run = trace ("run branch min_k = " ++ show min_k) $ branch $ start_state graph min_k
+            run = branch $ start_state graph min_k
             
             
 parseInput = do

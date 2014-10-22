@@ -36,7 +36,7 @@ instance CE State2 where
     
   
 --find_p3_simple :: (HasGraph st G) => st -> Maybe P3
-find_p3_simple state = traceS state "::find p3" $ headSafe $ filter isJust $ map isP3 $ [(u,v,w) | u <- n, v <- n, w <- n, u /= w]
+find_p3_simple state =  headSafe $ filter isJust $ map isP3 $ [(u,v,w) | u <- n, v <- n, w <- n, u /= w]
     where
         g = view graph state
         n = nodes g
@@ -49,7 +49,7 @@ find_p3_simple state = traceS state "::find p3" $ headSafe $ filter isJust $ map
                     t3 = not $ neighbore g u w
                     
 --select_branch_simple :: (CE st, HasResEdges st (Maybe[Edge]), HasK st Int) => P3 -> st -> Maybe st
-select_branch_simple p3 state = traceS state "::select branch " $
+select_branch_simple p3 state = 
     find (isJust . (view resEdges)) 
     $ map branch
     $ branch_pos p3 state
@@ -57,9 +57,9 @@ select_branch_simple p3 state = traceS state "::select branch " $
 --branch_pos_simple :: (HasGraph st G,HasResEdges st (Maybe [Edge])) => P3 -> st -> [st]
 branch_pos_simple (u,v,w) state = map (kstep) $ [b1,b2,b3]
     where
-        b1 = traceS state "    b1" $ over resEdges (((:)(u,v)) <$>) $ over graph (uDelEdge (u,v)) state
-        b2 = traceS state "    b2" $ over resEdges (((:)(v,w)) <$>) $ over graph (uDelEdge (v,w)) state
-        b3 = traceS state "    b3" $ over resEdges (((:)(u,w)) <$>) $ over graph (uInsEdge (u,w, ())) state
+        b1 = over resEdges (((:)(u,v)) <$>) $ over graph (uDelEdge (u,v)) state
+        b2 =  over resEdges (((:)(v,w)) <$>) $ over graph (uDelEdge (v,w)) state
+        b3 =  over resEdges (((:)(u,w)) <$>) $ over graph (uInsEdge (u,w, ())) state
      
 start_state_simple :: G -> Int -> State2
 start_state_simple g k = State2 g (Just []) k
