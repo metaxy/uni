@@ -53,20 +53,17 @@ solved :: (HasResEdges st (Maybe [Edge])) => st -> Bool
 solved state =  isJust $ view resEdges state
 
 find_min :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => G -> st
-find_min = find_min_state' 0
+find_min graph = find_min_state' (start_state graph 0) 0 graph 
 
-find_min_state' :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => Int -> G -> st
-find_min_state' min_k graph 
+find_min_state' :: (CE st, HasResEdges st (Maybe [Edge]), HasK st Int, HasGraph st G) => st -> Int -> G -> st
+find_min_state' start min_k graph 
     | (solved run) = run
-    | otherwise =  find_min_state' (min_k+1) graph
+    | otherwise =  find_min_state' start (min_k+1) graph
         where
-            run = branch $ start_state graph min_k
+            run = branch $ set k min_k start
             
             
-parseInput = do
-     s <- getContents
-     let graph' = parseFile s
-     return (undir graph')
+
      
 output res = do
      mapM_ putStr (printEdges (view graph res) (view resEdges res))

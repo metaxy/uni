@@ -2,7 +2,19 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FlexibleContexts #-}
-module Helper ( parseFile,headSafe, neighbore, G , uDelEdge, uInsEdge, P3, printEdges) where
+module Helper (
+    parseFile,
+    parseInput,
+    parseGraphFile,
+    headSafe, 
+    headSafe', 
+    neighbore, 
+    G , 
+    uDelEdge, 
+    uInsEdge, 
+    P3, 
+    printEdges
+    ) where
 import Data.Graph.Inductive
 import Data.Graph.Inductive.Example
 import Prelude
@@ -27,9 +39,19 @@ parseFile content =  mkGraph nodes edges
         tuplify2 [x,y] = (x,y)
         hashGet table needle = fst $ fromMaybe (0,"") $ find (\x -> snd x == needle) table 
 
+parseInput = do
+     s <- getContents
+     let graph' = parseFile s
+     return (undir graph')
+parseGraphFile file = do
+     s <- readFile file
+     let graph' = parseFile s
+     return (undir graph')   
 headSafe [] = Nothing
 headSafe x = head $ x
 
+headSafe' [] = Nothing
+headSafe' x = Just $ head $ x
 
 neighbore :: G -> Node -> Node -> Bool
 neighbore graph x y = x `elem` (neighbors graph y) 
@@ -37,8 +59,8 @@ neighbore graph x y = x `elem` (neighbors graph y)
 uDelEdge :: Edge -> G -> G
 uDelEdge edge@(x,y) graph = delEdge (y,x) $ delEdge edge graph
 
-uInsEdge :: LEdge b -> G -> G
-uInsEdge (x,y,_) graph = insEdge (y,x,()) $ insEdge (x,y,()) graph
+uInsEdge :: Edge -> G -> G
+uInsEdge (x,y) graph = insEdge (y,x,()) $ insEdge (x,y,()) graph
 
 defaultVis :: G -> DotGraph Node
 defaultVis = setDirectedness graphToDot nonClusteredParams

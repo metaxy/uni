@@ -6,7 +6,7 @@ import Control.Lens
 main = do
     g <- parseInput 
     genImage "before.dot" (g)
-    let res = (find_min g) :: State2
+    let res = (find_min g) :: State1
     genImage "after.dot" (view graph res)
     output res
     return ()
