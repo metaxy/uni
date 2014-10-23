@@ -8,7 +8,13 @@ Build-Type:     Simple
 Executable t1
   Main-Is:        t1.hs
   Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
+
 Executable t2
   Main-Is:        t2.hs
+  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
+  ghc-prof-options: -O2 -prof -auto-all
+
+Executable t3
+  Main-Is:        t3.hs
   Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
   ghc-prof-options: -O2 -prof -auto-all

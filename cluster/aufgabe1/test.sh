@@ -3,7 +3,7 @@ export LC_NUMERIC="en_US.UTF-8"
 MYHOME="/home/paul/uni/cluster/aufgabe1"
 TESTHOME="/home/paul/Cloud/studium/Cluster/programs/material"
 
-names=(t1 t2)
+names=(t2 t3)
 cd $MYHOME
 cabal build
 cd $TESTHOME

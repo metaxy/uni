@@ -3,17 +3,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FlexibleContexts #-}
 module Helper (
-    parseFile,
-    parseInput,
-    parseGraphFile,
-    headSafe, 
-    headSafe', 
-    neighbore, 
-    G , 
-    uDelEdge, 
-    uInsEdge, 
-    P3, 
-    printEdges
+    module Helper
     ) where
 import Data.Graph.Inductive
 import Data.Graph.Inductive.Example
@@ -32,8 +22,6 @@ parseFile content =  mkGraph nodes edges
             filter(\x -> not $ head x == '#') $ 
             lines content
         nodes' =  nub $ concat $ map (words) $ lines'
-          
-            
         nodes = zip [0..length nodes' - 1] nodes'
         edges = labUEdges $ map (tuplify2   .map (hashGet nodes). words) $ lines'
         tuplify2 [x,y] = (x,y)
@@ -46,10 +34,12 @@ parseInput = do
 parseGraphFile file = do
      s <- readFile file
      let graph' = parseFile s
-     return (undir graph')   
+     return (undir graph')
+
 headSafe [] = Nothing
 headSafe x = head $ x
 
+headSafe' :: [a] -> Maybe a
 headSafe' [] = Nothing
 headSafe' x = Just $ head $ x
 
@@ -62,12 +52,15 @@ uDelEdge edge@(x,y) graph = delEdge (y,x) $ delEdge edge graph
 uInsEdge :: Edge -> G -> G
 uInsEdge (x,y) graph = insEdge (y,x,()) $ insEdge (x,y,()) graph
 
-defaultVis :: G -> DotGraph Node
-defaultVis = setDirectedness graphToDot nonClusteredParams
 
 printEdges graph (Just x) = map (printEdge graph) x
 printEdges _ Nothing = []
 
 printEdge graph (u,v) = (fromMaybe "" $ lab graph u) ++ " " ++ (fromMaybe "" $ lab graph v) ++"\n"
 
+combos n =  [(u,v,w) | u <- n, v <- n, w <- n]
+
+nodes_with_neighbors g nodes = map (\x -> (x, (neighbors g x))) $ nodes
+
+make_p3 ((x,_),(y,_),(z,_)) = (x,y,z)
 --connected graph x y = n

@@ -32,27 +32,26 @@ instance CE State1 where
     start_state = start_state_simple
     
   
-find_p3_simple :: (HasGraph st G) => st -> Maybe P3
-find_p3_simple state =  headSafe $ filter isJust $ map isP3 $ [(u,v,w) | u <- n, v <- n, w <- n, u /= w]
+find_p3_simple :: (CE st) => st -> Maybe P3
+find_p3_simple state =  
+    headSafe' $ [(u,v,w) | u <- n, v <- n, w <- n, u /= w, v /= w, u /= v, isP3 (u,v,w)]
     where
         g = view graph state
         n = nodes g
-        isP3 ((u,v,w)) 
-            | t && t2 && t3 = Just (u,v,w)
-            | otherwise = Nothing
-                where
-                    t = neighbore g u v
-                    t2 = neighbore g v w
-                    t3 = not $ neighbore g u w
+        isP3 ((u,v,w)) = t && t2 && t3
+            where
+                t = neighbore g u v
+                t2 = neighbore g v w
+                t3 = not $ neighbore g u w
                     
-select_branch_simple :: (CE st, HasResEdges st (Maybe[Edge]), HasK st Int) => P3 -> st -> Maybe st
+select_branch_simple :: (CE st) => P3 -> st -> Maybe st
 select_branch_simple p3 state = 
     find (isJust . (view resEdges)) 
     $ map branch
     $ map kstep
     $ branch_pos p3 state
     
-branch_pos_simple :: (HasGraph st G,HasResEdges st (Maybe [Edge])) => P3 -> st -> [st]
+branch_pos_simple :: (CE st) => P3 -> st -> [st]
 branch_pos_simple (u,v,w) state =  [b1,b2,b3]
     where
         b1 = over resEdges (((:)(u,v)) <$>) $ over graph (uDelEdge (u,v)) state
