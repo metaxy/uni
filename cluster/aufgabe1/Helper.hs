@@ -64,6 +64,4 @@ nodes_with_neighbors g nodes = map (\x -> (x, (neighbors g x))) $ nodes
 
 make_p3 ((x,_),(y,_),(z,_)) = (x,y,z)
 
-connected graph x y 
-    | x `elem` (neighbors graph y) = 1
-    | otherwise = 0
+connected graph x y =  x `elem` (neighbors graph y) 
