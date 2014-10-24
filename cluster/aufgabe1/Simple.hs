@@ -17,7 +17,8 @@ import Debug.Trace
 import Control.Applicative
 import Control.Lens
 import Control.Lens.TH
-
+import Control.Parallel.Strategies
+import Control.Parallel
 data State1 = State1 {
     _state1Graph :: G,
     _state1ResEdges :: Maybe [Edge],

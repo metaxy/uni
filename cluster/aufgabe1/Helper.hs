@@ -22,10 +22,10 @@ parseFile content =  mkGraph nodes edges
             filter(\x -> not $ head x == '#') $ 
             lines content
         nodes' =  nub $ concat $ map (words) $ lines'
-        nodes = zip [0..length nodes' - 1] nodes'
+        nodes = zip [1..length nodes'] nodes'
         edges = labUEdges $ map (tuplify2   .map (hashGet nodes). words) $ lines'
         tuplify2 [x,y] = (x,y)
-        hashGet table needle = fst $ fromMaybe (0,"") $ find (\x -> snd x == needle) table 
+        hashGet table needle = fst $ fromJust $ find (\x -> snd x == needle) table 
 
 parseInput = do
      s <- getContents
@@ -58,9 +58,12 @@ printEdges _ Nothing = []
 
 printEdge graph (u,v) = (fromMaybe "" $ lab graph u) ++ " " ++ (fromMaybe "" $ lab graph v) ++"\n"
 
-combos n =  [(u,v,w) | u <- n, v <- n, w <- n]
+combos n =  [(u,v,w) | u <- n, v <- n, w <- n, u /= w, w /= v, v /= u]
 
 nodes_with_neighbors g nodes = map (\x -> (x, (neighbors g x))) $ nodes
 
 make_p3 ((x,_),(y,_),(z,_)) = (x,y,z)
---connected graph x y = n
+
+connected graph x y 
+    | x `elem` (neighbors graph y) = 1
+    | otherwise = 0
