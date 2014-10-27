@@ -1,0 +1,23 @@
+Testing t3\n
+test000.graph           4     0.01
+test001.graph           3     0.01
+test002.graph           3     0.00
+test003.graph           1     0.00
+test004.graph           1     0.02
+test005.graph           5     0.02
+test006.graph           3     0.23
+test007.graph           6     0.03
+test008.graph           4     0.03
+test009.graph           3     0.04
+test010.graph           7     0.09
+test011.graph           5     0.08
+test012.graph           3     0.18
+test013.graph           4     0.07
+test014.graph           6     0.08
+test015.graph           5     0.22
+test016.graph           7     0.19
+test017.graph           4     0.51
+test018.graph           5     0.13
+test019.graph           3     0.80
+test020.graph           8     0.31
+test068.graph          10    32.21

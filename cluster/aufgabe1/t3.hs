@@ -39,15 +39,15 @@ instance CE State3 where
 find_p3_t3 :: State3 -> Maybe P3
 find_p3_t3  state =
     headSafe' $ 
-    [(u,v,w) | u <- n, v <- n, w <- n, u /= w, w /= v, v /= u, m_conn state v u, m_conn state v w, not (m_conn state u w)]
+    [(u,v,w) | 
+        u <- n, v <- n, w <- n, 
+        u /= w, w /= v, v /= u, 
+        m_conn state v u,
+        m_conn state v w,
+        not (m_conn state u w)]
         where
             n = state ^. allNodes
-{--
-find_p3_t3' :: State3 -> [P3]
-find_p3_t3' state = 
-    [(u,v,w) | u <- n, v <- n, w <- n, u /= w, w /= v, v /= u, m_conn state v u, m_conn state v w, not (m_conn state u w)]
-        where
-            n = [1..(state ^. gSize)]
+
             --}
 m_conn state x y = (getElem x y (state ^. gMatrix))
 
@@ -61,8 +61,6 @@ addEdge (x,y) = over gMatrix (setElem True (x,y) . setElem True (y,x))
 
 branch_pos_t3 :: P3 -> State3 -> [State3]
 branch_pos_t3 (u,v,w) state = 
-    --trace ("remove" ++ show(state ^. gMatrix)) $ 
-    --trace ("branch on " ++ show (u,v,w)) $
     catMaybes [b1,b2,b3]
     where
         b1 = editEdge (u,v) $ rmEdge (u,v) state
