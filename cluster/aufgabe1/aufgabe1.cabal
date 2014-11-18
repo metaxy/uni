@@ -5,16 +5,20 @@ License:        BSD3
 Author:         Paul Walger
 Synopsis:       Small package with two programs
 Build-Type:     Simple
+
 Executable t1
   Main-Is:        t1.hs
-  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
+  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens, parallel
+  ghc-prof-options: -O2 -prof -auto-all -threaded 
 
 Executable t2
   Main-Is:        t2.hs
-  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
-  ghc-prof-options: -O2 -prof -auto-all
+  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens, parallel
+  ghc-prof-options: -O2 -prof -auto-all -threaded 
 
 Executable t3
   Main-Is:        t3.hs
-  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens
-  ghc-prof-options: -O2 -prof -auto-all
+  Build-Depends:  base, fgl, graphviz >= 2999.17, text, lens, matrix, parallel
+  ghc-options: -optl-static 
+  ghc-prof-options: -O2 -prof -auto-all -threaded
+  
