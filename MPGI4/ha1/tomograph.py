@@ -18,19 +18,35 @@ def sinogramm(nshots, nrays):
     PNG file (use plt.imshow)
     """
     
-    sino = np.zeros((nshots, nrays))
-    #TODO: calculate starting points for each ray
-    
-    #TODO: put the values of the trace function into an np.array
-    
-    #TODO: use trace function to get the value for sinogramm
-    #sino[?, ?] = ellipse.trace(?, ?)
-    
-    #TODO: visualize sino
 
+    sino = np.zeros((nshots, nrays))
+    a = 0
+    for i in np.linspace(np.pi,0, num=nshots):
+        x_points = []
+        y_points = []
+        y = np.sin(i)*2
+        x = np.cos(i)*2
+        b= 0
+        for j in np.linspace(-1,1,num=nrays):
+            x1 = x + j*np.sin(-i)
+            y1 = y + j*np.cos(-i)
+            x2 = -x
+            y2 = -y
+            res = ellipse.trace([x1,y1], [x2,y2])
+            sino[b,a] = res
+            x_points.append(x1)
+            y_points.append(y1)
+            b += 1
+        #plt.plot(x_points, y_points, marker='o', color=(i/180,0,i/210+0.1))
+        a += 1
+        print(a)
+ 
+    plt.imshow(sino, cmap='Greys')
+    plt.show()
     #sino have to be returned for 3 c)
     return sino
 
+sinogramm(64,64)
 def equalMatrix(nshots, nrays, ngrid):
     """
     Aufgabe 3 b)
