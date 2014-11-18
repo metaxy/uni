@@ -1,47 +1,52 @@
 import ellipse
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import math
 from numpy import dot
 
-def sinogramm(n, m):
+def sinogramm(nshots, nrays):
     """
+    Aufgabe 3 a)
     Saves the trace values in a matrix
     
     Inputs:
-    n :: number of rays
-    m :: number of positions
-    
+    nshots :: number of shots
+    nrays  :: number of rays per shot
+        
     Output:
     sino :: trace values stored in a np.array 
     PNG file (use plt.imshow)
     """
     
-    sino = np.zeros((n, m))
+    sino = np.zeros((nshots, nrays))
+    #TODO: calculate starting points for each ray
     
     #TODO: put the values of the trace function into an np.array
     
-    #use trace function to get the value for sinogramm
+    #TODO: use trace function to get the value for sinogramm
     #sino[?, ?] = ellipse.trace(?, ?)
     
-    #TODO: display matrix (use plt.imshow)
-    
+    #TODO: visualize sino
+
+    #sino have to be returned for 3 c)
     return sino
 
-def equalMatrix(n, k):
+def equalMatrix(nshots, nrays, ngrid):
     """
+    Aufgabe 3 b)
     Calculates the equality matrix (Ausgleichsmatrix)
     
     Inputs:
-    n :: numberof rays (have to be atleast 4*K)
-    k :: size of the row/columm of the square grid (k*k)
+    nshots :: number of shots
+    nrays  :: number of rays per shot
+    ngrid  :: size of raster grid (ngrid*ngrid)
     
     Output:
     A :: Matrix containing the intersections (np.array)
     """
-    
-    A = np.zeros((n, (k*k)))
-    #TODO: evaluate the sinogramm
+
+    A = np.zeros((nshots*nrays, ngrid*ngrid))
+    #TODO: calculate starting points for each ray    
     
     #TODO: use grid_intersect
     #I, G, dt, px, py = ellipse.grid_intersect(?, ?, ?)
@@ -50,17 +55,23 @@ def equalMatrix(n, k):
     
     return A 
 
-def showPic(A, b):
+def solveTg(nshots, nrays, ngrid):
     """
+    Aufgabe 3 c)
     evaluates the sinogramm using the matrix containing the intersect
     values and creates the tomograph picture
     
     Inputs:
-    A :: equalization matrix
-    b :: sinogramm
+    nshots :: number of shots
+    nrays  :: number of rays per shot
+    ngrid  :: size of raster grid (ngrid*ngrid)
     
     Output:
-    PNG file (use plt.imshow)
+    PNG file (use plt.imshow and plt.show)
     """
+    
+    #TODO: use your sinogramm function and reshape for gauss
+    
+    #TODO: use your equalMatrix function
 
-    #TODO generate picture of the skull
+    #TODO: generate picture of toft (use matplotlib as plt)

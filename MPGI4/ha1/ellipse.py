@@ -4,6 +4,10 @@ import math
 from numpy import dot
 from operator import itemgetter
 
+'''
+    Dieses Paket dient einzig der Erstellung des Tofts.
+    Hier sind keine Aufgaben zu bearbeiten. (Do NOT touch this)
+'''
 
 class Ellipse:
     def __init__(self, d, a, b, x0, y0, phi):

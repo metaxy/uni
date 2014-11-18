@@ -1,5 +1,12 @@
 import numpy as np
+import string
+def pm(my_matrix):
+    max_lens = [max([len(str(r[i])) for r in my_matrix])
+                for i in range(len(my_matrix[0]))]
 
+    print("\n".join(["".join([str(np.round(e,2)).ljust(l + 2)
+                for e, l in zip(r, max_lens)]) for r in my_matrix]))
+    
 def gaussianElimination(M, b, use_pivoting = True):
     """
     Gaussian Elimination with Pivoting.
@@ -15,34 +22,29 @@ def gaussianElimination(M, b, use_pivoting = True):
     b :: input vector with pivoting permutations applied (numpy.array)
     """
 
-    #TODO: implement gauss elimination with and without pivoting
-    b = b.T
+    #b = b.T
     asone = np.concatenate((M,b),axis=1)                    #matrix wird erzeugt durch die beiden eingabe matrizen
-    columns = asone.shape[0]
-    rows = asone.shape[1]
-    for r in range (rows):
-            if r == rows-1:
-                return asone                                #abbruch bei wenn man bei der letzten diagonalen
-            else:
-                asone1 = asone[r:,r:]                       #slicen der matrix PROBLEM: ich kann nicht auf die shape zugreifen das waere spaeter fuer gauss nuetzlich
-                #print(type(asone1))
-                #print(dir(asone1))
-                print(asone1.shape[0])
+    rows = asone.shape[0]    
+    columns = asone.shape[1]
+    for c in range (columns):
+        if c == columns-2:
+            return asone[:,:asone.shape[1]-1], asone[:, asone.shape[1]-1:]                          #abbruch bei wenn man bei der letzten diagonalen
+        else:
+            if(use_pivoting):
+                asone1 = asone[c:,c:]                       #slicen der matrix PROBLEM: ich kann nicht auf die shape zugreifen das waere spaeter fuer gauss nuetzlich
                 posi = np.argmax(np.abs(asone1[:,:1]))      #absolute maximum der zeile ermitteln 
-                asone[[r,posi+r],:] = asone[[posi+r,r],:]   #tauschen der zeilen
-                for c in range (rows):                     
-                    if c+1 == rows:                        #Das soll das Gauss werden
-                        break
-                    else:
-                        asone[r,:]= (((asone[c+1][r])/(asone[r][r]))*(asone[r,:]))
-                        asone[c+1,:]=((asone[c+1,:])-(asone[r,:]))
-                        print(r)
+                asone[[c,posi+c],:] = asone[[posi+c,c],:]   #tauschen der zeilen
+            for r in range(c+1,rows):
+                if(asone[c][c] == 0):
+                    raise Exception("Division durch null!")
+                mult = asone[r][c]/asone[c][c]
+                asone[r] = asone[r] - mult*asone[c]
+    return asone[:,:asone.shape[1]-1], asone[:, asone.shape[1]-1:]        
                 
-                
-A = np.array([[11,44,1],[0.1,0.4,3],[0,1,-1]])
-b = np.array([[1,1,1]])   
-gaussianElimination(A,b)
-
+A = np.array([[23.0,-8.0,5.0],[22.0,3.0,-4.0],[1.0,11.0,7.0]])
+b = np.array([[12.0],[4.0],[0.0]])   
+print(gaussianElimination(A,b))
+print(np.linalg.solve(A, b)) 
 def backSubstitution(M, b):
     """
     Back substitution for the solution of a linear system in row echelon form.
@@ -56,10 +58,22 @@ def backSubstitution(M, b):
     """
 
     #TODO: check, if a solution exists
+    if(np.linalg.det(M)==0):
+        raise Exception("Gleichungssystem hat keine (eindeutige) Lösung")
+        
     
     #TODO: size of x?
-    x = np.zeros(1)
+    x = np.zeros(M.shape[1])
     
     #TODO: your function
+    rows = M.shape[0]
+    cols = M.shape[1]
+    for i in range(rows - 1, -1, -1):
+        sub = 0
+        y = 1
+        for j in range(cols - 1, i, -1):
+            sub += M[i][j] * x[cols - y]
+            y += 1
+        x[i] = (b[i] - sub) / M[i][i]
         
     return x
